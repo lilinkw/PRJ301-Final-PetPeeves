@@ -6,6 +6,7 @@
 package dao;
 
 import helpers.ConnectDB;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,14 +21,15 @@ public class UserDAO {
     }
 
     public boolean checkUser(String username, String password) throws Exception {
-
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
+            // loi tu thang nay
             con = ConnectDB.makeConnection();
+            System.out.println("con ga");
 
-            System.out.println(username);
+
             //check username and password if exist
             if (con != null) {
                 String sql = "select Student_ID, Faculty from Student_DE160142\n"
@@ -35,7 +37,7 @@ public class UserDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
                 stm.setString(2, password);
-                
+
                 rs = stm.executeQuery();
                 if (rs.next()) {
                     return true;
