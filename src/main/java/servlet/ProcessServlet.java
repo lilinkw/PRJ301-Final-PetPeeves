@@ -39,19 +39,28 @@ public class ProcessServlet extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         
         try {
             String url = welcomePage;
-            
+            String err = null;
+
             UserDAO user = new UserDAO();
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            
-            if (user.checkUser(username, password)) {
+
+            if (username.trim().isEmpty() || password.trim().isEmpty()) {
+                err = "Username or password is empty!";
+                request.setAttribute("LOGINERROR", err);
+                url = welcomePage;
+            }
+            else if (user.checkUser(username, password)) {
                 url = homePage;
                 System.out.println("Success!");
             } 
             else {
+                err = "Username or password is not right or user is not existed!";
+                request.setAttribute("LOGINERROR", err);
                 url = welcomePage;
                 System.out.println("User does not existed!");
             }

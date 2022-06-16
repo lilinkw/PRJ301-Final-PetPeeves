@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!-- saved from url=(0051)# -->
@@ -68,6 +69,8 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
+                                                <c:set var="errors" value="${requestScope.LOGINERROR}"></c:set>
+                                                <h6 style="color: red">${errors}</h6> <br><br>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="checky-sec">
                                                         <div class="fgt-sec">
