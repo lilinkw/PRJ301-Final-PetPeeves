@@ -48,7 +48,7 @@ public class UserDAO {
                 rs.close();
             }
             if (stm != null) {
-                rs.close();
+                stm.close();
             }
             if (con != null) {
                 con.close();
