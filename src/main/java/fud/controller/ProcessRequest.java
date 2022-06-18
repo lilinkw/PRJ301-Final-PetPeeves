@@ -9,7 +9,7 @@ import java.io.IOException;
 @WebServlet(name = "ProcessRequest", value = "/ProcessRequest")
 public class ProcessRequest extends HttpServlet {
     // Change redirect page here
-    public String homePage="index.jsp";
+    public String homePage="template/index.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("ProcessRequest");
