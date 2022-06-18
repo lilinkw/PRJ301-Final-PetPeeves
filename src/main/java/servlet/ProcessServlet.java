@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ProcessServlet extends HttpServlet {
     
     private final String welcomePage = "welcome.jsp";
-    private final String homePage = "success.jsp";
+    private final String homePage = "newsfeed.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
