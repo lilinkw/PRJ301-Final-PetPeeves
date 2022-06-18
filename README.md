@@ -12,7 +12,7 @@ To setup `directory`:
 - Run `CreateImgDir.java`
 
 To setup `database`:
-
+- Run the script in `createDB.sql` 
 
 ## Contributor
 
