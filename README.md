@@ -23,4 +23,4 @@ To setup `database`:
 
 ## Link To Drive
 
-[Drive](https://drive.google.com/drive/u/0/folders/1YJi6a4lLgLpQU36f9GQZPLE9A330pOnm)
+[Google Drive](https://drive.google.com/drive/u/0/folders/1YJi6a4lLgLpQU36f9GQZPLE9A330pOnm)
