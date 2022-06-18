@@ -22,8 +22,8 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
 
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-        <link rel="stylesheet" type="text/css" href="./css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="css/welcome-style.css">
+        <link rel="stylesheet" type="text/css" href="css/welcome-responsive.css">
     </head>
 
     <body class="sign-in">
@@ -253,7 +253,7 @@
         <script type="text/javascript" src="./js/popper.js"></script>
         <script type="text/javascript" src="./js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./js/slick.min.js"></script>
-        <script type="text/javascript" src="./js/script.js"></script>
+        <script type="text/javascript" src="js/welcome-script.js"></script>
 
     </body>
 
