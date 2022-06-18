@@ -6,7 +6,7 @@ Final project of PRJ301. A social media for pet lovers. Where you can find thing
 
 To run ***this project*** <br> 
 **Setup Phase** is ***required*** <br> <br>
-**Setup File** are in `src\setup` <br> <br>
+**Setup File** are in `src\main\setup` <br> <br>
 You can setup for `database` or `directory` first as you like <br> <br>
 To setup `directory`:
 - Run `CreateImgDir.java`
