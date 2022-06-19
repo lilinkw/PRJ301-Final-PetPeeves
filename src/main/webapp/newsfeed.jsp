@@ -46,67 +46,8 @@
 
 <body>
 <div class="wrapper">
-    <header>
-        <div class="container">
-            <div class="header-data">
-                <div class="logo">
-                    <a href="#" title=""><img src="./images/logo.png" alt=""></a>
-                </div>
-                <div class="search-bar">
-                    <form>
-                        <input type="text" name="search" placeholder="Search...">
-                        <button type="submit"><i class="la la-search"></i></button>
-                    </form>
-                </div>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#" title="">
-                                <span><img src="./images/icon1.png" alt=""></span>
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <span><img src="./images/icon4.png" alt=""></span>
-                                My Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <span><img src="./images/icon2.png" alt=""></span>
-                                Category
-                            </a>
-                            <ul>
-                                <li><a href="#" title="">Category</a></li>
-                                <li><a href="#" title="">Category 1</a></li>
-                                <li><a href="#" title="">Category 2</a></li>
-                                <li><a href="#" title="">Category 3</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="menu-btn">
-                    <a href="#" title=""><i class="fa fa-bars"></i></a>
-                </div>
-                <div class="user-account">
-                    <div class="user-info">
-                        <img src="./images/user.png" alt="">
-                        <a href="#" title="">John</a>
-                        <i class="la la-sort-down"></i>
-                    </div>
-                    <div class="user-account-settingss" id="users">
-                        <h3>Setting</h3>
-                        <ul class="us-links">
-                            <li><a href="#" title="">Account Setting</a></li>
-                        </ul>
-                        <h3 class="tc"><a href="https://gambolthemes.net/workwise-new/sign-in.html"
-                                          title="">Logout</a></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <jsp:include page="header.jsp"></jsp:include>
+
     <main>
         <div class="main-section">
             <div class="container">
@@ -164,56 +105,126 @@
                                 <div class="posts-section">
 
                                     <!-- day la bai post template, duoc dung trong c:forEach -->
-                                    <div class="post-bar">
-                                        <div class="post_topbar">
-                                            <div class="usy-dt">
-                                                <img src="./images/us-pic.png" alt="">
-                                                <div class="usy-name">
-                                                    <h3>John Doe</h3>
-                                                    <span><img src="./images/clock.png" alt="">3 min
-                                                            ago</span>
+                                    <div class="posty">
+                                        <div class="post-bar no-margin">
+                                            <div class="post_topbar">
+                                                <div class="usy-dt">
+                                                    <img src="./images/us-pic.png" alt="">
+                                                    <div class="usy-name">
+                                                        <h3>John Doe</h3>
+                                                        <span><img src="./images/clock.png" alt="">
+                                                            <a href="post.jsp" style="color: #b2b2b2">3 min ago</a> </span>
+                                                    </div>
+                                                </div>
+                                                <div class="ed-opts">
+                                                    <a href="#" title="" class="ed-opts-open"><i
+                                                            class="la la-ellipsis-v"></i></a>
+
+                                                    <!-- not available for viewer -->
+                                                    <ul class="ed-options">
+                                                        <!-- for user only -->
+                                                        <li><a href="#" title="">Edit Post</a></li>
+                                                        <!-- for admin and user only -->
+                                                        <li><a href="#" title="">Delete post</a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div class="ed-opts">
-                                                <a href="#" title="" class="ed-opts-open"><i
-                                                        class="la la-ellipsis-v"></i></a>
+                                            <div class="epi-sec">
+                                                <ul class="bk-links">
+                                                    <!-- this will be the icon of the category(trang tri cho dep, khong bam vao duoc) -->
+                                                    <li><a title=""><i class="la la-bookmark"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="job_descp">
+                                                <!-- Can be deleted or change to another -->
+                                                <h3>Senior Wordpress Developer</h3>
 
-                                                <!-- not available for viewer -->
-                                                <ul class="ed-options">
-                                                    <!-- for user only -->
-                                                    <li><a href="#" title="">Edit Post</a></li>
-                                                    <!-- for admin and user only -->
-                                                    <li><a href="#" title="">Delete post</a></li>
+                                                <ul class="job-dt">
+                                                    <li><a href="#" title="">Category 1</a></li>
+                                                </ul>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                                                    luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
+                                                    magna sit amet... <a href="#" title="">view more</a></p>
+                                            </div>
+                                            <div class="job-status-bar">
+                                                <ul class="like-com">
+                                                    <li>
+                                                        <a href="#"><i class="fas fa-heart"></i> Like</a>
+                                                        <span>25</span>
+                                                    </li>
+                                                    <li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
+                                                        Comment 15</a></li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="epi-sec">
-                                            <ul class="bk-links">
-                                                <!-- this will be the icon of the category(trang tri cho dep, khong bam vao duoc) -->
-                                                <li><a title=""><i class="la la-bookmark"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="job_descp">
-                                            <!-- Can be deleted or change to another -->
-                                            <h3>Senior Wordpress Developer</h3>
-
-                                            <ul class="job-dt">
-                                                <li><a href="#" title="">Category 1</a></li>
-                                            </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                                                luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                                                magna sit amet... <a href="#" title="">view more</a></p>
-                                        </div>
-                                        <div class="job-status-bar">
-                                            <ul class="like-com">
-                                                <li>
-                                                    <a href="#"><i class="fas fa-heart"></i> Like</a>
-                                                    <span>25</span>
-                                                </li>
-                                                <li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
-                                                    Comment
-                                                    15</a></li>
-                                            </ul>
+                                        <div class="comment-section">
+                                            <a href="#" class="plus-ic">
+                                                <i class="la la-plus"></i>
+                                            </a>
+                                            <div class="comment-sec">
+                                                <ul>
+                                                    <li>
+                                                        <div class="comment-list">
+                                                            <div class="bg-img">
+                                                                <img src="./images/bg-img1.png" alt="">
+                                                            </div>
+                                                            <div class="comment">
+                                                                <h3>John Doe</h3>
+                                                                <span><img src="./images/clock.png" alt="">
+                                                                            3 min ago</span>
+                                                                <p>Lorem ipsum dolor sit amet, </p>
+                                                                <a href="#" title="" class="active"><i
+                                                                        class="fa fa-reply-all"></i>Reply</a>
+                                                            </div>
+                                                        </div>
+                                                        <ul>
+                                                            <li>
+                                                                <div class="comment-list">
+                                                                    <div class="bg-img">
+                                                                        <img src="./images/bg-img2.png" alt="">
+                                                                    </div>
+                                                                    <div class="comment">
+                                                                        <h3>John Doe</h3>
+                                                                        <span><img src="./images/clock.png" alt="">
+                                                                                    3 min ago</span>
+                                                                        <p>Hi John </p>
+                                                                        <a href="#" title=""><i
+                                                                                class="fa fa-reply-all"></i>Reply</a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <div class="comment-list">
+                                                            <div class="bg-img">
+                                                                <img src="./images/bg-img3.png" alt="">
+                                                            </div>
+                                                            <div class="comment">
+                                                                <h3>John Doe</h3>
+                                                                <span><img src="./images/clock.png" alt="">
+                                                                            3 min ago</span>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur
+                                                                    adipiscing elit. Aliquam luctus hendrerit metus,
+                                                                    ut ullamcorper quam finibus at.</p>
+                                                                <a href="#" title=""><i
+                                                                        class="fa fa-reply-all"></i>Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="post-comment">
+                                                <div class="cm_img">
+                                                    <img src="./images/bg-img4.png" alt="">
+                                                </div>
+                                                <div class="comment_box">
+                                                    <form>
+                                                        <input type="text" placeholder="Post a comment">
+                                                        <button type="submit">Send</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
