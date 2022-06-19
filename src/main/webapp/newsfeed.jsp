@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: phamn
-  Date: 6/18/2022
-  Time: 6:30 PM
+  Date: 6/19/2022
+  Time: 11:31 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -38,8 +38,8 @@
     <link rel="stylesheet" type="text/css" href="./css/slick.css">
     <link rel="stylesheet" type="text/css" href="./css/slick-theme.css">
 
-    <link rel="stylesheet" type="text/css" href="./css/newsfeed-style.css">
-    <link rel="stylesheet" type="text/css" href="./css/newsfeed-responsive.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/responsive.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
 </head>
@@ -100,7 +100,7 @@
                         <ul class="us-links">
                             <li><a href="#" title="">Account Setting</a></li>
                         </ul>
-                        <h3 class="tc"><a href="welcome.jsp"
+                        <h3 class="tc"><a href="https://gambolthemes.net/workwise-new/sign-in.html"
                                           title="">Logout</a></h3>
                     </div>
                 </div>
@@ -454,12 +454,8 @@
                         </div>
                         <div class="col-lg-12">
                             <ul>
-                                <li>
-                                    <button class="active" type="submit" value="post">Post</button>
-                                </li>
-                                <li>
-                                    <button type="button" value="post">Add images</button>
-                                </li>
+                                <li><button class="active" type="submit" value="post">Post</button></li>
+                                <li><button type="button" value="post">Add images</button></li>
                                 <li><a href="#" title="">Cancel</a>
                                 </li>
                             </ul>
@@ -479,8 +475,8 @@
 
 <script type="text/javascript" src="./js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="./js/slick.min.js"></script>
-<script type="text/javascript" src="./js/newsfeed-scrollbar.js"></script>
-<script type="text/javascript" src="./js/newsfeed-script.js"></script>
+<script type="text/javascript" src="./js/scrollbar.js"></script>
+<script type="text/javascript" src="./js/script.js"></script>
 
 </body>
 

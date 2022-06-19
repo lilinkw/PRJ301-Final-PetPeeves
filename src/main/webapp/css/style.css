@@ -272,6 +272,8 @@ header {
 	float: left;
 	width: 100%;
 	background-color: #e44d3a;
+	position: fixed;
+	z-index: 100;
 }
 .header-data {
 	float: left;
@@ -713,7 +715,7 @@ nav > ul > li > a:hover {
 main {
 	float: left;
 	width: 100%;
-	padding: 60px 0;
+	padding: 8rem 0;
 }
 .main-section {
 	float: left;
@@ -1356,7 +1358,6 @@ main {
 	float: left;
 	text-align: center;
 	font-weight: 600;
-	margin-left: -25px;
 }
 .like-com li .com {
 	position: relative;
