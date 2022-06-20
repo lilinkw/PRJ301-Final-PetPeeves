@@ -21,13 +21,13 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="#" title="">
+                        <a href="newsfeed.jsp" title="">
                             <span><img src="./images/icon1.png" alt=""></span>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
+                        <a href="user-profile.jsp" title="">
                             <span><img src="./images/icon4.png" alt=""></span>
                             My Profile
                         </a>
