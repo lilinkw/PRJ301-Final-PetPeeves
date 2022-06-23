@@ -10,7 +10,7 @@
     <div class="container">
         <div class="header-data">
             <div class="logo">
-                <a href="#" title=""><img src="./images/logo.png" alt=""></a>
+                <a href="#" title=""><img src="static/images/logo.png" alt=""></a>
             </div>
             <div class="search-bar">
                 <form>
@@ -21,20 +21,20 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="#" title="">
-                            <span><img src="./images/icon1.png" alt=""></span>
+                        <a href="newsfeed.jsp" title="">
+                            <span><img src="static/images/icon1.png" alt=""></span>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
-                            <span><img src="./images/icon4.png" alt=""></span>
+                        <a href="user-profile.jsp" title="">
+                            <span><img src="static/images/icon4.png" alt=""></span>
                             My Profile
                         </a>
                     </li>
                     <li>
                         <a href="#" title="">
-                            <span><img src="./images/icon2.png" alt=""></span>
+                            <span><img src="static/images/icon2.png" alt=""></span>
                             Category
                         </a>
                         <ul>
@@ -51,7 +51,7 @@
             </div>
             <div class="user-account">
                 <div class="user-info">
-                    <img src="./images/user.png" alt="">
+                    <img src="static/images/user.png" alt="">
                     <a href="#" title="">John</a>
                     <i class="la la-sort-down"></i>
                 </div>
