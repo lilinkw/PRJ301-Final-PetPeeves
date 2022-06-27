@@ -6,14 +6,13 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ProcessRequest", value = "/ProcessRequest")
-public class ProcessRequest extends HttpServlet {
-    // Change redirect page here
-    public String homePage="template/index.jsp";
+@WebServlet(name = "LoginServlet", value = "/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private final String forwardPage = "welcome.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("ProcessRequest");
-        request.getRequestDispatcher(homePage).forward(request,response);
+        // Forward to login page
+        request.getRequestDispatcher(forwardPage).forward(request, response);
     }
 
     @Override
