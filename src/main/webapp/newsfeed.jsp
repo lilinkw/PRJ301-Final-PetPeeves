@@ -140,7 +140,7 @@
                                                 <h3>Senior Wordpress Developer</h3>
 
                                                 <ul class="job-dt">
-                                                    <li><a href="#" title="">Category 1</a></li>
+                                                    <li><a href="search-post.jsp" title="">Category 1</a></li>
                                                 </ul>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
                                                     luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
