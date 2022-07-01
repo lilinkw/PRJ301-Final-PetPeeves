@@ -466,7 +466,18 @@
                         <div class="col-lg-12">
                             <ul>
                                 <li><button class="active" type="submit" value="post">Post</button></li>
-                                <li><button type="button" value="post">Add images</button></li>
+                                <li style="margin-bottom: -15px">
+                                    <input type="file" id="file" style="height: 0;overflow: hidden;width: 0;
+                                        float: left; padding: 0px; margin-bottom: 0px">
+
+                                    <label for="file" style="background: #fff; border: 2px solid #e44d3a;
+                                    border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;
+                                    font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;
+                                    position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;
+                                    float: right; text-transform: uppercase;">
+                                        Add images
+                                    </label>
+                                </li>
                                 <li><a href="#" title="">Cancel</a>
                                 </li>
                             </ul>
