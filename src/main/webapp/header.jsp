@@ -13,6 +13,8 @@
                 <a href="#" title=""><img src="static/images/logo.png" alt=""></a>
             </div>
             <div class="search-bar">
+
+<%--                search nguoi dung only, chi den search-user.jsp--%>
                 <form>
                     <input type="text" name="search" placeholder="Search...">
                     <button type="submit"><i class="la la-search"></i></button>
