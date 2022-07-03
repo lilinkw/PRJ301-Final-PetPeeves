@@ -40,3 +40,6 @@ build/
 
 ### pom ###
 pom.xml
+
+### DBUtils ###
+src/main/java/fud/helpers/DBUtils.java

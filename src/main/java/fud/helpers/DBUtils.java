@@ -17,9 +17,9 @@ public class DBUtils {
     // Change userID here
     public static final String userID = "sa";
     // Change password here
-    public static final String password = "123456";
+    public static final String password = "123456789";
     // Change database name here
-    public static final String dbName = "SE1603_DE160142";
+    public static final String dbName = "Final_PetPeeves";
 
     public static Connection makeConnection() throws Exception {
 
