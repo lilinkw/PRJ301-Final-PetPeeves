@@ -4,11 +4,13 @@ public class UserDTO {
     private String userID;
     private String password;
     private String username;
+    private String fullname;
     private String avatarLink;
     private String dateOfBirth;
     private String gender;
     private String location;
     private boolean isAdmin;
+    private boolean status;
 
     public UserDTO() {
     }
@@ -87,5 +89,21 @@ public class UserDTO {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
