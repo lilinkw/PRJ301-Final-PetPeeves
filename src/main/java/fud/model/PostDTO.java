@@ -12,7 +12,7 @@ public class PostDTO {
     private String authorName;
     private String authorAvatarLink;
     private String postTime;
-    private String postStatus;
+    private boolean postStatus;
     private List<String> imageLinks;
 
     public PostDTO() {
@@ -22,6 +22,21 @@ public class PostDTO {
         this.postID = postID;
         this.postContent = postContent;
         this.imageLinks = imageLinks;
+    }
+
+    public PostDTO(String postID, String postTitle, String postContent,
+                   String category, String authorID,
+                   String authorName, String authorAvatarLink, String postTime,
+                   boolean postStatus) {
+        this.postID = postID;
+        this.postTitle = postTitle;
+        this.postContent = postContent;
+        this.category = category;
+        this.authorID = authorID;
+        this.authorName = authorName;
+        this.authorAvatarLink = authorAvatarLink;
+        this.postTime = postTime;
+        this.postStatus = postStatus;
     }
 
     public String getPostID() {
@@ -104,11 +119,11 @@ public class PostDTO {
         this.postTime = postTime;
     }
 
-    public String getPostStatus() {
+    public boolean getPostStatus() {
         return postStatus;
     }
 
-    public void setPostStatus(String postStatus) {
+    public void setPostStatus(boolean postStatus) {
         this.postStatus = postStatus;
     }
 }
