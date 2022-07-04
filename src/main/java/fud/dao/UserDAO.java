@@ -30,13 +30,19 @@ public class UserDAO {
 
                 while (rs.next()) {
                     String userID = rs.getString("userID");
-//                    String fullname = rs.getString("Fullname");
+                    String fullname = rs.getString("Fullname");
                     String avatarLink = rs.getString("imgLink");
-                    boolean role = rs.getBoolean("isAdmin");
+                    String dateOfBirth = rs.getString("dateOfBirth");
+                    String gender = rs.getString("gender");
+                    String location = rs.getString("locations");
+                    boolean isAdmin = rs.getBoolean("isAdmin");
                     boolean status = rs.getBoolean("userStatus");
 
+
                     //TODO: PUT OTHER ATTRIBUTES INTO UserDTO
-                    return new UserDTO(username, password, status);
+                    return new UserDTO(userID, password, username,
+                            fullname, avatarLink, dateOfBirth,
+                            gender, location, isAdmin, status);
                 }
             }
         } finally {
@@ -96,7 +102,9 @@ public class UserDAO {
             UserDTO user = new UserDAO().login("Admin", "admin");
             System.out.println("Username: " + user.getUsername() +
                     "\nPassword: " + user.getPassword() +
-                    "\nstatus: " + user.isStatus() );
+                    "\nstatus: " + user.isStatus() +
+                    "\navatarLink :" + user.getAvatarLink() +
+                    "\nFull Name: " + user.getFullname());
         } catch (Exception e){
             System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
         }

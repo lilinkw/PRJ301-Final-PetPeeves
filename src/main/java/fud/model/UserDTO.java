@@ -33,6 +33,23 @@ public class UserDTO {
         this.isAdmin = isAdmin;
     }
 
+    public UserDTO(String userID, String password,
+                   String username, String fullname,
+                   String avatarLink, String dateOfBirth,
+                   String gender, String location,
+                   boolean isAdmin, boolean status) {
+        this.userID = userID;
+        this.password = password;
+        this.username = username;
+        this.fullname = fullname;
+        this.avatarLink = avatarLink;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.location = location;
+        this.isAdmin = isAdmin;
+        this.status = status;
+    }
+
     public String getUserID() {
         return userID;
     }
