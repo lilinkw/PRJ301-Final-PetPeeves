@@ -37,7 +37,7 @@
                                             <span>155</span>
                                         </li>
                                         <li>
-                                            <a href="https://gambolthemes.net/workwise-new/my-profile-feed.html"
+                                            <a href="user-profile.jsp"
                                                title="">View Profile</a>
                                         </li>
                                     </ul>

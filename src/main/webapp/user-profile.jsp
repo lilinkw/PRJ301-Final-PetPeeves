@@ -5,37 +5,6 @@
   Time: 3:17 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<!DOCTYPE html>--%>
-<%--<!-- saved from url=(0056)# -->--%>
-<%--<html>--%>
-
-<%--<head>--%>
-<%--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
-
-<%--    <title>WorkWise Html Template</title>--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
-<%--    <meta name="description" content="">--%>
-<%--    <meta name="keywords" content="">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/animate.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">--%>
-
-<%--    <link rel="stylesheet" type="text/css"--%>
-<%--          href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">--%>
-<%--    <link rel="stylesheet" type="text/css"--%>
-<%--          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">--%>
-<%--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"--%>
-<%--          type="text/css">--%>
-
-<%--    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/slick.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/slick-theme.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/style.css">--%>
-<%--    <link rel="stylesheet" type="text/css" href="static/css/responsive.css">--%>
-<%--</head>--%>
-
-<%--<body>--%>
-<%--<div class="wrapper">--%>
     <jsp:include page="header.jsp"></jsp:include>
 
     <section class="cover-sec">

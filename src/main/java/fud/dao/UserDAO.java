@@ -65,8 +65,9 @@ public class UserDAO {
 
             //check username and password if exist
             if (con != null) {
-                String sql = "select Student_ID, Faculty from Student_DE160142\n"
-                        + "where Student_ID = ? and Faculty = ?";
+                String sql = "select userName, passwords\n" +
+                        "from " + userDbName + "\n" +
+                        "where userName = ? and passwords = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
                 stm.setString(2, password);

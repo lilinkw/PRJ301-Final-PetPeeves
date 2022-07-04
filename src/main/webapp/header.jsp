@@ -95,7 +95,7 @@
             <div class="user-account">
                 <div class="user-info">
                     <img src="static/images/user.png" alt="">
-                    <a href="#" title="">John</a>
+                    <a style="color: white">John</a>
                     <i class="la la-sort-down"></i>
                 </div>
                 <div class="user-account-settingss" id="users">
@@ -103,7 +103,8 @@
                     <ul class="us-links">
                         <li><a href="account-setting.jsp" title="">Account Setting</a></li>
                     </ul>
-                    <h3 class="tc"><a href="https://gambolthemes.net/workwise-new/sign-in.html"
+<%--                    tra ve log out servlet--%>
+                    <h3 class="tc"><a href="LogoutServlet"
                                       title="">Logout</a></h3>
                 </div>
             </div>
