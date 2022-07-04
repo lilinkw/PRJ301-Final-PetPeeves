@@ -111,12 +111,12 @@
         </div>
     </section>
 </div>
-<script type="text/javascript" src="static/jquery.min.js"></script>
-<script type="text/javascript" src="static/popper.js"></script>
-<script type="text/javascript" src="static/bootstrap.min.js"></script>
-<script type="text/javascript" src="static/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="static/slick.min.js"></script>
-<script type="text/javascript" src="static/script.js"></script>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/popper.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="static/js/slick.min.js"></script>
+<script type="text/javascript" src="static/js/script.js"></script>
 
 </body>
 
