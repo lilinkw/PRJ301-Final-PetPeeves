@@ -15,6 +15,12 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    public UserDTO(String password, String username, boolean status) {
+        this.password = password;
+        this.username = username;
+        this.status = status;
+    }
+
     public UserDTO(String userID, String password, String username, String avatarLink,
                    String dateOfBirth, String gender, String location, boolean isAdmin) {
         this.userID = userID;

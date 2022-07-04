@@ -1,23 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fud.dao;
 
 import fud.helpers.DBUtils;
+import fud.model.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author phamn
- */
 public class UserDAO {
+    private final String userDbName = "Users";
+    private final String imageDbName = "Images";
 
     public UserDAO() {
+    }
+    public UserDTO login(String username, String password) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "SELECT *\n"
+                        + "FROM " + userDbName + " AS U LEFT JOIN " + imageDbName + " AS I on U.avatarID = I.imgID\n "
+                        + "WHERE [userName]=? AND [passwords]=?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+//                    String fullname = rs.getString("Fullname");
+                    String avatarLink = rs.getString("imgLink");
+                    boolean role = rs.getBoolean("isAdmin");
+                    boolean status = rs.getBoolean("userStatus");
+
+                    //TODO: PUT OTHER ATTRIBUTES INTO UserDTO
+                    return new UserDTO(username, password, status);
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
     }
 
     public boolean checkUser(String username, String password) throws Exception {
@@ -55,5 +88,16 @@ public class UserDAO {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        try {
+            UserDTO user = new UserDAO().login("Admin", "admin");
+            System.out.println("Username: " + user.getUsername() +
+                    "\nPassword: " + user.getPassword() +
+                    "\nstatus: " + user.isStatus() );
+        } catch (Exception e){
+            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+        }
     }
 }
