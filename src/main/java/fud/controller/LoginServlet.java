@@ -1,12 +1,14 @@
 package fud.controller;
 
 import fud.dao.UserDAO;
+import fud.model.UserDTO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -32,6 +34,7 @@ public class LoginServlet extends HttpServlet {
 
             UserDAO user = new UserDAO();
 
+
             if (username.trim().isEmpty() || password.trim().isEmpty()) {
                 err = "Username or password is empty!";
                 request.setAttribute("LOGINERROR", err);
@@ -42,7 +45,10 @@ public class LoginServlet extends HttpServlet {
             }
             else if (user.checkUser(username, password)) {
                 url = homePage;
-                System.out.println("Success!");
+                UserDTO account = user.login(username, password);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("CURRENTUSER", account);
             }
             else {
                 err = "Username or password is not right or user is not existed!";

@@ -64,10 +64,7 @@ public class UserDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            // loi tu thang nay
             con = DBUtils.makeConnection();
-            System.out.println("con ga");
-
 
             //check username and password if exist
             if (con != null) {
