@@ -55,7 +55,7 @@
                                         
                                         <!--sign in section-->
                                         <h3>Sign in</h3>
-                                        <form action="ProcessServlet" method="post">
+                                        <form action="LoginServlet" method="post">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
