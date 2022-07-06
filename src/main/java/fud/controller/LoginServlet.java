@@ -44,14 +44,24 @@ public class LoginServlet extends HttpServlet {
                 url = welcomePage;
             }
             else if (user.checkUser(username, password)) {
-                url = homePage;
                 UserDTO account = user.login(username, password);
 
-                HttpSession session = request.getSession();
-                session.setAttribute("CURRENTUSER", account);
+                if (!account.isStatus()) {
+                    err = "User has banned from this server!";
+                    request.setAttribute("LOGINERROR", err);
+                    request.setAttribute("username", username);
+                    request.setAttribute("password", password);
+
+                    url = welcomePage;
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("CURRENTUSER", account);
+
+                    url = homePage;
+                }
             }
             else {
-                err = "Username or password is not right or user is not existed!";
+                err = "Username/password is not right or user is not existed!";
                 request.setAttribute("LOGINERROR", err);
                 request.setAttribute("username", username);
                 request.setAttribute("password", password);
