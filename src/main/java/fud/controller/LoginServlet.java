@@ -14,7 +14,7 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     private final String welcomePage = "welcome.jsp";
 
-    private final String homePage = "newsfeed.jsp";
+    private final String homePage = "NewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Forward to login page
@@ -53,11 +53,13 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("password", password);
 
                     url = welcomePage;
+                    RequestDispatcher rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("CURRENTUSER", account);
-
                     url = homePage;
+                    response.sendRedirect(url);
                 }
             }
             else {
@@ -68,10 +70,10 @@ public class LoginServlet extends HttpServlet {
 
                 url = welcomePage;
                 System.out.println("User does not existed!");
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
 
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

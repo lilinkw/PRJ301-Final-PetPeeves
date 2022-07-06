@@ -94,8 +94,9 @@
             </div>
             <div class="user-account">
                 <div class="user-info">
-                    <img src="static/images/user.png" alt="">
-                    <a style="color: white">John</a>
+                    <c:set var="curentUser" value="${sessionScope.CURRENTUSER}"/>
+                    <img style="height: 30px; width: 30px" src="${curentUser.getAvatarLink()}" alt="">
+                    <a style="color: white">${curentUser.getUsername()}</a>
                     <i class="la la-sort-down"></i>
                 </div>
                 <div class="user-account-settingss" id="users">

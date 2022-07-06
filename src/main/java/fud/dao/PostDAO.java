@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PostDAO {
     private final String postInfoDbName = "PostInfo";
     private final String getPostInfoProcedure = "getPostInfo";
@@ -41,7 +42,21 @@ public class PostDAO {
                         String postCategory = rs.getString("category");
                         String postTitle = rs.getString("postTitle");
                         String postContent = rs.getString("postContent");
-                        result.add( new PostDTO(postID, postTitle, postContent, postCategory,authorID, authorName, avatarLink,postTime, true));
+
+                        //get image
+                        sql = "SELECT * FROM dbo.PostImage INNER JOIN dbo.Images ON Images.imgID = PostImage.imgID \n" +
+                                "WHERE postID =?";
+                        ps = con.prepareStatement(sql);
+                        ps.setString(1, postID);
+                        ResultSet rs2 = ps.executeQuery();
+
+                        ArrayList<String> imgLinkList = new ArrayList<>();
+                        while (rs2.next()){
+                            imgLinkList.add(rs2.getString("imgLink"));
+                        }
+
+
+                        result.add( new PostDTO(postID, postTitle, postContent, postCategory,authorID, authorName, avatarLink,postTime, true,imgLinkList));
                     }
 
                 }
@@ -61,6 +76,54 @@ public class PostDAO {
         return null;
     }
 
+    public boolean addNewPost(String postTitle, String postContent, String authorID, String categoryID ,String imgLink) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBUtils.makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "INSERT INTO dbo.PostInfo (postTitle,postContent,authorID,categoryID)\n" +
+                        "VALUES(?,?,?,?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, postTitle);
+                stm.setString(2, postContent);
+                stm.setString(3, authorID);
+                stm.setString(4, categoryID);
+                int row = stm.executeUpdate();
+                if (imgLink != "")  {
+                    sql = "INSERT INTO dbo.Images(imgLink)\n" +
+                            "VALUES(?)\n" +
+                            "\n" +
+                            "INSERT INTO dbo.PostImage(postID,imgID)\n" +
+                            "VALUES\n" +
+                            "( (SELECT TOP (1) postID FROM dbo.PostInfo ORDER BY postTime DESC),\n" +
+                            "  (SELECT TOP (1) imgID FROM dbo.Images ORDER BY imgID DESC)\n" +
+                            ")";
+
+                    stm = con.prepareStatement(sql);
+                    stm.setString(1, imgLink);
+                    row += stm.executeUpdate();
+
+                }
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         try {
             String userID = "USE00000001";
@@ -69,7 +132,9 @@ public class PostDAO {
             List<PostDTO> postDTOList = new PostDAO().getPost(userID, category,offset);
             for (PostDTO postDTO: postDTOList){
                 System.out.println("Post ID: " + postDTO.getPostID()
-                + "\nPost Status: " + postDTO.getPostStatus());
+                + "\nPost Status: " + postDTO.getPostStatus()
+                + "\nPost Time: "+ postDTO.getPostTime()
+                + "\nPost img: "+ postDTO.getImageLinks().get(0));
             }
         } catch (Exception e){
             System.out.println("PostDAO ERROR: " + e.getMessage());

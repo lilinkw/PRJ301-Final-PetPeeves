@@ -27,7 +27,7 @@ public class PostDTO {
     public PostDTO(String postID, String postTitle, String postContent,
                    String category, String authorID,
                    String authorName, String authorAvatarLink, String postTime,
-                   boolean postStatus) {
+                   boolean postStatus, List<String> imgLinkList) {
         this.postID = postID;
         this.postTitle = postTitle;
         this.postContent = postContent;
@@ -37,6 +37,7 @@ public class PostDTO {
         this.authorAvatarLink = authorAvatarLink;
         this.postTime = postTime;
         this.postStatus = postStatus;
+        this.imageLinks =imgLinkList;
     }
 
     public String getPostID() {
