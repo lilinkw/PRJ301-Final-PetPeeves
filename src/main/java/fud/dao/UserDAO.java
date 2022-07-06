@@ -6,6 +6,7 @@ import fud.model.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDAO {
     private final String userDbName = "Users";
@@ -94,6 +95,94 @@ public class UserDAO {
         return false;
     }
 
+    public boolean isUserExisted(String username) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtils.makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "select userName\n" +
+                        "from " + userDbName + "\n" +
+                        "where userName = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean createNewAccount(String username, String password, String fullname, String gender, String birthday, String location, String image) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = DBUtils.makeConnection();
+
+            // create new student
+            if (con != null) {
+
+                if (image == "") {
+                    String sql = "insert into Users\n" +
+                            "values (\n" +
+                            "\t?, ?, null, ?, ?, ?, 0, 1, ?\n" +
+                            ")";
+
+                    stm = con.prepareStatement(sql);
+                    stm.setString(1, username);
+                    stm.setString(2, password);
+                    stm.setString(3, birthday);
+                    stm.setString(4, gender);
+                    stm.setString(5, location);
+                    stm.setString(6, fullname);
+                } else {
+                    String sql = "insert into Users\n" +
+                            "values (\n" +
+                            "\t?, ?, ?, ?, ?, ?, 0, 1, ?\n" +
+                            ")";
+
+                    stm = con.prepareStatement(sql);
+                    stm.setString(1, username);
+                    stm.setString(2, password);
+                    stm.setString(3, image);
+                    stm.setString(4, birthday);
+                    stm.setString(5, gender);
+                    stm.setString(6, location);
+                    stm.setString(7, fullname);
+                }
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         try {
             UserDTO user = new UserDAO().login("Admin", "admin");

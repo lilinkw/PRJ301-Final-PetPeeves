@@ -103,56 +103,62 @@
                                     <!--sign up section-->
                                     <div class="sign_in_sec" id="tab-2">
                                         <div class="dff-tab current" id="tab-3">
-                                            <form>
+
+                                            <c:set var="SIGNUPERROR" value="${requestScope.SIGNUPERROR}"></c:set>
+                                            <form action="SignUpServlet" method="post" enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="text" name="username" placeholder="Username">
+                                                            <input type="text" name="usernameSU" placeholder="Username" value="${requestScope.usernameSU}">
                                                             <i class="la la-user"></i>
                                                         </div>
                                                     </div>
+                                                    <h6 style="color: red">${SIGNUPERROR}</h6> <br><br>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="password" name="password" placeholder="Password">
+                                                            <input type="password" name="passwordSU" placeholder="Password" value="${requestScope.passwordSU}">
                                                             <i class="la la-lock"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="password" name="repeat-password"
-                                                                   placeholder="Repeat Password">
+                                                            <input type="password" name="repeat-passwordSU"
+                                                                   placeholder="Repeat Password" value="${requestScope.repeat_passwordSU}">
                                                             <i class="la la-lock"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="text" name="fullname"
-                                                                   placeholder="Fullname">
+                                                            <input type="text" name="fullnameSU"
+                                                                   placeholder="Fullname" value="${requestScope.fullnameSU}">
                                                             <i class="fa fa-user"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="text" name="gender"
-                                                                   placeholder="Gender">
+                                                            <select name="genderSU">
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+                                                                <option>Others</option>
+                                                            </select>
                                                             <i class="fa fa-venus-mars"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="date" name="birthday">
+                                                            <input type="date" name="birthdaySU" value="${requestScope.birthdaySU}">
                                                             <i class="fa fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="text" name="location" placeholder="Location">
+                                                            <input type="text" name="locationSU" placeholder="Location" value="${requestScope.locationSU}">
                                                             <i class="la la-globe"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
-                                                            <input type="file" id="file"></input>
+                                                            <input type="file" name="imageSU"></input>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
