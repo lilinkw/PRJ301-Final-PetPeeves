@@ -264,6 +264,11 @@ public class UserDAO {
         }
         return false;
     }
+
+    public UserDTO getUserByUserID(String userID){
+        //TODO: return a UserDTO
+        return null;
+    }
     public static void main(String[] args) {
 //        try {
 //            UserDTO user = new UserDAO().login("Admin", "admin");

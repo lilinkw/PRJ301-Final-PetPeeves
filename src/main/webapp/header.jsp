@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="user-profile.jsp" title="">
+                        <a href="GetUserProfileServlet?userID=${sessionScope.CURRENTUSER.getUserID()}" title="">
                             <span><img src="static/images/icon4.png" alt=""></span>
                             My Profile
                         </a>
