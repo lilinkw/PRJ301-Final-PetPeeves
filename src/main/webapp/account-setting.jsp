@@ -42,9 +42,11 @@
                                         <div class="cp-field">
                                             <h5>Gender</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="gender"
-                                                       placeholder="Enter your gender">
-                                                <i class="fa fa-venus-mars"></i>
+                                                <select class="form-control" id="exampleFormControlSelect1" style="-webkit-appearance: menulist-button;">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="cp-field">
@@ -67,7 +69,7 @@
                             <div class="tab-pane fade" id="nav-password" role="tabpanel"
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
-                                    <h3>Account Setting</h3>
+                                    <h3>Change Password</h3>
                                     <form>
                                         <div class="cp-field">
                                             <h5>Old Password</h5>
