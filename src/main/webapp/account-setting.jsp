@@ -24,28 +24,28 @@
                                  aria-labelledby="nav-acc-tab">
                                 <div class="acc-setting">
                                     <h3>Account Setting</h3>
-                                    <form>
+                                    <form method="post" action="UpdateUserInfoServlet">
                                         <div class="cp-field">
-                                            <h5>Name</h5>
+                                            <h5>Full Name</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="fullname" placeholder="Enter your full name">
+                                                <input type="text" name="fullname" placeholder="Enter your full name" value="${sessionScope.CURRENTUSER.getFullname()}">
                                                 <i class="fa fa-user"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Date of birth</h5>
                                             <div class="cpp-fiel">
-                                                <input type="date" name="birthday">
+                                                <input type="date" name="birthday" value="${sessionScope.CURRENTUSER.getDateOfBirth()}">
                                                 <i class="fa fa-calendar-days"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Gender</h5>
                                             <div class="cpp-fiel">
-                                                <select class="form-control" id="exampleFormControlSelect1" style="-webkit-appearance: menulist-button;">
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Others">Others</option>
+                                                <select class="form-control" name="gender" style="-webkit-appearance: menulist-button;">
+                                                    <option value="Male" ${sessionScope.CURRENTUSER.getGender() == "Male" ? "selected":""}>Male</option>
+                                                    <option value="Female" ${sessionScope.CURRENTUSER.getGender() == "Female" ? "selected":""}>Female</option>
+                                                    <option value="Others" ${sessionScope.CURRENTUSER.getGender() == "Others" ? "selected":""}>Others</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                                             <h5>Location</h5>
                                             <div class="cpp-fiel">
                                                 <input type="text" name="location"
-                                                       placeholder="Enter your location">
+                                                       placeholder="Enter your location" value="${sessionScope.CURRENTUSER.getLocation()}">
                                                 <i class="fa fa-location-dot"></i>
                                             </div>
                                         </div>
