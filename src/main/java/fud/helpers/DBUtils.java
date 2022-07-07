@@ -15,13 +15,13 @@ import java.sql.DriverManager;
 public class DBUtils {
 
     // Change userID here
-    public static final String userID = "sa";
+    public final String userID = "sa";
     // Change password here
-    public static final String password = "123456";
+    public final String password = "123456789";
     // Change database name here
-    public static final String dbName = "Final_PetPeeves";
+    public final String dbName = "Final_PetPeeves";
 
-    public static Connection makeConnection() throws Exception {
+    public Connection makeConnection() throws Exception {
 
         String connectionUrl = "jdbc:sqlserver://localhost:1433;"
                 + "databaseName=" + dbName;
@@ -33,7 +33,8 @@ public class DBUtils {
 
     public static void main(String[] args){
         try{
-            System.out.println(DBUtils.makeConnection());
+            Connection con = new DBUtils().makeConnection();
+            System.out.println(con);
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }

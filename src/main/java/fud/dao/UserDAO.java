@@ -65,7 +65,7 @@ public class UserDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            con = DBUtils.makeConnection();
+            con = new DBUtils().makeConnection();
 
             //check username and password if exist
             if (con != null) {
@@ -100,7 +100,7 @@ public class UserDAO {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            con = DBUtils.makeConnection();
+            con = new DBUtils().makeConnection();
 
             //check username existed
             if (con != null) {
@@ -134,7 +134,7 @@ public class UserDAO {
         PreparedStatement stm = null;
 
         try {
-            con = DBUtils.makeConnection();
+            con = new DBUtils().makeConnection();
 
             // create new student
             if (con != null) {
@@ -192,7 +192,7 @@ public class UserDAO {
      * @param dateOfBirth current user date of birth
      * @param gender current user gender
      * @param location current user location
-     * @return true of user info updated, false otherwise
+     * @return true if user info updated, false otherwise
      * @throws Exception
      */
     public boolean updateUserInfo(String userID, String fullName, String dateOfBirth, String gender, String location ) throws Exception {
@@ -202,7 +202,7 @@ public class UserDAO {
         try {
             con = new DBUtils().makeConnection();
             if (con != null) {
-                String sql = "UPDATE Users\n" +
+                String sql = "UPDATE " + userDbName + " \n" +
                         "SET [fullName]= ?, [dateOfBirth] = ?, [gender] = ?, [locations] = ?\n" +
                         "WHERE [userID] = ?";
                 ps = con.prepareStatement(sql);
@@ -211,6 +211,43 @@ public class UserDAO {
                 ps.setString(3, gender);
                 ps.setString(4, location);
                 ps.setString(5, userID);
+                int row = ps.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Update user password via userID
+     * @param userID Current User ID
+     * @param password User new password
+     * @return true if success. False otherwise
+     * @throws Exception
+     */
+    public boolean updateUserPassword(String userID, String password) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "UPDATE " + userDbName + " \n" +
+                        "SET [passwords] = ?\n" +
+                        "WHERE [userID] = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, password);
+                ps.setString(2, userID);
                 int row = ps.executeUpdate();
 
                 if (row > 0) {
@@ -238,8 +275,14 @@ public class UserDAO {
 //        } catch (Exception e){
 //            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
 //        }
+//        try {
+//        boolean test = new UserDAO().updateUserInfo("USE00000001", "Admin", "2002-08-30", "male", "Quang Nam");
+//
+//        } catch (Exception e){
+//            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+//        }
         try {
-        boolean test = new UserDAO().updateUserInfo("USE00000001", "Admin", "2002-08-30", "male", "Quang Nam");
+            boolean test = new UserDAO().updateUserPassword("USE00000001", "admin");
 
         } catch (Exception e){
             System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());

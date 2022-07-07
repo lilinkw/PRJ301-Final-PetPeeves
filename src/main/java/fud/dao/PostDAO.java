@@ -81,7 +81,7 @@ public class PostDAO {
         PreparedStatement stm = null;
 
         try {
-            con = DBUtils.makeConnection();
+            con = new DBUtils().makeConnection();
 
             // create new student
             if (con != null) {
