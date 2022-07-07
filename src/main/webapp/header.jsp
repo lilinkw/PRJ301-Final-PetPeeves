@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <!-- saved from url=(0048) -->
 <html>
@@ -102,7 +102,7 @@
                 <div class="user-account-settingss" id="users">
                     <h3>Setting</h3>
                     <ul class="us-links">
-                        <li><a href="account-setting.jsp" title="">Account Setting</a></li>
+                        <li><a href="UpdateUserInfoServlet" title="">Account Setting</a></li>
                     </ul>
 <%--                    tra ve log out servlet--%>
                     <h3 class="tc"><a href="LogoutServlet"
