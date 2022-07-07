@@ -23,7 +23,6 @@ public class UpdateUserPasswordFilter implements Filter {
         HttpSession session = httpRequest.getSession();
         UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
         String currentPassword = currentUser.getPassword();
-        // TODO: forward to Change password
         String forwardPage = "account-setting.jsp";
 
         String error;

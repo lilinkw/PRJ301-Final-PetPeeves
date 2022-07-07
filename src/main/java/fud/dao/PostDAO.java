@@ -55,7 +55,7 @@ public class PostDAO {
                             imgLinkList.add(rs2.getString("imgLink"));
                         }
 
-
+                        //TODO: GET IMAGE USING METHOD
                         result.add( new PostDTO(postID, postTitle, postContent, postCategory,authorID, authorName, avatarLink,postTime, true,imgLinkList));
                     }
 

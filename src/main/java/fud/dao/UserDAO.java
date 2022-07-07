@@ -40,7 +40,7 @@ public class UserDAO {
                     boolean status = rs.getBoolean("userStatus");
 
 
-                    //TODO: PUT OTHER ATTRIBUTES INTO UserDTO
+                    //TODO: ADD FOLLOWER, FOLLOWEE INTO UserDTO
                     return new UserDTO(userID, password, username,
                             fullname, avatarLink, dateOfBirth,
                             gender, location, isAdmin, status);
