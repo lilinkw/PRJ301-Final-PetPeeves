@@ -14,6 +14,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
     private final String homePage = "NewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ACTION","Info" );
         request.getRequestDispatcher(updatePage).forward(request, response);
     }
 

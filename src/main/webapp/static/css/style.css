@@ -4466,6 +4466,15 @@ a:hover {
 	border-bottom: 1px solid #e5e5e5;
 	padding: 17px 20px;
 }
+.acc-setting > p {
+	float: left;
+	width: 100%;
+	color: #EB1D36;
+	font-weight: 400;
+	font-size: 15px;
+	text-transform: uppercase;
+	padding: 17px 20px 0
+}
 .notbar {
 	float: left;
 	width: 100%;
