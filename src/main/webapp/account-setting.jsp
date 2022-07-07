@@ -7,11 +7,11 @@
                     <div class="col-lg-3">
                         <div class="acc-leftbar">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab"
+                                <a class="nav-item nav-link ${requestScope.ACTION == "Info" ?"active":""}" id="nav-acc-tab" data-toggle="tab"
                                    href="#nav-acc"
                                    role="tab" aria-controls="nav-acc" aria-selected="true"><i
                                         class="la la-cogs"></i>Account Setting</a>
-                                <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
+                                <a class="nav-item nav-link ${requestScope.ACTION == "Password" ?"active":""}" id="nav-password-tab" data-toggle="tab"
                                    href="#nav-password"
                                    role="tab" aria-controls="nav-password" aria-selected="false"><i
                                         class="fa fa-lock"></i>Change Password</a>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-acc" role="tabpanel"
+                            <div class="tab-pane fade ${requestScope.ACTION == "Info" ?"show active":""}" id="nav-acc" role="tabpanel"
                                  aria-labelledby="nav-acc-tab">
                                 <div class="acc-setting">
                                     <h3>Account Setting</h3>
@@ -60,35 +60,36 @@
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li><button type="submit">Save Setting</button></li>
-                                                <li><button type="submit">Restore Setting</button></li>
+                                                <li><button type="reset">Restore Setting</button></li>
                                             </ul>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-password" role="tabpanel"
+                            <div class="tab-pane fade ${requestScope.ACTION == "Password" ?"show active":""}" id="nav-password" role="tabpanel"
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
                                     <h3>Change Password</h3>
-                                    <form>
+                                    <p>${requestScope.ERROR}</p>
+                                    <form action="UpdateUserPasswordServlet" method="post">
                                         <div class="cp-field">
                                             <h5>Old Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="old-password" placeholder="Old Password">
+                                                <input type="password" name="old-password" placeholder="Old Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>New Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="new-password" placeholder="New Password">
+                                                <input type="password" name="new-password" placeholder="New Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Repeat Password</h5>
                                             <div class="cpp-fiel">
-                                                <input type="text" name="repeat-password"
+                                                <input type="password" name="repeat-password"
                                                        placeholder="Repeat Password">
                                                 <i class="fa fa-lock"></i>
                                             </div>
@@ -100,7 +101,7 @@
                                         <div class="save-stngs pd2">
                                             <ul>
                                                 <li><button type="submit">Save Setting</button></li>
-                                                <li><button type="submit">Restore Setting</button></li>
+                                                <li><button type="reset">Restore Setting</button></li>
                                             </ul>
                                         </div>
                                     </form>
