@@ -183,14 +183,64 @@ public class UserDAO {
         }
         return false;
     }
-    public static void main(String[] args) {
+
+    /**
+     * Update Current user info via userID
+     *
+     * @param userID userID of current user
+     * @param fullName current user full name
+     * @param dateOfBirth current user date of birth
+     * @param gender current user gender
+     * @param location current user location
+     * @return true of user info updated, false otherwise
+     * @throws Exception
+     */
+    public boolean updateUserInfo(String userID, String fullName, String dateOfBirth, String gender, String location ) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
         try {
-            UserDTO user = new UserDAO().login("Admin", "admin");
-            System.out.println("Username: " + user.getUsername() +
-                    "\nPassword: " + user.getPassword() +
-                    "\nstatus: " + user.isStatus() +
-                    "\navatarLink :" + user.getAvatarLink() +
-                    "\nFull Name: " + user.getFullname());
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "UPDATE Users\n" +
+                        "SET [fullName]= ?, [dateOfBirth] = ?, [gender] = ?, [locations] = ?\n" +
+                        "WHERE [userID] = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, fullName);
+                ps.setString(2, dateOfBirth);
+                ps.setString(3, gender);
+                ps.setString(4, location);
+                ps.setString(5, userID);
+                int row = ps.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+//        try {
+//            UserDTO user = new UserDAO().login("Admin", "admin");
+//            System.out.println("Username: " + user.getUsername() +
+//                    "\nPassword: " + user.getPassword() +
+//                    "\nstatus: " + user.isStatus() +
+//                    "\navatarLink :" + user.getAvatarLink() +
+//                    "\nFull Name: " + user.getFullname());
+//        } catch (Exception e){
+//            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+//        }
+        try {
+        boolean test = new UserDAO().updateUserInfo("USE00000001", "Admin", "2002-08-30", "male", "Quang Nam");
+
         } catch (Exception e){
             System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
         }
