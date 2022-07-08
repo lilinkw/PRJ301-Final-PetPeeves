@@ -14,7 +14,7 @@ public class PostDTO {
     private String postTime;
     private boolean postStatus;
     private List<String> imageLinks;
-
+    private List<CommentDTO> commentList;
     public PostDTO() {
     }
 
@@ -126,5 +126,13 @@ public class PostDTO {
 
     public void setPostStatus(boolean postStatus) {
         this.postStatus = postStatus;
+    }
+
+    public List<CommentDTO> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<CommentDTO> commentList) {
+        this.commentList = commentList;
     }
 }
