@@ -18,6 +18,16 @@ public class CommentDTO {
         this.commentTime = commentTime;
     }
 
+    public CommentDTO(String commentID, String postID, String commenterID, String commenterName, String commenterAvatarLink, String commentContent, String commentTime) {
+        this.commentID = commentID;
+        this.postID = postID;
+        this.commenterID = commenterID;
+        this.commenterName = commenterName;
+        this.commenterAvatarLink = commenterAvatarLink;
+        this.commentContent = commentContent;
+        this.commentTime = commentTime;
+    }
+
     public String getCommentID() {
         return commentID;
     }

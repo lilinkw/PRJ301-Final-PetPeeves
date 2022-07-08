@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 
     <main>
         <div class="main-section">
@@ -10,26 +11,32 @@
 
                             <div class="main-ws-sec">
                                 <div class="posts-section">
+                                    <c:set var="postDTO" value="${requestScope.POSTDTO}"/>
                                     <div class="post-bar">
                                         <div class="post_topbar">
                                             <div class="usy-dt">
-                                                <img src="static/images/bg-img2.png" alt="">
+                                                <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                 <div class="usy-name">
-                                                    <h3>John Doe</h3>
-                                                    <span><img src="static/images/clock.png" alt="">3 min ago</span>
+                                                    <h3>${postDTO.getAuthorName()}</h3>
+                                                    <span><img src="static/images/clock.png" alt="">${postDTO.getPostTime()}</span>
                                                 </div>
                                             </div>
                                             <div class="ed-opts">
-                                                <a href="#" title="" class="ed-opts-open"><i
-                                                        class="la la-ellipsis-v"></i></a>
+                                                <c:if test="${postDTO.getAuthorID().equals(currentUser.getUserID())||currentUser.isAdmin()}">
+                                                    <a href="#" title="" class="ed-opts-open"><i
+                                                            class="la la-ellipsis-v"></i></a>
 
-                                                <!-- not available for viewer -->
-                                                <ul class="ed-options">
-                                                    <!-- for user only -->
-                                                    <li><a href="#" title="">Edit Post</a></li>
-                                                    <!-- for admin and user only -->
-                                                    <li><a href="#" title="">Delete post</a></li>
-                                                </ul>
+                                                    <!-- not available for viewer -->
+
+                                                    <ul class="ed-options">
+                                                        <!-- for user only -->
+                                                        <c:if test="${postDTO.getAuthorID().equals(currentUser.getUserID())}">
+                                                            <li><a href="#" title="">Edit Post</a></li>
+                                                        </c:if>
+                                                        <!-- for admin and user only -->
+                                                        <li><a href="#" title="">Delete post</a></li>
+                                                    </ul>
+                                                </c:if>
                                             </div>
                                         </div>
                                         <div class="epi-sec">
@@ -39,17 +46,13 @@
                                         </div>
                                         <div class="job_descp accountnone">
                                             <!-- Can be deleted or change to another -->
-                                            <h3>Senior Wordpress Developer</h3>
+                                            <h3 style="margin-top: 10px">${postDTO.getPostTitle()}</h3>
+
                                             <ul class="job-dt">
-                                                <li>
-                                                    <a href="search-category.jsp">Category 1</a>
-                                                </li>
+                                                <li><a href="search-category.jsp" title="">${postDTO.getCategory()}</a></li>
                                             </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In porttitor
-                                                ligula et dolor dignissim, sit amet efficitur felis maximus.
-                                                Suspendisse metus magna, tempus eu ultrices et, maximus id tellus.
-                                                Ut eu lacinia ante, id facilisis enim. s. ut suscipit urna
-                                                sollicitudin at...<a href="#" title="">view more</a></p>
+                                            <p>${postDTO.getPostContent()}</p>
+                                            <img style="display: block; width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">
                                         </div>
                                         <div class="job-status-bar btm-line">
                                             <ul class="like-com">
@@ -63,75 +66,47 @@
                                                     15</a></li>
                                             </ul>
                                         </div>
-                                        <div class="comment-area">
-                                            <i class="la la-plus-circle"></i>
-                                            <div class="post_topbar">
-                                                <div class="usy-dt">
-                                                    <img src="static/images/bg-img1.png" alt="">
-                                                    <div class="usy-name">
-                                                        <h3>John Doe</h3>
-                                                        <span><img src="static/images/clock.png" alt="">3 min
-                                                                ago</span>
+                                        <div  class="comment-area">
+                                            <c:if test="${not empty postDTO.getCommentList()}">
+                                            <c:forEach var="commentDTO" items="${postDTO.getCommentList()}">
+                                                <div class="post_topbar">
+                                                    <div class="usy-dt">
+                                                        <img style="height: 30px; width: 30px" src="${commentDTO.getCommenterAvatarLink()}" alt="">
+                                                        <div class="usy-name">
+                                                            <h3>${commentDTO.getCommenterName()}</h3>
+                                                            <span><img src="static/images/clock.png" alt="">${commentDTO.getCommentTime()}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="reply-area">
-                                                <p>Lorem ipsum dolor sit amet,</p>
-                                                <span><i class="la la-mail-reply"></i>Reply</span>
-                                                <div class="comment-area reply-rply1">
-                                                    <div class="post_topbar">
-                                                        <div class="usy-dt">
-                                                            <img src="static/images/bg-img2.png" alt="">
-                                                            <div class="usy-name">
-                                                                <h3>John Doe</h3>
-                                                                <span><img src="static/images/clock.png" alt="">3 min
-                                                                        ago</span>
+                                                <div class="reply-area">
+                                                    <p>${commentDTO.getCommentContent()}</p>
+                                                </div>
+                                            </c:forEach>
+                                            </c:if>
+                                        </div>
+                                        <div class="post-topbar">
+                                            <div  class="postcomment">
+                                                <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
+                                                <div class="row">
+                                                    <div class="col-md-2 usy-dt">
+                                                        <img style="width: 50%" src="${currentUser.getAvatarLink()}" alt="">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <form>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                       id="inputPassword" placeholder="Post a comment">
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="reply-area">
-                                                        <p>Lorem ipsum dolor sit amet,</p>
-                                                        <p>Hi John</p>
-                                                        <span><i class="la la-mail-reply"></i>Reply</span>
+                                                    <div class="col-md-2">
+                                                        <a href="#">Send</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="comment-area">
-                                            <div class="post_topbar">
-                                                <div class="usy-dt">
-                                                    <img src="static/images/bg-img3.png" alt="">
-                                                    <div class="usy-name">
-                                                        <h3>John Doe</h3>
-                                                        <span><img src="static/images/clock.png" alt="">3 min
-                                                                ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="reply-area">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                                                    luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-                                                <span><i class="la la-mail-reply"></i>Reply</span>
-                                            </div>
-                                        </div>
-                                        <div class="postcomment">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <img src="static/images/bg-img4.png" alt="">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control"
-                                                                   id="inputPassword" placeholder="Post a comment">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#">Send</a>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                     </div>
 
                                 </div>
