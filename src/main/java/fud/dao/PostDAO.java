@@ -355,12 +355,7 @@ public class PostDAO {
                         ps.setString(1, postID);
                         ResultSet rs2 = ps.executeQuery();
 
-                        ArrayList<String> imgLinkList = new ArrayList<>();
-                        while (rs2.next()){
-                            imgLinkList.add(rs2.getString("imgLink"));
-                        }
-
-                        //TODO: GET IMAGE USING METHOD
+                        List<String> imgLinkList = getImageListByPostID(postID);
                         result.add( new PostDTO(postID, postTitle, postContent, postCategoryID, postCategory, authorID, authorName, avatarLink,postTime, true,imgLinkList));
                     }
 
