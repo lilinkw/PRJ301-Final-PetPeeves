@@ -38,12 +38,13 @@ public class UserDAO {
                     String location = rs.getString("locations");
                     boolean isAdmin = rs.getBoolean("isAdmin");
                     boolean status = rs.getBoolean("userStatus");
+                    int followerAmount = getUserFollowerAmount(userID);
+                    int followeeAmount = getUserFolloweeAmount(userID);
 
-
-                    //TODO: ADD FOLLOWER, FOLLOWEE INTO UserDTO
                     return new UserDTO(userID, password, username,
                             fullname, avatarLink, dateOfBirth,
-                            gender, location, isAdmin, status);
+                            gender, location, isAdmin, status,
+                            followerAmount, followeeAmount);
                 }
             }
         } finally {
