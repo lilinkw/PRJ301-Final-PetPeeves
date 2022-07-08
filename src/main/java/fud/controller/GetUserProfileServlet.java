@@ -15,10 +15,14 @@ public class GetUserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            String userID = request.getParameter("userID");
-            UserDTO userDTO = new UserDAO().getUserInfoByUserID(userID);
-            request.setAttribute("USERPROFILE", userDTO);
-            //TODO: CHECK IF CURRENT USER FOLLOWED THE REQUESTED USER
+            HttpSession session = request.getSession();
+            UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
+
+            String requestedUserID = request.getParameter("userID");
+            UserDTO requestedUser = new UserDAO().getUserInfoByUserID(requestedUserID);
+            boolean isUserFollowed = new UserDAO().isUserFollowed(currentUser.getUserID(),requestedUserID);
+            request.setAttribute("USERPROFILE", requestedUser);
+            request.setAttribute("FOLLOWED", isUserFollowed);
             //TODO: get Post by userID
             request.getRequestDispatcher(profilePage).forward(request, response);
         } catch (Exception e){

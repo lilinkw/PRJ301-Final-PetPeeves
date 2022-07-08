@@ -13,7 +13,7 @@
 
     <section class="cover-sec">
         <img src="static/images/cover-img.jpg" alt="">
-        <div class="add-pic-box">
+        <div class="add-pic-box" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "":"hidden" }>
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-sm-12">
@@ -34,16 +34,16 @@
                                 <div class="user_profile">
                                     <div class="user-pro-img">
                                         <img src="${USERPROFILE.getAvatarLink()}" width="76.9%" alt="">
-                                        <div class="add-dp" id="OpenImgUpload">
+                                        <div class="add-dp" id="OpenImgUpload" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "":"hidden" }>
                                             <input type="file" id="file">
                                             <label for="file"><i class="fas fa-camera"></i></label>
                                         </div>
                                     </div>
                                     <div class="user_pro_status">
                                         <ul class="flw-hr" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "hidden":"" }>
-                                            <li><a href="#" title="" class="flww"><i class="la la-plus"></i>
-                                                Follow</a></li>
-                                            <li><a href="#" title="" class="hre">Hire</a></li>
+                                            <li><a href="#" title="" class="flww${FOLLOWED == true ? "ed":""}"><i class="la ${FOLLOWED == true ? "la-check":"la-plus"}"></i>
+                                                Follow${FOLLOWED == true ? "ed":""}</a></li>
+                                            <%-- <li><a href="#" title="" class="hre">Hire</a></li> --%>
                                         </ul>
                                         <ul class="flw-status">
                                             <li>

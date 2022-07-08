@@ -396,6 +396,42 @@ public class UserDAO {
         }
         return result;
     }
+
+    public boolean isUserFollowed(String followerID, String followeeID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "SELECT *\n" +
+                        "FROM " + followingDbName + "\n" +
+                        "WHERE userID = ? and followeeId = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, followerID);
+                ps.setString(2, followeeID);
+
+
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
 //        try {
 //            UserDTO user = new UserDAO().login("Admin", "admin");
@@ -427,16 +463,24 @@ public class UserDAO {
 //        } catch (Exception e){
 //            System.out.println("UserDAO getUserFolloweeAmount ERROR: " + e.getMessage());
 //        }
+//        try {
+//            String userID = "USE00000003";
+//            UserDTO userDTO = new UserDAO().getUserInfoByUserID(userID);
+//            System.out.println("userID: " + userDTO.getUserID());
+//            System.out.println("userName: " + userDTO.getUsername());
+//            System.out.println("follower: " + userDTO.getFollowerAmount());
+//            System.out.println("followee: " + userDTO.getFolloweeAmount());
+//            System.out.println("password: " + userDTO.getPassword());
+//        } catch (Exception e){
+//            System.out.println("UserDAO getUserInfoByUserIDERROR: " + e.getMessage());
+//        }
         try {
-            String userID = "USE00000003";
-            UserDTO userDTO = new UserDAO().getUserInfoByUserID(userID);
-            System.out.println("userID: " + userDTO.getUserID());
-            System.out.println("userName: " + userDTO.getUsername());
-            System.out.println("follower: " + userDTO.getFollowerAmount());
-            System.out.println("followee: " + userDTO.getFolloweeAmount());
-            System.out.println("password: " + userDTO.getPassword());
+            String followerID = "USE00000001";
+            String followeeID = "USE00000006";
+            boolean test = new UserDAO().isUserFollowed(followerID, followeeID);
+            System.out.println(test);
         } catch (Exception e){
-            System.out.println("UserDAO getUserInfoByUserIDERROR: " + e.getMessage());
+            System.out.println("UserDAO isUserFollowed ERROR: " + e.getMessage());
         }
     }
 }
