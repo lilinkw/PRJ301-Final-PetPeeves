@@ -80,11 +80,11 @@
                             <span><img src="static/images/icon2.png" alt=""></span>
                             Category
                         </a>
+                        <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
                         <ul>
-                            <li><a href="#" title="">Category</a></li>
-                            <li><a href="#" title="">Category 1</a></li>
-                            <li><a href="#" title="">Category 2</a></li>
-                            <li><a href="#" title="">Category 3</a></li>
+                            <c:forEach var="categoryDTO" items="${categoryList}" varStatus="loop">
+                                <li><a onclick="${loop.index}" href="SearchCategoryServlet?categoryID=${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</a></li>
+                            </c:forEach>
                         </ul>
                     </li>
                 </ul>

@@ -78,7 +78,9 @@
                                                     <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                     <div class="usy-name">
                                                         <h3>${postDTO.getAuthorName()}</h3>
-                                                        <span><a href="post.jsp" style="color: #b2b2b2">${postDTO.getPostTime()}</a> </span>
+                                                        <span><img src="static/images/clock.png" alt="">
+                                                            <a href="post.jsp" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="ed-opts">
@@ -111,7 +113,7 @@
                                                 <h3 style="margin-top: 10px">${postDTO.getPostTitle()}</h3>
 
                                                 <ul class="job-dt">
-                                                    <li><a href="search-category.jsp" title="">${postDTO.getCategory()}</a></li>
+                                                    <li><a href="SearchCategoryServlet?categoryID=${postDTO.getCategoryID()}" title="">${postDTO.getCategory()}</a></li>
                                                 </ul>
                                                 <p>${postDTO.getPostContent()}</p>
                                                     <img style="display: block; width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">

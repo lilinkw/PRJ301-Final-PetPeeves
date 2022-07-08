@@ -13,6 +13,55 @@
         <div class="container">
             <div class="forum-questions-sec">
                 <div class="row">
+
+                    <div class="col-lg-3">
+                        <div class="filter-secs">
+                            <div class="filter-heading">
+                                <h3>Filters</h3>
+                            </div>
+                            <div class="paddy">
+                                <div class="filter-dd">
+                                    <div class="filter-ttl">
+                                        <h3>User</h3>
+                                    </div>
+                                    <form>
+                                        <input type="text" name="search-user" placeholder="Search user">
+                                        <button type="reset" style="float: right; font-size: 14px;
+                                            color: #666666; border: none; background-color: white; margin-top: 0.5rem;">Clear</button>
+                                    </form>
+                                </div>
+
+                                <div class="filter-dd">
+                                    <div class="filter-ttl">
+                                        <h3>Title</h3>
+                                    </div>
+                                    <form>
+                                        <input type="text" name="search-title" placeholder="Search title">
+                                        <button type="reset" style="float: right; font-size: 14px;
+                                            color: #666666; border: none; background-color: white; margin-top: 0.5rem;">Clear</button>
+                                    </form>
+                                </div>
+
+                                <div class="filter-dd">
+                                    <div class="filter-ttl">
+                                        <h3>Category</h3>
+                                    </div>
+                                    <form class="job-tp">
+                                        <select name="category">
+                                            <option>Category 1</option>
+                                            <option>Category 2</option>
+                                            <option>Category 3</option>
+                                            <option>Category 4</option>
+                                        </select>
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        <button type="submit" style="background-color: #e44d3a; color: white; margin-top: 1rem;
+                                            border: none; padding: 0.2rem;">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-lg-8">
                         <div class="forum-questions">
 

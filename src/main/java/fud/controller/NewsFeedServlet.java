@@ -32,11 +32,6 @@ public class NewsFeedServlet extends HttpServlet {
             List<PostDTO> postDTOList = postDAO.getPost(currentUser.getUserID(),categoryID,0);
             request.setAttribute("POSTLIST",postDTOList);
 
-            //get and set category list
-            CategoryDAO categoryDAO = new CategoryDAO();
-            List<CategoryDTO> categoryDTOList = categoryDAO.getCategoryList();
-            session.setAttribute("CATEGORYLIST",categoryDTOList);
-
             // forward to newsfeed
             request.getRequestDispatcher(forwardPage).forward(request, response);
 

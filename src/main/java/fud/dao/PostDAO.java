@@ -39,6 +39,7 @@ public class PostDAO {
                         String avatarLink = rs.getString("authorAvatar");
                         String postID = rs.getString("postID");
                         String postTime = rs.getString("postTime");
+                        String postCategoryID = rs.getString("categoryID");
                         String postCategory = rs.getString("category");
                         String postTitle = rs.getString("postTitle");
                         String postContent = rs.getString("postContent");
@@ -56,7 +57,7 @@ public class PostDAO {
                         }
 
                         //TODO: GET IMAGE USING METHOD
-                        result.add( new PostDTO(postID, postTitle, postContent, postCategory,authorID, authorName, avatarLink,postTime, true,imgLinkList));
+                        result.add( new PostDTO(postID, postTitle, postContent, postCategoryID, postCategory, authorID, authorName, avatarLink,postTime, true,imgLinkList));
                     }
 
                 }
@@ -124,6 +125,67 @@ public class PostDAO {
         return false;
     }
 
+    public List<PostDTO> getPostByCategoryID(String categoryID) throws Exception{
+        List<PostDTO> result = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "select * from Post_Author_Category \n" +
+                        "where categoryID = ?\n" +
+                        "order by postTime desc";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, categoryID);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    // ADD POST THAT HAVE NOT BEEN DELETED ONLY
+                    boolean postStatus = rs.getBoolean("postStatus");
+                    if (postStatus) {
+                        String authorID = rs.getString("authorID");
+                        String authorName = rs.getString("authorName");
+                        String avatarLink = rs.getString("authorAvatar");
+                        String postID = rs.getString("postID");
+                        String postTime = rs.getString("postTime");
+                        String postCategoryID = rs.getString("categoryID");
+                        String postCategory = rs.getString("category");
+                        String postTitle = rs.getString("postTitle");
+                        String postContent = rs.getString("postContent");
+
+                        //get image
+                        sql = "SELECT * FROM dbo.PostImage INNER JOIN dbo.Images ON Images.imgID = PostImage.imgID \n" +
+                                "WHERE postID =?";
+                        ps = con.prepareStatement(sql);
+                        ps.setString(1, postID);
+                        ResultSet rs2 = ps.executeQuery();
+
+                        ArrayList<String> imgLinkList = new ArrayList<>();
+                        while (rs2.next()){
+                            imgLinkList.add(rs2.getString("imgLink"));
+                        }
+
+                        //TODO: GET IMAGE USING METHOD
+                        result.add( new PostDTO(postID, postTitle, postContent, postCategoryID, postCategory, authorID, authorName, avatarLink,postTime, true,imgLinkList));
+                    }
+
+                }
+                return result;
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
         try {
             String userID = "USE00000001";

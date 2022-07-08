@@ -25,19 +25,20 @@ public class PostDTO {
     }
 
     public PostDTO(String postID, String postTitle, String postContent,
-                   String category, String authorID,
+                   String categoryID, String category, String authorID,
                    String authorName, String authorAvatarLink, String postTime,
-                   boolean postStatus, List<String> imgLinkList) {
+                   boolean postStatus, List<String> imageLinks) {
         this.postID = postID;
         this.postTitle = postTitle;
         this.postContent = postContent;
+        this.categoryID = categoryID;
         this.category = category;
         this.authorID = authorID;
         this.authorName = authorName;
         this.authorAvatarLink = authorAvatarLink;
         this.postTime = postTime;
         this.postStatus = postStatus;
-        this.imageLinks =imgLinkList;
+        this.imageLinks = imageLinks;
     }
 
     public String getPostID() {

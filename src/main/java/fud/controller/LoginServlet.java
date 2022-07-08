@@ -1,6 +1,8 @@
 package fud.controller;
 
+import fud.dao.CategoryDAO;
 import fud.dao.UserDAO;
+import fud.model.CategoryDTO;
 import fud.model.UserDTO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -17,8 +19,18 @@ public class LoginServlet extends HttpServlet {
     private final String homePage = "NewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Forward to login page
-        request.getRequestDispatcher(welcomePage).forward(request, response);
+        try {
+            HttpSession session= request.getSession();
+
+            //get and set category list
+            CategoryDAO categoryDAO = new CategoryDAO();
+            List<CategoryDTO> categoryDTOList = categoryDAO.getCategoryList();
+            session.setAttribute("CATEGORYLIST",categoryDTOList);
+
+            // Forward to login page
+            request.getRequestDispatcher(welcomePage).forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     @Override
