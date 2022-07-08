@@ -11,6 +11,8 @@ public class UserDTO {
     private String location;
     private boolean isAdmin;
     private boolean status;
+    private int followerAmount;
+    private int followeeAmount;
 
     public UserDTO() {
     }
@@ -48,6 +50,26 @@ public class UserDTO {
         this.location = location;
         this.isAdmin = isAdmin;
         this.status = status;
+    }
+
+    public UserDTO(String userID, String password,
+                   String username, String fullname,
+                   String avatarLink, String dateOfBirth,
+                   String gender, String location,
+                   boolean isAdmin, boolean status,
+                   int followerAmount, int followeeAmount) {
+        this.userID = userID;
+        this.password = password;
+        this.username = username;
+        this.fullname = fullname;
+        this.avatarLink = avatarLink;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.location = location;
+        this.isAdmin = isAdmin;
+        this.status = status;
+        this.followerAmount = followerAmount;
+        this.followeeAmount = followeeAmount;
     }
 
     public String getUserID() {
@@ -128,5 +150,21 @@ public class UserDTO {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getFollowerAmount() {
+        return followerAmount;
+    }
+
+    public void setFollowerAmount(int followerAmount) {
+        this.followerAmount = followerAmount;
+    }
+
+    public int getFolloweeAmount() {
+        return followeeAmount;
+    }
+
+    public void setFolloweeAmount(int followeeAmount) {
+        this.followeeAmount = followeeAmount;
     }
 }
