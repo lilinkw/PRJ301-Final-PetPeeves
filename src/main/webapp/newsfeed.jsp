@@ -34,11 +34,11 @@
                                     <ul class="user-fw-status">
                                         <li>
                                             <h4>Following</h4>
-                                            <span>34</span>
+                                            <span>${currentUser.getFolloweeAmount()}</span>
                                         </li>
                                         <li>
                                             <h4>Followers</h4>
-                                            <span>155</span>
+                                            <span>${currentUser.getFollowerAmount()}</span>
                                         </li>
                                         <li>
                                             <a href="user-profile.jsp"
