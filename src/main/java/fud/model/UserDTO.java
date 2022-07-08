@@ -72,6 +72,25 @@ public class UserDTO {
         this.followeeAmount = followeeAmount;
     }
 
+    // This Construct user to get User Info only. Not include password
+    public UserDTO(String userID, String username,
+                   String fullname, String avatarLink,
+                   String dateOfBirth, String gender,
+                   String location, boolean isAdmin, boolean status,
+                   int followerAmount, int followeeAmount) {
+        this.userID = userID;
+        this.username = username;
+        this.fullname = fullname;
+        this.avatarLink = avatarLink;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.location = location;
+        this.isAdmin = isAdmin;
+        this.status = status;
+        this.followerAmount = followerAmount;
+        this.followeeAmount = followeeAmount;
+    }
+
     public String getUserID() {
         return userID;
     }

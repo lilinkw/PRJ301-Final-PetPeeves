@@ -266,8 +266,50 @@ public class UserDAO {
         return false;
     }
 
-    public UserDTO getUserInfoByUserID(String userID){
+    public UserDTO getUserInfoByUserID(String userID) throws Exception{
         //TODO: return a UserDTO
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "SELECT *\n"
+                        + "FROM " + userDbName + " AS U LEFT JOIN " + imageDbName + " AS I on U.avatarID = I.imgID\n "
+                        + "WHERE [userID] = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, userID);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    String username = rs.getString("userName");
+                    String fullname = rs.getString("Fullname");
+                    String avatarLink = rs.getString("imgLink");
+                    String dateOfBirth = rs.getString("dateOfBirth");
+                    String gender = rs.getString("gender");
+                    String location = rs.getString("locations");
+                    boolean isAdmin = rs.getBoolean("isAdmin");
+                    boolean status = rs.getBoolean("userStatus");
+                    int followerAmount = getUserFollowerAmount(userID);
+                    int followeeAmount = getUserFolloweeAmount(userID);
+
+                    return new UserDTO(userID, username,
+                            fullname, avatarLink, dateOfBirth,
+                            gender, location, isAdmin, status,
+                            followerAmount, followeeAmount);
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
         return null;
     }
 
@@ -385,5 +427,16 @@ public class UserDAO {
 //        } catch (Exception e){
 //            System.out.println("UserDAO getUserFolloweeAmount ERROR: " + e.getMessage());
 //        }
+        try {
+            String userID = "USE00000003";
+            UserDTO userDTO = new UserDAO().getUserInfoByUserID(userID);
+            System.out.println("userID: " + userDTO.getUserID());
+            System.out.println("userName: " + userDTO.getUsername());
+            System.out.println("follower: " + userDTO.getFollowerAmount());
+            System.out.println("followee: " + userDTO.getFolloweeAmount());
+            System.out.println("password: " + userDTO.getPassword());
+        } catch (Exception e){
+            System.out.println("UserDAO getUserInfoByUserIDERROR: " + e.getMessage());
+        }
     }
 }

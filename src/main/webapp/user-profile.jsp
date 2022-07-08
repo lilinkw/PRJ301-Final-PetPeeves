@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: phamn
@@ -5,7 +6,10 @@
   Time: 3:17 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <jsp:include page="header.jsp"></jsp:include>
+    <%-- copy lon Tung --%>
+    <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
 
     <section class="cover-sec">
         <img src="static/images/cover-img.jpg" alt="">
@@ -29,14 +33,14 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="static/images/user-pro-img.png" alt="">
+                                        <img src="${USERPROFILE.getAvatarLink()}" width="76.9%" alt="">
                                         <div class="add-dp" id="OpenImgUpload">
                                             <input type="file" id="file">
                                             <label for="file"><i class="fas fa-camera"></i></label>
                                         </div>
                                     </div>
                                     <div class="user_pro_status">
-                                        <ul class="flw-hr">
+                                        <ul class="flw-hr" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "hidden":"" }>
                                             <li><a href="#" title="" class="flww"><i class="la la-plus"></i>
                                                 Follow</a></li>
                                             <li><a href="#" title="" class="hre">Hire</a></li>
@@ -44,11 +48,11 @@
                                         <ul class="flw-status">
                                             <li>
                                                 <span>Following</span>
-                                                <b>34</b>
+                                                <b>${USERPROFILE.getFolloweeAmount()}</b>
                                             </li>
                                             <li>
                                                 <span>Followers</span>
-                                                <b>155</b>
+                                                <b>${USERPROFILE.getFollowerAmount()}</b>
                                             </li>
                                         </ul>
                                     </div>
@@ -77,10 +81,11 @@
                         <div class="col-lg-6">
                             <div class="main-ws-sec">
                                 <div class="user-tab-sec">
-                                    <h3>John Doe</h3>
-                                    <div class="star-descp">
-                                        <span>Graphic Designer at Self Employed</span>
-                                    </div>
+                                    <h3>${USERPROFILE.getUsername()}</h3>
+                                    <%-- user description --%>
+                                    <%-- <div class="star-descp"> --%>
+                                    <%--     <span>Graphic Designer at Self Employed</span> --%>
+                                    <%-- </div> --%>
                                     <div class="tab-feed">
                                         <ul>
                                             <li data-tab="feed-dd" class="active animated fadeIn">
