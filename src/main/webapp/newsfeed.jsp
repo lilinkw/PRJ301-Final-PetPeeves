@@ -79,9 +79,7 @@
                                                             <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                             <div class="usy-name">
                                                                 <h3>${postDTO.getAuthorName()}</h3>
-                                                                <span><img src="static/images/clock.png" alt="">
-                                                            <a href="post.jsp" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
-                                                        </span>
+                                                                <span><p style="color: #b2b2b2">${postDTO.getPostTime()}</p> </span>
                                                             </div>
                                                         </div>
                                                         <div class="ed-opts">
@@ -114,7 +112,7 @@
                                                         <h3 style="margin-top: 10px">${postDTO.getPostTitle()}</h3>
 
                                                         <ul class="job-dt">
-                                                            <li><a href="SearchCategoryServlet?categoryID=${postDTO.getCategoryID()}" title="">${postDTO.getCategory()}</a></li>
+                                                            <li><a href="search-category.jsp" title="">${postDTO.getCategory()}</a></li>
                                                         </ul>
                                                         <p>${postDTO.getPostContent()}</p>
                                                         <img style="display: block; width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">
@@ -125,15 +123,15 @@
                                                                 <a href="#"><i class="fas fa-heart"></i> Like</a>
                                                                 <span>25</span>
                                                             </li>
-                                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
+                                                            <li><a href="PostServlet?id=${postDTO.getPostID()}" class="com"><i class="fas fa-comment-alt"></i>
                                                                 Comment 15</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                     <%--                                        <div class="comment-section">--%>
-                                                    <%--&lt;%&ndash;                                            <a href="#" class="plus-ic">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;                                                <i class="la la-plus"></i>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;                                            </a>&ndash;%&gt;--%>
+                                                    <%--                                            <a href="#" class="plus-ic">--%>
+                                                    <%--                                                <i class="la la-plus"></i>--%>
+                                                    <%--                                            </a>--%>
                                                     <%--                                            <div class="comment-sec">--%>
                                                     <%--                                                <ul>--%>
                                                     <%--&lt;%&ndash;                                                    <li>&ndash;%&gt;--%>
@@ -207,13 +205,14 @@
                                     </c:if>
 
 
-                                    <div class="process-comm">
-                                        <div class="spinner">
-                                            <div class="bounce1"></div>
-                                            <div class="bounce2"></div>
-                                            <div class="bounce3"></div>
-                                        </div>
-                                    </div>
+
+<%--                                    <div class="process-comm">--%>
+<%--                                        <div class="spinner">--%>
+<%--                                            <div class="bounce1"></div>--%>
+<%--                                            <div class="bounce2"></div>--%>
+<%--                                            <div class="bounce3"></div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
                                 </div>
                             </div>
                         </div>
