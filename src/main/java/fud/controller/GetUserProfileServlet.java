@@ -15,7 +15,7 @@ public class GetUserProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String userID = request.getParameter("userID");
-        UserDTO userDTO = new UserDAO().getUserByUserID(userID);
+        UserDTO userDTO = new UserDAO().getUserInfoByUserID(userID);
         request.setAttribute("USER", userDTO);
         //TODO: get Post by userID
         request.getRequestDispatcher(profilePage).forward(request, response);

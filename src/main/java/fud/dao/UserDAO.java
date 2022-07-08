@@ -6,11 +6,11 @@ import fud.model.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserDAO {
-    private final String userDbName = "Users";
-    private final String imageDbName = "Images";
+    private final String userDbName = "[Users]";
+    private final String imageDbName = "[Images]";
+    private final String followingDbName = "[Followings]";
 
     public UserDAO() {
     }
@@ -265,9 +265,93 @@ public class UserDAO {
         return false;
     }
 
-    public UserDTO getUserByUserID(String userID){
+    public UserDTO getUserInfoByUserID(String userID){
         //TODO: return a UserDTO
         return null;
+    }
+
+    /**
+     * get the amount of follower (Number of people that follow this account) via userID
+     * This method is only used by This (UserDAO) class methods. Can not be used outside
+     * @param userID ID of user that need to get the amount of follower
+     * @return the amount of follower if @userID exist. -1 otherwise
+     * @throws Exception
+     */
+    private int getUserFollowerAmount(String userID) throws Exception{
+        int result = -1;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null){
+                String resultColumnName = "followerAmount";
+                String sql = "SELECT COUNT(userID) as " + resultColumnName + "\n" +
+                        "FROM " + followingDbName + "\n" +
+                        "WHERE followeeId = ?\n" +
+                        "GROUP BY followeeId";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, userID);
+                rs = ps.executeQuery();
+
+                if (rs.next()){
+                    result = rs.getInt(resultColumnName);
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * get the amount of followee (Number of people that this account follow ) via userID
+     * This method is only used by This (UserDAO) class methods. Can not be used outside
+     * @param userID ID of user that need to get the amount of followee
+     * @return the amount of followee if @userID exist. -1 otherwise
+     * @throws Exception
+     */
+    private int getUserFolloweeAmount(String userID) throws Exception{
+        int result = -1;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null){
+                String resultColumnName = "followeeAmount";
+                String sql = "SELECT COUNT(followeeId) as " + resultColumnName + "\n" +
+                        "FROM " + followingDbName +"\n" +
+                        "WHERE userID = ?\n" +
+                        "GROUP BY userID";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, userID);
+                rs = ps.executeQuery();
+
+                if (rs.next()){
+                    result = rs.getInt(resultColumnName);
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return result;
     }
     public static void main(String[] args) {
 //        try {
@@ -286,11 +370,19 @@ public class UserDAO {
 //        } catch (Exception e){
 //            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
 //        }
-        try {
-            boolean test = new UserDAO().updateUserPassword("USE00000001", "admin");
+//        try {
+//            boolean test = new UserDAO().updateUserPassword("USE00000001", "admin");
+//
+//        } catch (Exception e){
+//            System.out.println("UserDAO updateUserPassword ERROR: " + e.getMessage());
+//        }
 
-        } catch (Exception e){
-            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
-        }
+//        try {
+//            String userID = "USE00000003";
+//            int followerAmount = new UserDAO().getUserFolloweeAmount(userID);
+//            System.out.println("Number Followee of " + userID + " is: " + followerAmount);
+//        } catch (Exception e){
+//            System.out.println("UserDAO getUserFolloweeAmount ERROR: " + e.getMessage());
+//        }
     }
 }
