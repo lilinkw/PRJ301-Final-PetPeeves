@@ -24,9 +24,10 @@
                                  aria-labelledby="nav-acc-tab">
                                 <div class="acc-setting">
                                     <h3>Account Setting</h3>
-                                    <form method="post" action="UpdateUserInfoServlet">
+                                    <form id="update-user-info-form" method="post" action="UpdateUserInfoServlet" onsubmit="return false" >
                                         <div class="cp-field">
                                             <h5>Full Name</h5>
+                                            <p class="error" id="fullname-error"></p>
                                             <div class="cpp-fiel">
                                                 <input type="text" name="fullname" placeholder="Enter your full name" value="${sessionScope.CURRENTUSER.getFullname()}">
                                                 <i class="fa fa-user"></i>
@@ -34,6 +35,7 @@
                                         </div>
                                         <div class="cp-field">
                                             <h5>Date of birth</h5>
+                                            <p class="error" id="birthday-error"></p>
                                             <div class="cpp-fiel">
                                                 <input type="date" name="birthday" value="${sessionScope.CURRENTUSER.getDateOfBirth()}">
                                                 <i class="fa fa-calendar-days"></i>
@@ -41,6 +43,7 @@
                                         </div>
                                         <div class="cp-field">
                                             <h5>Gender</h5>
+                                            <p class="error" id="gender-error"></p>
                                             <div class="cpp-fiel">
                                                 <select class="form-control" name="gender" style="-webkit-appearance: menulist-button;">
                                                     <option value="Male" ${sessionScope.CURRENTUSER.getGender() == "Male" ? "selected":""}>Male</option>
@@ -51,6 +54,7 @@
                                         </div>
                                         <div class="cp-field">
                                             <h5>Location</h5>
+                                            <p class="error" id="location-error"></p>
                                             <div class="cpp-fiel">
                                                 <input type="text" name="location"
                                                        placeholder="Enter your location" value="${sessionScope.CURRENTUSER.getLocation()}">
@@ -59,7 +63,7 @@
                                         </div>
                                         <div class="save-stngs pd2">
                                             <ul>
-                                                <li><button type="submit">Save Setting</button></li>
+                                                <li><button id="save-info" type="submit">Save Setting</button></li>
                                                 <li><button type="reset">Restore Setting</button></li>
                                             </ul>
                                         </div>
@@ -71,10 +75,10 @@
                                 <div class="acc-setting">
                                     <h3>Change Password</h3>
                                     <p>${requestScope.OLDPASSWORDERROR}</p>
-                                    <form id="change-password-form" action="UpdateUserPasswordServlet" method="post">
+                                    <form id="change-password-form" action="UpdateUserPasswordServlet" method="post" onsubmit="return false">
                                         <div class="cp-field">
                                             <h5>Old Password</h5>
-                                            <p class="error" id="old-password-error">$></p>
+                                            <p class="error" id="old-password-error"></p>
                                             <div class="cpp-fiel">
                                                 <input type="password" name="old-password" placeholder="Old Password" >
                                                 <i class="fa fa-lock"></i>
@@ -103,7 +107,7 @@
                                         </div>
                                         <div class="save-stngs pd2">
                                             <ul>
-                                                <li><button id="save" type="submit">Save Setting</button></li>
+                                                <li><button id="save-password" type="submit">Save Setting</button></li>
                                                 <li><button type="reset">Restore Setting</button></li>
                                             </ul>
                                         </div>
