@@ -30,6 +30,7 @@ public class SearchCategoryServlet extends HttpServlet {
 
             List<PostDTO> postDTOList = postDAO.getPostByCategoryID(categoryID);
             request.setAttribute("POSTLIST", postDTOList);
+            request.setAttribute("categoryID", categoryID);
 
             // forward to search-category.jsp
             RequestDispatcher rd = request.getRequestDispatcher("search-category.jsp");

@@ -42,7 +42,7 @@
                                             <span>${currentUser.getFollowerAmount()}</span>
                                         </li>
                                         <li>
-                                            <a href="user-profile.jsp"
+                                            <a href="GetUserProfileServlet?userID=${sessionScope.CURRENTUSER.getUserID()}"
                                                title="">View Profile</a>
                                         </li>
                                     </ul>
@@ -69,6 +69,11 @@
                                 </div>
                                 <div class="posts-section">
                                     <c:set var="postList" value="${requestScope.POSTLIST}"/>
+
+                                    <c:if test="${empty postList}">
+                                        <p>There is no post, Creat post or follow someone to see more</p>
+                                    </c:if>
+
                                     <c:if test="${not empty postList}">
                                         <c:forEach var="postDTO" items="${postList}">
                                             <c:set var="a" value="${postDTO}"/>
@@ -246,9 +251,7 @@
                                             </div>
                                         </c:forEach>
                                     </c:if>
-                                    <c:if test="${empty postList}">
-                                        <p>There is no post, Creat post or follow someone to see more</p>
-                                    </c:if>
+
 
 
                                 </div>

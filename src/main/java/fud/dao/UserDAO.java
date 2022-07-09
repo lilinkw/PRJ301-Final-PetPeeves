@@ -6,6 +6,9 @@ import fud.model.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     private final String userDbName = "[Users]";
@@ -432,6 +435,57 @@ public class UserDAO {
         }
         return false;
     }
+
+    public List<UserDTO> getUsersByName(String name) throws SQLException {
+        List<UserDTO> result = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "select * \n" +
+                        "FROM " + userDbName + " LEFT JOIN " + imageDbName + " on Users.avatarID = Images.imgID\n" +
+                        "where fullName like ?\n";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, "%" + name + "%");
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    // TODO: fix account has been deactived showing
+
+                    // show account that has not been deactived only
+                    boolean status = rs.getBoolean("userStatus");
+                    if (status) {
+                        String userID = rs.getString("userID");
+                        String fullname = rs.getString("fullName");
+                        String avatarLink = rs.getString("imgLink");
+                        String gender = rs.getString("gender");
+                        String location = rs.getString("locations");
+                        boolean isAdmin = rs.getBoolean("isAdmin");
+
+                        result.add( new UserDTO(userID, fullname, avatarLink, gender, location, isAdmin, true));
+                    }
+                }
+                return result;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
 //        try {
 //            UserDTO user = new UserDAO().login("Admin", "admin");
@@ -474,13 +528,23 @@ public class UserDAO {
 //        } catch (Exception e){
 //            System.out.println("UserDAO getUserInfoByUserIDERROR: " + e.getMessage());
 //        }
-        try {
-            String followerID = "USE00000001";
-            String followeeID = "USE00000006";
-            boolean test = new UserDAO().isUserFollowed(followerID, followeeID);
-            System.out.println(test);
-        } catch (Exception e){
-            System.out.println("UserDAO isUserFollowed ERROR: " + e.getMessage());
+//        try {
+//            String followerID = "USE00000001";
+//            String followeeID = "USE00000006";
+//            boolean test = new UserDAO().isUserFollowed(followerID, followeeID);
+//            System.out.println(test);
+//        } catch (Exception e){
+//            System.out.println("UserDAO isUserFollowed ERROR: " + e.getMessage());
+//        }
+
+        try{
+            String name = "B";
+            List<UserDTO> result = new UserDAO().getUsersByName(name);
+            for (int i=0; i< result.size(); i++) {
+                System.out.println(result.get(i).getFullname());
+            }
+        } catch (Exception e) {
+
         }
     }
 }

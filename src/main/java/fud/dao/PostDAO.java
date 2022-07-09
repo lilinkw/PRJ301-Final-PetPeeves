@@ -149,8 +149,9 @@ public class PostDAO {
         try {
             con = new DBUtils().makeConnection();
             if (con != null) {
-                String sql = "SELECT * FROM dbo.Post_Author_Category\n" +
-                        "WHERE authorID =?";
+                String sql = "select * from Post_Author_Category\n" +
+                        "where authorID=?\n" +
+                        "order by postTime desc";
                 ps = con.prepareStatement(sql);
                 ps.setString(1,authorID );
                 rs = ps.executeQuery();
@@ -375,6 +376,7 @@ public class PostDAO {
         return null;
     }
 
+
     public boolean deactivatePostByPostID(String postID) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
@@ -456,17 +458,13 @@ public class PostDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, postTile);
                 stm.setString(2, postContent);
-                stm.setString(3,categoryID);
-                stm.setString(4,postID);
-                stm.setString(5,imgLink);
-                stm.setString(6,postID);
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
                 }
             }
-        }finally {
+        } finally {
             if (con != null) {
                 con.close();
             }
@@ -475,6 +473,64 @@ public class PostDAO {
             }
         }
         return false;
+    }
+
+    public List<PostDTO> getPostByTitle(String titleName) throws Exception{
+        List<PostDTO> result = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "select * from Post_Author_Category\n" +
+                        "where postTitle like ?\n" +
+                        "order by postTime desc";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, "%" + titleName + "%");
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    // ADD POST THAT HAVE NOT BEEN DELETED ONLY
+                    boolean postStatus = rs.getBoolean("postStatus");
+                    if (postStatus) {
+                        String authorID = rs.getString("authorID");
+                        String authorName = rs.getString("authorName");
+                        String avatarLink = rs.getString("authorAvatar");
+                        String postID = rs.getString("postID");
+                        String postTime = rs.getString("postTime");
+                        String postCategoryID = rs.getString("categoryID");
+                        String postCategory = rs.getString("category");
+                        String postTitle = rs.getString("postTitle");
+                        String postContent = rs.getString("postContent");
+
+                        //get image
+                        sql = "SELECT * FROM dbo.PostImage INNER JOIN dbo.Images ON Images.imgID = PostImage.imgID \n" +
+                                "WHERE postID =?";
+                        ps = con.prepareStatement(sql);
+                        ps.setString(1, postID);
+                        ResultSet rs2 = ps.executeQuery();
+
+                        List<String> imgLinkList = getImageListByPostID(postID);
+                        result.add( new PostDTO(postID, postTitle, postContent, postCategoryID, postCategory, authorID, authorName, avatarLink,postTime, true,imgLinkList));
+                    }
+
+                }
+                return result;
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+
     }
     public static void main(String[] args) {
         try {

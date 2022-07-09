@@ -51,13 +51,13 @@
     <div class="container">
         <div class="header-data">
             <div class="logo">
-                <a href="#" title=""><img src="static/images/logo.png" alt=""></a>
+                <a href="ViewNewsFeedServlet" title=""><img src="static/images/logo.png" alt=""></a>
             </div>
             <div class="search-bar">
 
-<%--                search nguoi dung only, chi den search-user.jsp--%>
-                <form>
-                    <input type="text" name="search" placeholder="Search...">
+<%--                search nguoi dung only--%>
+                <form action="SearchUserServlet" method="post">
+                    <input type="text" name="search-user" placeholder="Search user...">
                     <button type="submit"><i class="la la-search"></i></button>
                 </form>
             </div>

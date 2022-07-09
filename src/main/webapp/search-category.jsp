@@ -24,7 +24,7 @@
                     <div class="filter-ttl">
                       <h3>User</h3>
                     </div>
-                    <form>
+                    <form action="SearchUserServlet" method="post">
                       <input type="text" name="search-user" placeholder="Search user">
                       <button type="reset" style="float: right; font-size: 14px;
                                             color: #666666; border: none; background-color: white; margin-top: 0.5rem;">Clear</button>
@@ -35,7 +35,7 @@
                     <div class="filter-ttl">
                       <h3>Title</h3>
                     </div>
-                    <form>
+                    <form action="SearchTitleServlet" method="post">
                       <input type="text" name="search-title" placeholder="Search title">
                       <button type="reset" style="float: right; font-size: 14px;
                                             color: #666666; border: none; background-color: white; margin-top: 0.5rem;">Clear</button>
@@ -46,7 +46,7 @@
                     <div class="filter-ttl">
                       <h3>Category</h3>
                     </div>
-                    <form class="job-tp">
+                    <form class="job-tp" action="SearchCategoryServlet" method="get">
                       <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
                       <select name="categoryID">
                         <c:forEach var="categoryDTO" items="${categoryList}">
@@ -68,6 +68,11 @@
                   <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
 
                   <c:set var="postList" value="${requestScope.POSTLIST}"/>
+
+                  <c:if test="${empty postList}">
+                    <p>There is no post here :((</p>
+                  </c:if>
+
                   <c:forEach var="postDTO" items="${postList}">
                     <!-- day la bai post template, duoc dung trong c:forEach -->
                     <div class="posty">
@@ -202,6 +207,8 @@
                       </div>
                     </div>
                   </c:forEach>
+
+
 
 
                   <div class="process-comm">
