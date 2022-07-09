@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "UpdateUserPasswordServlet", value = "/UpdateUserPasswordServlet")
 public class UpdateUserPasswordServlet extends HttpServlet {
-    private final String homePage = "NewsFeedServlet";
+    private final String homePage = "ViewNewsFeedServlet";
     private final String updatePage = "account-setting.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

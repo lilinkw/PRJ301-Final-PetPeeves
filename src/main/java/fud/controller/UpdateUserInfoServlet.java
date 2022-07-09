@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "UpdateUserInfoServlet", value = "/UpdateUserInfoServlet")
 public class UpdateUserInfoServlet extends HttpServlet {
     private final String updatePage = "account-setting.jsp";
-    private final String homePage = "NewsFeedServlet";
+    private final String homePage = "ViewNewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ACTION","Info" );

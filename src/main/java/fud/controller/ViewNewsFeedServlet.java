@@ -1,8 +1,6 @@
 package fud.controller;
 
-import fud.dao.CategoryDAO;
 import fud.dao.PostDAO;
-import fud.model.CategoryDTO;
 import fud.model.PostDTO;
 import fud.model.UserDTO;
 import jakarta.servlet.*;
@@ -15,8 +13,8 @@ import java.util.List;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
         maxFileSize = 1024 * 1024 * 1000, // 1 GB
         maxRequestSize = 1024 * 1024 * 1000)   	// 1 GB
-@WebServlet(name = "NewsFeedServlet", value = "/NewsFeedServlet")
-public class NewsFeedServlet extends HttpServlet {
+@WebServlet(name = "ViewNewsFeedServlet", value = "/ViewNewsFeedServlet")
+public class ViewNewsFeedServlet extends HttpServlet {
 
     private final String forwardPage = "newsfeed.jsp";
     @Override
@@ -59,7 +57,7 @@ public class NewsFeedServlet extends HttpServlet {
             PostDAO postDAO = new PostDAO();
             postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
 
-            response.sendRedirect("NewsFeedServlet");
+            response.sendRedirect("ViewNewsFeedServlet");
 
 //        System.out.println(authorID+"    "+ categoryID+"   "+content);
         } catch (Exception e) {
