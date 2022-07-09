@@ -125,7 +125,7 @@
                                                                 <a href="#"><i class="fas fa-heart"></i> Like</a>
                                                                 <span>25</span>
                                                             </li>
-                                                            <li><a href="PostServlet?id=${postDTO.getPostID()}" class="com"><i class="fas fa-comment-alt"></i>
+                                                            <li><a href="EditPostServlet?id=${postDTO.getPostID()}" class="com"><i class="fas fa-comment-alt"></i>
                                                                 Comment 15</a></li>
                                                         </ul>
                                                     </div>
