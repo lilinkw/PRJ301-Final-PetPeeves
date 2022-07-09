@@ -16,7 +16,7 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     private final String welcomePage = "welcome.jsp";
 
-    private final String homePage = "NewsFeedServlet";
+    private final String homePage = "ViewNewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

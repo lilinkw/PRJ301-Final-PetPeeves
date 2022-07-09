@@ -227,7 +227,7 @@
         <div class="post-project">
             <h3>Create post</h3>
             <div class="post-project-fields">
-                <form action="NewsFeedServlet" method="post">
+                <form action="ViewNewsFeedServlet" method="post">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="inp-field">

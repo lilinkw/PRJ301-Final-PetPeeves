@@ -61,7 +61,7 @@ public class PostServlet extends HttpServlet {
             PostDAO postDAO = new PostDAO();
             postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
 
-            response.sendRedirect("NewsFeedServlet");
+            response.sendRedirect("ViewNewsFeedServlet");
 
 //        System.out.println(authorID+"    "+ categoryID+"   "+content);
         } catch (Exception e) {

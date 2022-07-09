@@ -64,7 +64,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="newsfeed.jsp" title="">
+                        <a href="ViewNewsFeedServlet" title="">
                             <span><img src="static/images/icon1.png" alt=""></span>
                             Home
                         </a>
