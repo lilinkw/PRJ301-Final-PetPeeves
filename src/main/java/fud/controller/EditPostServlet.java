@@ -44,25 +44,28 @@ public class EditPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            String postID = request.getParameter("postID");
             String categoryID = request.getParameter("categoryID");
             String title = request.getParameter("title");
             String content = request.getParameter("description");
 
-            HttpSession session = request.getSession();
-            UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
-            String authorID = currentUser.getUserID();
 
+
+            //TODO: modify imglink
             String imgLink = "https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg";
 
             PostDAO postDAO = new PostDAO();
-            postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
+            if(imgLink == null){
+                postDAO.updatePostByPostID(postID,title,content,categoryID);
+            }else {
+                postDAO.updatePostByPostID(postID,title,content,categoryID,imgLink);
+            }
+            String url = "EditPostServlet?id=" + postID;
+            response.sendRedirect(url);
 
-            response.sendRedirect("ViewNewsFeedServlet");
 
-//        System.out.println(authorID+"    "+ categoryID+"   "+content);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 }

@@ -21,6 +21,7 @@
                                 <div class="user-data full-width">
                                     <div class="user-profile">
                                     <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
+                                        <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
                                         <div class="username-dt">
                                             <div class="usr-pic">
                                                 <img src="${currentUser.getAvatarLink()}" alt="">
@@ -69,7 +70,8 @@
                                 <div class="posts-section">
                                     <c:set var="postList" value="${requestScope.POSTLIST}"/>
                                     <c:if test="${not empty postList}">
-                                        <c:forEach var="postDTO" items="${postList}" >
+                                        <c:forEach var="postDTO" items="${postList}">
+                                            <c:set var="a" value="${postDTO}"/>
 
                                             <!-- day la bai post template, duoc dung trong c:forEach -->
                                             <div class="posty">
@@ -94,10 +96,10 @@
                                                                 <ul class="ed-options">
                                                                     <!-- for user only -->
                                                                     <c:if test="${postDTO.getAuthorID().equals(currentUser.getUserID())}">
-                                                                            <li><a href="#" title="" class="edit-post post_project">Edit Post</a></li>
+                                                                            <li><a href="#" title="" id="${postDTO.getPostID()}" class="edit-post post_project" >Edit Post</a></li>
                                                                     </c:if>
                                                                     <!-- for admin and user only -->
-                                                                    <li><a href="#" title="">Delete post</a></li>
+                                                                    <li><a href="DeletePostServlet?id=${postDTO.getPostID()}" title="">Delete post</a></li>
                                                                 </ul>
                                                             </c:if>
 
@@ -201,53 +203,46 @@
                                                     <%--                                        </div>--%>
                                             </div>
 
-                                                <div class="edit-post post-popup pst-pj">
-                                                    <div class="post-project">
-                                                        <h3>Edit post</h3>
-                                                        <div class="post-project-fields">
-                                                            <form action="ViewNewsFeedServlet" method="post">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="inp-field">
-                                                                            <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
-                                                                            <select name="categoryID">
-                                                                                <c:forEach var="categoryDTO" items="${categoryList}">
-                                                                                    <option value="${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-12">
-                                                                        <input name="title" placeholder="Title"/>
-                                                                    </div>
-                                                                    <div class="col-lg-12">
-                                                                        <textarea name="description" placeholder="What's on your mind?"></textarea>
-                                                                    </div>
-                                                                    <div class="col-lg-12">
-                                                                        <ul>
-                                                                            <li><button class="active" type="submit" value="post">Post</button></li>
-                                                                            <li style="margin-bottom: -15px">
-                                                                                <input type="file" id="file" style="height: 0;overflow: hidden;width: 0;
-                                        float: left; padding: 0px; margin-bottom: 0px">
+                                            <div class="edit-post post-popup pst-pj ${postDTO.getPostID()}">
+                                                <div class="post-project">
+                                                    <h3>Edit post</h3>
+                                                    <div class="post-project-fields">
+                                                        <form action="EditPostServlet" method="post">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="inp-field">
+                                                                        <input name="postID" hidden="" value="${postDTO.getPostID()}">
 
-                                                                                <label for="file" style="background: #fff; border: 2px solid #e44d3a;
-                                    border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;
-                                    font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;
-                                    position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;
-                                    float: right; text-transform: uppercase;">
-                                                                                    Add images
-                                                                                </label>
-                                                                            </li>
-                                                                            <li><a href="#" title="">Cancel</a>
-                                                                            </li>
-                                                                        </ul>
+                                                                        <select name="categoryID">
+                                                                            <c:forEach var="categoryDTO" items="${categoryList}">
+                                                                                <option value="${categoryDTO.getCategoryID()}" ${categoryDTO.getCategoryID().equals(postDTO.getCategoryID())?"selected":""}>${categoryDTO.getCategory()}</option>
+                                                                            </c:forEach>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                        <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+                                                                <div class="col-lg-12">
+                                                                    <input name="title" placeholder="Title" value="${postDTO.getPostTitle()}"/>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img id="output" style="display: block; width: 50%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                                                    <ul>
+                                                                        <li><button class="active" type="submit" value="post">Post</button></li>
+                                                                        <li style="margin-bottom: -15px">
+                                                                            <input type="file" onchange="loadFile(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
+                                                                            <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
+                                                                                Change images
+                                                                            </label>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
-
+                                                    <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+                                                </div>
                                             </div>
                                         </c:forEach>
                                     </c:if>
@@ -256,14 +251,6 @@
                                     </c:if>
 
 
-
-<%--                                    <div class="process-comm">--%>
-<%--                                        <div class="spinner">--%>
-<%--                                            <div class="bounce1"></div>--%>
-<%--                                            <div class="bounce2"></div>--%>
-<%--                                            <div class="bounce3"></div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +270,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="inp-field">
-                                    <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
                                     <select name="categoryID">
                                         <c:forEach var="categoryDTO" items="${categoryList}">
                                             <option value="${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</option>
@@ -299,7 +285,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <ul>
-                                    <li><button class="active" type="submit" value="post">Post</button></li>
+                                    <li><button class="active" type="submit" value="update">Update</button></li>
                                     <li style="margin-bottom: -15px">
                                         <input type="file" id="file" style="height: 0;overflow: hidden;width: 0;
                                         float: left; padding: 0px; margin-bottom: 0px">
@@ -312,8 +298,8 @@
                                             Add images
                                         </label>
                                     </li>
-                                    <li><a href="#" title="">Cancel</a>
-                                    </li>
+<%--                                    <li><a href="#" title="">Cancel</a>--%>
+<%--                                    </li>--%>
                                 </ul>
                             </div>
                         </div>
@@ -334,6 +320,12 @@
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/scrollbar.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 
 </body>
 

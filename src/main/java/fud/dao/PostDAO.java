@@ -286,7 +286,6 @@ public class PostDAO {
             if (con != null) {
                 String sql = "INSERT INTO dbo.PostInfo (postTitle,postContent,authorID,categoryID)\n" +
                         "VALUES(?,?,?,?)\n" +
-                        "GO\n" +
                         "INSERT INTO dbo.Images(imgLink) VALUES(?)\n" +
                         "GO\n" +
                         "INSERT INTO dbo.PostImage(postID,imgID)\n" +
@@ -376,6 +375,107 @@ public class PostDAO {
         return null;
     }
 
+    public boolean deactivatePostByPostID(String postID) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "UPDATE dbo.PostInfo SET postStatus = 0 WHERE postID = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, postID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        }finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updatePostByPostID(String postID, String postTile, String postContent, String categoryID) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "UPDATE dbo.PostInfo SET postTitle = ? ,postContent =?, categoryID=?\n" +
+                        "WHERE postID =?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, postTile);
+                stm.setString(2, postContent);
+                stm.setString(3,categoryID);
+                stm.setString(4,postID);
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        }finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updatePostByPostID(String postID, String postTile, String postContent, String categoryID, String imgLink) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "UPDATE dbo.PostInfo SET postTitle = ? ,postContent =?, categoryID=?\n" +
+                        "WHERE postID = ?\n" +
+                        "\n" +
+                        "UPDATE dbo.Images SET imgLink = ?\n" +
+                        "WHERE imgID =(SELECT imgID FROM dbo.PostInfo WHERE postID =?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, postTile);
+                stm.setString(2, postContent);
+                stm.setString(3,categoryID);
+                stm.setString(4,postID);
+                stm.setString(5,imgLink);
+                stm.setString(6,postID);
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        }finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         try {
             String userID = "USE00000001";

@@ -52,10 +52,17 @@ public class ViewNewsFeedServlet extends HttpServlet {
             UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
             String authorID = currentUser.getUserID();
 
+
+            //TODO: modify imglink
             String imgLink = "https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg";
 
             PostDAO postDAO = new PostDAO();
-            postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
+            if(imgLink == null){
+                postDAO.addNewPost(title,content,authorID,categoryID);
+            }else {
+                postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
+            }
+
 
             response.sendRedirect("ViewNewsFeedServlet");
 
