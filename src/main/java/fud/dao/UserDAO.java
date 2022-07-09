@@ -63,42 +63,6 @@ public class UserDAO {
         }
         return null;
     }
-
-    public boolean checkUser(String username, String password) throws Exception {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            con = new DBUtils().makeConnection();
-
-            //check username and password if exist
-            if (con != null) {
-                String sql = "select userName, passwords\n" +
-                        "from " + userDbName + "\n" +
-                        "where userName = ? and passwords = ?";
-                stm = con.prepareStatement(sql);
-                stm.setString(1, username);
-                stm.setString(2, password);
-
-                rs = stm.executeQuery();
-                if (rs.next()) {
-                    return true;
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-        return false;
-    }
-
     public boolean isUserExisted(String username) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
@@ -487,16 +451,16 @@ public class UserDAO {
         return null;
     }
     public static void main(String[] args) {
-//        try {
-//            UserDTO user = new UserDAO().login("Admin", "admin");
-//            System.out.println("Username: " + user.getUsername() +
-//                    "\nPassword: " + user.getPassword() +
-//                    "\nstatus: " + user.isStatus() +
-//                    "\navatarLink :" + user.getAvatarLink() +
-//                    "\nFull Name: " + user.getFullname());
-//        } catch (Exception e){
-//            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
-//        }
+        try {
+            UserDTO user = new UserDAO().login("Admin", "admin");
+            System.out.println("Username: " + user.getUsername() +
+                    "\nPassword: " + user.getPassword() +
+                    "\nstatus: " + user.isStatus() +
+                    "\navatarLink :" + user.getAvatarLink() +
+                    "\nFull Name: " + user.getFullname());
+        } catch (Exception e){
+            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+        }
 //        try {
 //        boolean test = new UserDAO().updateUserInfo("USE00000001", "Admin", "2002-08-30", "male", "Quang Nam");
 //
@@ -537,14 +501,14 @@ public class UserDAO {
 //            System.out.println("UserDAO isUserFollowed ERROR: " + e.getMessage());
 //        }
 
-        try{
-            String name = "B";
-            List<UserDTO> result = new UserDAO().getUsersByName(name);
-            for (int i=0; i< result.size(); i++) {
-                System.out.println(result.get(i).getFullname());
-            }
-        } catch (Exception e) {
-
-        }
+//        try{
+//            String name = "B";
+//            List<UserDTO> result = new UserDAO().getUsersByName(name);
+//            for (int i=0; i< result.size(); i++) {
+//                System.out.println(result.get(i).getFullname());
+//            }
+//        } catch (Exception e) {
+//
+//        }
     }
 }

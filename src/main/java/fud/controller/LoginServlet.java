@@ -16,7 +16,7 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     private final String welcomePage = "welcome.jsp";
 
-    private final String homePage = "ViewNewsFeedServlet";
+    private final String homeServlet = "ViewNewsFeedServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -44,9 +44,6 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
-            UserDAO user = new UserDAO();
-
-
             if (username.trim().isEmpty() || password.trim().isEmpty()) {
                 err = "Username or password is empty!";
                 request.setAttribute("LOGINERROR", err);
@@ -54,12 +51,12 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("password", password);
 
                 url = welcomePage;
-            }
-            else if (user.checkUser(username, password)) {
+            } else {
+                UserDAO user = new UserDAO();
                 UserDTO account = user.login(username, password);
 
-                if (!account.isStatus()) {
-                    err = "User has banned from this server!";
+                if (account == null) {
+                    err = "Username/Password is not right!";
                     request.setAttribute("LOGINERROR", err);
                     request.setAttribute("username", username);
                     request.setAttribute("password", password);
@@ -68,24 +65,24 @@ public class LoginServlet extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                 } else {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("CURRENTUSER", account);
-                    url = homePage;
-                    response.sendRedirect(url);
+                    if (!account.isStatus()) {
+                        err = "User has been banned from this server!";
+                        request.setAttribute("LOGINERROR", err);
+                        request.setAttribute("username", username);
+                        request.setAttribute("password", password);
+
+                        url = welcomePage;
+                        RequestDispatcher rd = request.getRequestDispatcher(url);
+                        rd.forward(request, response);
+                    } else {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("CURRENTUSER", account);
+
+                        url = homeServlet;
+                        response.sendRedirect(url);
+                    }
                 }
             }
-            else {
-                err = "Username/password is not right or user is not existed!";
-                request.setAttribute("LOGINERROR", err);
-                request.setAttribute("username", username);
-                request.setAttribute("password", password);
-
-                url = welcomePage;
-                System.out.println("User does not existed!");
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

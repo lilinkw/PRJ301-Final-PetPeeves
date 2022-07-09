@@ -18,6 +18,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("CURRENTUSER");
+        session.removeAttribute("CATEGORYLIST");
 
         // Forward to login page
         request.getRequestDispatcher(welcomePage).forward(request, response);
