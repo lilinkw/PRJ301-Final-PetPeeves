@@ -82,7 +82,7 @@
                                                             <div class="usy-name">
                                                                 <h3>${postDTO.getAuthorName()}</h3>
                                                                 <span><img src="static/images/clock.png" alt="">
-                                                                    <a href="post.jsp" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
+                                                                    <a href="EditPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -229,7 +229,7 @@
                                                                 <div class="col-lg-12">
                                                                     <img id="output" style="display: block; width: 50%" src="${postDTO.getImageLinks().get(0)}" alt="">
                                                                     <ul>
-                                                                        <li><button class="active" type="submit" value="post">Post</button></li>
+                                                                        <li><button class="active" type="submit" value="update">Update</button></li>
                                                                         <li style="margin-bottom: -15px">
                                                                             <input type="file" onchange="loadFile(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
                                                                             <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">

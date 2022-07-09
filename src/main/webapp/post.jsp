@@ -7,10 +7,12 @@
             <div class="container">
                 <div class="main-section-data">
                     <div class="row">
-                        <div class="col-xl-9 col-lg-9 col-md-12">
+                        <div class="col-md-12">
 
                             <div class="main-ws-sec">
                                 <div class="posts-section">
+                                    <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
+                                    <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
                                     <c:set var="postDTO" value="${requestScope.POSTDTO}"/>
                                     <div class="post-bar">
                                         <div class="post_topbar">
@@ -31,10 +33,10 @@
                                                     <ul class="ed-options">
                                                         <!-- for user only -->
                                                         <c:if test="${postDTO.getAuthorID().equals(currentUser.getUserID())}">
-                                                            <li><a href="#" title="">Edit Post</a></li>
+                                                            <li><a href="#" title="" id="${postDTO.getPostID()}" class="edit-post post_project" >Edit Post</a></li>
                                                         </c:if>
                                                         <!-- for admin and user only -->
-                                                        <li><a href="#" title="">Delete post</a></li>
+                                                        <li><a href="DeletePostServlet?id=${postDTO.getPostID()}" title="">Delete post</a></li>
                                                     </ul>
                                                 </c:if>
                                             </div>
@@ -86,7 +88,6 @@
                                         </div>
                                         <div class="post-topbar">
                                             <div  class="postcomment">
-                                                <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
                                                 <div class="row">
                                                     <div class="col-md-2 usy-dt">
                                                         <img style="width: 50%" src="${currentUser.getAvatarLink()}" alt="">
@@ -114,23 +115,64 @@
                             </div>
 
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-12">
-                            <div class="right-sidebar">
-                                <div class="widget widget-about bid-place">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#mymodal" data-whatever="@mdo">Create Post</button>
-                                </div>
+<%--                        <div class="col-xl-3 col-lg-3 col-md-12">--%>
+<%--                            <div class="right-sidebar">--%>
+<%--                                <div class="widget widget-about bid-place">--%>
+<%--                                    <button type="button" class="btn btn-primary" data-toggle="modal"--%>
+<%--                                            data-target="#mymodal" data-whatever="@mdo">Create Post</button>--%>
+<%--                                </div>--%>
 
-                                <div class="widget widget-projectid">
-                                    <h3>Project ID : 123456789</h3>
-                                    <p>Report Job</p>
-                                </div>
+<%--                                <div class="widget widget-projectid">--%>
+<%--                                    <h3>Project ID : 123456789</h3>--%>
+<%--                                    <p>Report Job</p>--%>
+<%--                                </div>--%>
 
-                            </div>
+<%--                            </div>--%>
 
-                        </div>
+<%--                        </div>--%>
                     </div>
 
+                </div>
+                <div class="edit-post post-popup pst-pj ${postDTO.getPostID()}">
+                    <div class="post-project">
+                        <h3>Edit post</h3>
+                        <div class="post-project-fields">
+                            <form action="EditPostServlet" method="post">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="inp-field">
+                                            <input name="postID" hidden="" value="${postDTO.getPostID()}">
+
+                                            <select name="categoryID">
+                                                <c:forEach var="categoryDTO" items="${categoryList}">
+                                                    <option value="${categoryDTO.getCategoryID()}" ${categoryDTO.getCategoryID().equals(postDTO.getCategoryID())?"selected":""}>${categoryDTO.getCategory()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <input name="title" placeholder="Title" value="${postDTO.getPostTitle()}"/>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <img id="output" style="display: block; width: 50%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                        <ul>
+                                            <li><button class="active" type="submit" value="update">Update</button></li>
+                                            <li style="margin-bottom: -15px">
+                                                <input type="file" onchange="loadFile(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
+                                                <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
+                                                    Change images
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -268,35 +310,35 @@
 <%--    </div>--%>
 
 <%--</div>--%>
-<div class="modal" id="mymodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="text-light text-center">Post</h3>
-            </div>
-            <div class="modal-body">
-                <div class="innerbody apply-jobbox">
-                    <h3>What is on your mind?</h3>
-                    <form>
-                            <textarea name="description" placeholder="What's on your mind?" style="width: 100%; padding:15px; height: 130px;     width: 100%;
-                            color: #b2b2b2;
-                            font-size: 14px;
-                            border: 1px solid #e5e5e5;
-                            font-weight: 500;"></textarea>
-                    </form>
-                    <div class="select-files">
-                        <input type="file" class="custom-file-input">
-                        <p>Upload your cv / resume file. Max file size : 3MB</p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="place-bid-btn">Post</button>
-                <button>Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="modal" id="mymodal">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h3 class="text-light text-center">Post</h3>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <div class="innerbody apply-jobbox">--%>
+<%--                    <h3>What is on your mind?</h3>--%>
+<%--                    <form>--%>
+<%--                            <textarea name="description" placeholder="What's on your mind?" style="width: 100%; padding:15px; height: 130px;     width: 100%;--%>
+<%--                            color: #b2b2b2;--%>
+<%--                            font-size: 14px;--%>
+<%--                            border: 1px solid #e5e5e5;--%>
+<%--                            font-weight: 500;"></textarea>--%>
+<%--                    </form>--%>
+<%--                    <div class="select-files">--%>
+<%--                        <input type="file" class="custom-file-input">--%>
+<%--                        <p>Upload your cv / resume file. Max file size : 3MB</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <button class="place-bid-btn">Post</button>--%>
+<%--                <button>Cancel</button>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 <script type="text/javascript" src="static/js/jquery.min.js"></script>
 <script type="text/javascript" src="static/js/popper.js"></script>
