@@ -70,27 +70,30 @@
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
                                     <h3>Change Password</h3>
-                                    <p>${requestScope.ERROR}</p>
-                                    <form action="UpdateUserPasswordServlet" method="post">
+                                    <p>${requestScope.OLDPASSWORDERROR}</p>
+                                    <form id="change-password-form" action="UpdateUserPasswordServlet" method="post">
                                         <div class="cp-field">
                                             <h5>Old Password</h5>
+                                            <p class="error" id="old-password-error">$></p>
                                             <div class="cpp-fiel">
-                                                <input type="password" name="old-password" placeholder="Old Password">
+                                                <input type="password" name="old-password" placeholder="Old Password" >
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>New Password</h5>
+                                            <p class="error" id="new-password-error"></p>
                                             <div class="cpp-fiel">
-                                                <input type="password" name="new-password" placeholder="New Password">
+                                                <input type="password" name="new-password" placeholder="New Password"  >
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
                                         <div class="cp-field">
                                             <h5>Repeat Password</h5>
+                                            <p class="error" id="repeat-password-error"></p>
                                             <div class="cpp-fiel">
                                                 <input type="password" name="repeat-password"
-                                                       placeholder="Repeat Password">
+                                                       placeholder="Repeat Password" >
                                                 <i class="fa fa-lock"></i>
                                             </div>
                                         </div>
@@ -100,7 +103,7 @@
                                         </div>
                                         <div class="save-stngs pd2">
                                             <ul>
-                                                <li><button type="submit">Save Setting</button></li>
+                                                <li><button id="save" type="submit">Save Setting</button></li>
                                                 <li><button type="reset">Restore Setting</button></li>
                                             </ul>
                                         </div>
@@ -114,12 +117,14 @@
         </div>
     </section>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="static/js/jquery.min.js"></script>
 <script type="text/javascript" src="static/js/popper.js"></script>
 <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="static/js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
+<script type="text/javascript" src="static/js/validate.js"></script>
 
 </body>
 

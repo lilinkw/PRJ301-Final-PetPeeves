@@ -4590,6 +4590,9 @@ a:hover {
 	line-height: 24px;
 	margin-top: 5px;
 }
+p.error {
+	color: red;
+}
 /* =============== notifications-list ============= */
 
 .notifications-list {

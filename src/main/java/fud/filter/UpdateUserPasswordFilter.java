@@ -28,16 +28,9 @@ public class UpdateUserPasswordFilter implements Filter {
         String error;
 
         String inputOldPassword = request.getParameter("old-password");
-        String inputNewPassword = request.getParameter("new-password");
-        String inputRepeatPassword = request.getParameter("repeat-password");
         if (!inputOldPassword.equals(currentPassword)){
-            error = "WRONG PASSWORD";
-            request.setAttribute("ERROR", error);
-            request.setAttribute("ACTION","Password" );
-            request.getRequestDispatcher(forwardPage).forward(request, response);
-        } else if (!inputNewPassword.equals(inputRepeatPassword)) {
-            error = "NEW PASSWORD AND REPEAT PASSWORD IS UNMATCHED";
-            request.setAttribute("ERROR", error);
+            error = "Wrong current password. Try again";
+            request.setAttribute("OLDPASSWORDERROR", error);
             request.setAttribute("ACTION","Password" );
             request.getRequestDispatcher(forwardPage).forward(request, response);
         } else {
