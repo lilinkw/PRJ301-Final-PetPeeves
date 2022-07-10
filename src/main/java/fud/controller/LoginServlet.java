@@ -51,6 +51,8 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("password", password);
 
                 url = welcomePage;
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 UserDAO user = new UserDAO();
                 UserDTO account = user.login(username, password);
