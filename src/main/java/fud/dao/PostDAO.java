@@ -287,13 +287,15 @@ public class PostDAO {
             if (con != null) {
                 String sql = "INSERT INTO dbo.PostInfo (postTitle,postContent,authorID,categoryID)\n" +
                         "VALUES(?,?,?,?)\n" +
-                        "INSERT INTO dbo.Images(imgLink) VALUES(?)\n" +
-                        "GO\n" +
-                        "INSERT INTO dbo.PostImage(postID,imgID)\n" +
+                        "\n" +
+                        "INSERT INTO dbo.Images(imgLink) \n" +
+                        "VALUES(?)\n" +
+                        "\n" +
+                        "INSERT INTO dbo.PostImage(postID,imgID) \n" +
                         "VALUES\n" +
                         "( \n" +
-                        "\t(SELECT TOP (1) postID FROM dbo.PostInfo ORDER BY postTime DESC), \n" +
-                        "\t(SELECT TOP (1) imgID FROM dbo.Images ORDER BY imgID DESC) \n" +
+                        "\t(SELECT TOP (1) postID FROM dbo.PostInfo ORDER BY postTime DESC),\n" +
+                        "\t(SELECT TOP (1) imgID FROM dbo.Images ORDER BY imgID DESC)\n" +
                         ")";
 
                 stm = con.prepareStatement(sql);
@@ -535,6 +537,37 @@ public class PostDAO {
         }
         return null;
 
+    }
+
+    public boolean addComment(String postID, String commenterID, String commentContent) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "INSERT INTO dbo.Comment(postID,commenterID,commentContent)\n" +
+                        "VALUES(?,?,?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, postID);
+                stm.setString(2, commenterID);
+                stm.setString(3, commentContent);
+                int row = stm.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
     }
     public static void main(String[] args) {
         try {
