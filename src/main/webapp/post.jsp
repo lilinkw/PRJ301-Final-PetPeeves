@@ -88,22 +88,23 @@
                                         </div>
                                         <div class="post-topbar">
                                             <div  class="postcomment">
+                                                <form action="AddCommentServlet" method="post">
+                                                    <input hidden name="postID" value="${postDTO.getPostID()}">
                                                 <div class="row">
                                                     <div class="col-md-2 usy-dt">
                                                         <img style="width: 50%" src="${currentUser.getAvatarLink()}" alt="">
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control"
-                                                                       id="inputPassword" placeholder="Post a comment">
+                                                        <div class="form-group">
+                                                            <input name="commentContent" type="text" class="form-control"
+                                                                   id="inputPassword" placeholder="Post a comment">
                                                             </div>
-                                                        </form>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <a href="#">Send</a>
+                                                        <button class="btn btn-primary" type="submit">Send</button>
                                                     </div>
                                                 </div>
+                                                </form>
                                             </div>
                                         </div>
 
