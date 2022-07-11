@@ -51,7 +51,7 @@
                                             <h3 style="margin-top: 10px">${postDTO.getPostTitle()}</h3>
 
                                             <ul class="job-dt">
-                                                <li><a href="search-category.jsp" title="">${postDTO.getCategory()}</a></li>
+                                                <li><a href="SearchCategoryServlet?categoryID=${postDTO.getCategoryID()}" title="">${postDTO.getCategory()}</a></li>
                                             </ul>
                                             <p>${postDTO.getPostContent()}</p>
                                             <img style="display: block; width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">
@@ -131,7 +131,7 @@
 
 <%--                        </div>--%>
                     </div>
-
+<%--                    edit post popup--%>
                 </div>
                 <div class="edit-post post-popup pst-pj ${postDTO.getPostID()}">
                     <div class="post-project">
@@ -157,7 +157,7 @@
                                         <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
                                     </div>
                                     <div class="col-lg-12">
-                                        <img id="output" style="display: block; width: 50%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                        <img id="output" style="display: block; width: 30%" src="${postDTO.getImageLinks().get(0)}" alt="">
                                         <ul>
                                             <li><button class="active" type="submit" value="update">Update</button></li>
                                             <li style="margin-bottom: -15px">
@@ -346,7 +346,12 @@
 <script type="text/javascript" src="static/js/jquery.range-min.js"></script>
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
-
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 </body>
 
 </html>

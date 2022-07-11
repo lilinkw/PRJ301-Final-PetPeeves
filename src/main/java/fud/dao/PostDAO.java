@@ -458,6 +458,10 @@ public class PostDAO {
                 stm = con.prepareStatement(sql);
                 stm.setString(1, postTile);
                 stm.setString(2, postContent);
+                stm.setString(3,categoryID);
+                stm.setString(4,postID);
+                stm.setString(5,imgLink);
+                stm.setString(6,postID);
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

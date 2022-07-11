@@ -85,7 +85,7 @@
                                                         <div class="usy-dt">
                                                             <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                             <div class="usy-name">
-                                                                <h3>${postDTO.getAuthorName()}</h3>
+                                                                <a href="GetUserProfileServlet?userID=${postDTO.getAuthorID()}"><h3>${postDTO.getAuthorName()}</h3></a>
                                                                 <span><img src="static/images/clock.png" alt="">
                                                                     <a href="EditPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
                                                                 </span>
@@ -232,7 +232,7 @@
                                                                     <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
                                                                 </div>
                                                                 <div class="col-lg-12">
-                                                                    <img id="output" style="display: block; width: 50%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                                                    <img id="output" style="display: block; width: 30%" src="${postDTO.getImageLinks().get(0)}" alt="">
                                                                     <ul>
                                                                         <li><button class="active" type="submit" value="update">Update</button></li>
                                                                         <li style="margin-bottom: -15px">
