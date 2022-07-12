@@ -97,8 +97,48 @@ public class UserDAO {
         return false;
     }
 
-    // TODO: MODIFY createNewAccount: Add Image to Image Table, then link to User table. If no img, Default img is the first img
-    public boolean createNewAccount(String username, String password, String fullname, String gender, String birthday, String location, String image) throws Exception {
+    public String createImageAccount(String imageLink) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+
+            // insert imageLink to Images first
+            // then create new account
+            if (con != null) {
+                String sql = "insert into Images \n" +
+                        "output Inserted.imgID\n" +
+                        "values (\n" +
+                        "\t?\n" +
+                        ")";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, imageLink);
+
+                rs = stm.executeQuery();
+            }
+            if (rs.next()) {
+                // return only 1 result, whether are there multiple results or not
+                String imgID = rs.getString("imgID");
+
+                return imgID;
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return null;
+    }
+    public boolean createNewAccount(String username, String password, String fullname, String gender, String birthday, String location, String imageLink) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
 
@@ -108,34 +148,71 @@ public class UserDAO {
             // create new student
             if (con != null) {
 
-                if (image == "") {
-                    String sql = "insert into Users\n" +
-                            "values (\n" +
-                            "\t?, ?, null, ?, ?, ?, 0, 1, ?\n" +
-                            ")";
+                String sql = "insert into Users\n" +
+                        "values (\n" +
+                        "\t?, ?, ?, ?, ?, ?, 0, 1, ?\n" +
+                        ")";
 
-                    stm = con.prepareStatement(sql);
-                    stm.setString(1, username);
-                    stm.setString(2, password);
-                    stm.setString(3, birthday);
-                    stm.setString(4, gender);
-                    stm.setString(5, location);
-                    stm.setString(6, fullname);
-                } else {
-                    String sql = "insert into Users\n" +
-                            "values (\n" +
-                            "\t?, ?, ?, ?, ?, ?, 0, 1, ?\n" +
-                            ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                stm.setString(2, password);
+                stm.setString(3, createImageAccount(imageLink));
+                stm.setString(4, birthday);
+                stm.setString(5, gender);
+                stm.setString(6, location);
+                stm.setString(7, fullname);
 
-                    stm = con.prepareStatement(sql);
-                    stm.setString(1, username);
-                    stm.setString(2, password);
-                    stm.setString(3, image);
-                    stm.setString(4, birthday);
-                    stm.setString(5, gender);
-                    stm.setString(6, location);
-                    stm.setString(7, fullname);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
                 }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * create new Account without image
+     * @param username
+     * @param password
+     * @param fullname
+     * @param gender
+     * @param birthday
+     * @param location
+     * @return
+     * @throws Exception
+     */
+    public boolean createNewAccount(String username, String password, String fullname, String gender, String birthday, String location) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+            String defaultImageID = "IMG00000001";
+
+            // create new student
+            if (con != null) {
+
+                String sql = "insert into Users\n" +
+                        "values (\n" +
+                        "\t?, ?, ?, ?, ?, ?, 0, 1, ?\n" +
+                        ")";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                stm.setString(2, password);
+                stm.setString(3, defaultImageID);
+                stm.setString(4, birthday);
+                stm.setString(5, gender);
+                stm.setString(6, location);
+                stm.setString(7, fullname);
 
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -289,7 +366,7 @@ public class UserDAO {
      * @throws Exception
      */
     private int getUserFollowerAmount(String userID) throws Exception{
-        int result = -1;
+        int result = 0;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -331,7 +408,7 @@ public class UserDAO {
      * @throws Exception
      */
     private int getUserFolloweeAmount(String userID) throws Exception{
-        int result = -1;
+        int result = 0;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

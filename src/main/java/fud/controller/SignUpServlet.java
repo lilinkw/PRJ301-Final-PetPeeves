@@ -38,10 +38,6 @@ public class SignUpServlet extends HttpServlet {
             String birthday = request.getParameter("birthdaySU");
             String location = request.getParameter("locationSU");
 
-            // TODO: add method get images
-            Part part = request.getPart("imageSU");
-            String fileName = part.getSubmittedFileName();
-
             UserDAO userDAO = new UserDAO();
 
             String url = welcomePage;
@@ -49,6 +45,7 @@ public class SignUpServlet extends HttpServlet {
 
             if (userDAO.isUserExisted(username)) {
                 err = "username is existed!";
+
                 request.setAttribute("SIGNUPERROR", err);
                 request.setAttribute("usernameSU", username);
                 request.setAttribute("passwordSU", password);
@@ -57,31 +54,30 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("genderSU", gender);
                 request.setAttribute("birthdaySU", birthday);
                 request.setAttribute("locationSU", location);
+            } else {
+                // Get image
+                Part image = null;
+                try {
+                    image = request.getPart("imageSU");
 
-                url = welcomePage;
-            }
+                    String dateCreate = LocalDate.now().toString();
+                    LocalTime time = LocalTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H-m-s-n");
+                    String timeCreate = time.format(formatter);
 
-            // Get image
-            Part image = null;
-            try {
-                image = request.getPart("Image");
+                    // Get file extension
+                    String fileExtension = image.getSubmittedFileName().split("\\.")[1];
+                    String imageName = dateCreate + "_" + timeCreate + "." + fileExtension;
+                    String imagePath = getServletContext().getInitParameter("img-upload") + "\\" + imageName;
+                    String imageServletPath = getServletContext().getInitParameter("get-img") + "/" + imageName;
 
-                String dateCreate = LocalDate.now().toString();
-                LocalTime time = LocalTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H-m-s-n");
-                String timeCreate = time.format(formatter);
-                // Get file extension
-                String fileExtension = image.getSubmittedFileName().split("\\.")[1];
-                String imageName = dateCreate + "_" + timeCreate + "." + fileExtension;
-                String imagePath = getServletContext().getInitParameter("img-upload") + "\\" + imageName;
-                String imageServletPath = getServletContext().getInitParameter("get-img") + "/" + imageName;
-                System.out.println(imageServletPath);
-                image.write(imagePath);
+                    image.write(imagePath);
 
-//                userDAO.createNewAccount(username, password, fullname, gender, birthday, location, imageServletPath);
-            } catch (Exception e){
-                // Default image
-//                userDAO.createNewAccount(username, password, fullname, gender, birthday, location);
+                    userDAO.createNewAccount(username, password, fullname, gender, birthday, location, imageServletPath);
+                } catch (Exception e){
+                    // Default image
+                    userDAO.createNewAccount(username, password, fullname, gender, birthday, location);
+                }
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
