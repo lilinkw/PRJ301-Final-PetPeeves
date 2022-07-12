@@ -97,6 +97,7 @@ public class UserDAO {
         return false;
     }
 
+    // TODO: MODIFY createNewAccount: Add Image to Image Table, then link to User table. If no img, Default img is the first img
     public boolean createNewAccount(String username, String password, String fullname, String gender, String birthday, String location, String image) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;

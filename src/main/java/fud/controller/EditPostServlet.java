@@ -6,12 +6,12 @@ import fud.model.UserDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
         maxFileSize = 1024 * 1024 * 1000, // 1 GB
@@ -28,6 +28,7 @@ public class EditPostServlet extends HttpServlet {
             PostDAO postDAO = new PostDAO();
             PostDTO postDTO = postDAO.getPostByPostID(postID);
 
+            //TODO: Check if User has posts
 //            for (CommentDTO a: postDTO.getCommentList()){
 //                System.out.println(a.getCommentContent());
 //            }
@@ -56,10 +57,25 @@ public class EditPostServlet extends HttpServlet {
             String imgLink = "https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg";
 
             PostDAO postDAO = new PostDAO();
-            if(imgLink == null){
+            Part image = null;
+            try {
+                image = request.getPart("Image");
+
+                String dateCreate = LocalDate.now().toString();
+                LocalTime time = LocalTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H-m-s-n");
+                String timeCreate = time.format(formatter);
+                // Get file extension
+                String fileExtension = image.getSubmittedFileName().split("\\.")[1];
+                String imageName = dateCreate + "_" + timeCreate + "." + fileExtension;
+                String imagePath = getServletContext().getInitParameter("img-upload") + "\\" + imageName;
+                String imageServletPath = getServletContext().getInitParameter("get-img") + "/" + imageName;
+                System.out.println(imageServletPath);
+                image.write(imagePath);
+
+                postDAO.updatePostByPostID(postID,title,content,categoryID,imageServletPath);
+            } catch (Exception e){
                 postDAO.updatePostByPostID(postID,title,content,categoryID);
-            }else {
-                postDAO.updatePostByPostID(postID,title,content,categoryID,imgLink);
             }
             String url = "EditPostServlet?id=" + postID;
             response.sendRedirect(url);

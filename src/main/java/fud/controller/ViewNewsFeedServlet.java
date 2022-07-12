@@ -8,6 +8,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
@@ -53,14 +56,27 @@ public class ViewNewsFeedServlet extends HttpServlet {
             String authorID = currentUser.getUserID();
 
 
-            //TODO: modify imglink
-            String imgLink = "https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg";
-
             PostDAO postDAO = new PostDAO();
-            if(imgLink == null){
+            // Get image
+            Part image = null;
+            try {
+                image = request.getPart("Image");
+
+                String dateCreate = LocalDate.now().toString();
+                LocalTime time = LocalTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H-m-s-n");
+                String timeCreate = time.format(formatter);
+                // Get file extension
+                String fileExtension = image.getSubmittedFileName().split("\\.")[1];
+                String imageName = dateCreate + "_" + timeCreate + "." + fileExtension;
+                String imagePath = getServletContext().getInitParameter("img-upload") + "\\" + imageName;
+                String imageServletPath = getServletContext().getInitParameter("get-img") + "/" + imageName;
+                System.out.println(imageServletPath);
+                image.write(imagePath);
+
+                postDAO.addNewPost(title,content,authorID,categoryID,imageServletPath);
+            } catch (Exception e){
                 postDAO.addNewPost(title,content,authorID,categoryID);
-            }else {
-                postDAO.addNewPost(title,content,authorID,categoryID,imgLink);
             }
 
 

@@ -78,9 +78,9 @@ public class SignUpServlet extends HttpServlet {
                 System.out.println(imageServletPath);
                 image.write(imagePath);
 
-                userDAO.createNewAccount(username, password, fullname, gender, birthday, location, imageServletPath);
+//                userDAO.createNewAccount(username, password, fullname, gender, birthday, location, imageServletPath);
             } catch (Exception e){
-                // TODO: ADD User without image
+                // Default image
 //                userDAO.createNewAccount(username, password, fullname, gender, birthday, location);
             }
 
