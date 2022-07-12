@@ -115,7 +115,7 @@
                                                                 <div class="usy-name">
                                                                     <a href="GetUserProfileServlet?userID=${postDTO.getAuthorID()}"><h3>${postDTO.getAuthorName()}</h3></a>
                                                                     <span><img src="static/images/clock.png" alt="">
-                                                                    <a href="EditPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
+                                                                    <a href="ViewPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
                                                                 </span>
                                                                 </div>
                                                             </div>
@@ -164,8 +164,8 @@
                                                                     <a href="#"><i class="fas fa-heart"></i> Like</a>
                                                                     <span>25</span>
                                                                 </li>
-                                                                <li><a href="EditPostServlet?id=${postDTO.getPostID()}" class="com"><i class="fas fa-comment-alt"></i>
-                                                                    Comment 15</a></li>
+                                                                <li><a href="ViewPostServlet?id=${postDTO.getPostID()}" class="com"><i class="fas fa-comment-alt"></i>
+                                                                    Comment</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -244,7 +244,7 @@
                                                     <div class="post-project">
                                                         <h3>Edit post</h3>
                                                         <div class="post-project-fields">
-                                                            <form action="EditPostServlet" method="post" enctype="multipart/form-data">
+                                                            <form action="UpdatePostServlet" method="post" enctype="multipart/form-data">
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
                                                                         <div class="inp-field">
@@ -269,7 +269,7 @@
                                                                         <ul>
                                                                             <li><button class="active" type="submit" value="update">Update</button></li>
                                                                             <li style="margin-bottom: -15px">
-                                                                                <input  type="file" onchange="loadFileEdit(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
+                                                                                <input name="Image" type="file" onchange="loadFileEdit(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
                                                                                 <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
                                                                                     Change images
                                                                                 </label>

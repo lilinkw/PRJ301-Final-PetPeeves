@@ -2,41 +2,40 @@ package fud.controller;
 
 import fud.dao.PostDAO;
 import fud.model.PostDTO;
-import fud.model.UserDTO;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
         maxFileSize = 1024 * 1024 * 1000, // 1 GB
         maxRequestSize = 1024 * 1024 * 1000)   	// 1 GB
-@WebServlet(name = "ViewNewsFeedServlet", value = "/ViewNewsFeedServlet")
-public class ViewNewsFeedServlet extends HttpServlet {
+@WebServlet(name = "ViewPostServlet", value = "/ViewPostServlet")
+public class ViewPostServlet extends HttpServlet {
 
-    private final String forwardPage = "newsfeed.jsp";
+    private final String forwardPage = "post.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            String categoryID = "Following";
+            String postID = request.getParameter("id");
             PostDAO postDAO = new PostDAO();
-            HttpSession session= request.getSession();
+            PostDTO postDTO = postDAO.getPostByPostID(postID);
 
-            //get and set post list
-            UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
-            List<PostDTO> postDTOList = postDAO.getPostByCategoryID(currentUser.getUserID(),categoryID,0);
-            request.setAttribute("POSTLIST",postDTOList);
+//            for (CommentDTO a: postDTO.getCommentList()){
+//                System.out.println(a.getCommentContent());
+//            }
 
-
-            // forward to newsfeed
-            request.getRequestDispatcher(forwardPage).forward(request, response);
-
+            request.setAttribute("POSTDTO",postDTO);
+            request.getRequestDispatcher(forwardPage).forward(request,response);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -46,5 +45,6 @@ public class ViewNewsFeedServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
     }
 }

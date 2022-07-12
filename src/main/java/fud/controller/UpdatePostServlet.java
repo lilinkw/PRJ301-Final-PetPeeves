@@ -1,8 +1,6 @@
 package fud.controller;
 
 import fud.dao.PostDAO;
-import fud.model.PostDTO;
-import fud.model.UserDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,27 +14,13 @@ import java.time.format.DateTimeFormatter;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
         maxFileSize = 1024 * 1024 * 1000, // 1 GB
         maxRequestSize = 1024 * 1024 * 1000)   	// 1 GB
-@WebServlet(name = "EditPostServlet", value = "/EditPostServlet")
-public class EditPostServlet extends HttpServlet {
+@WebServlet(name = "UpdatePostServlet", value = "/UpdatePostServlet")
+public class UpdatePostServlet extends HttpServlet {
 
     private final String forwardPage = "post.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            String postID = request.getParameter("id");
-            PostDAO postDAO = new PostDAO();
-            PostDTO postDTO = postDAO.getPostByPostID(postID);
-
-//            for (CommentDTO a: postDTO.getCommentList()){
-//                System.out.println(a.getCommentContent());
-//            }
-
-            request.setAttribute("POSTDTO",postDTO);
-            request.getRequestDispatcher(forwardPage).forward(request,response);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
@@ -73,7 +57,7 @@ public class EditPostServlet extends HttpServlet {
                 System.out.println(e.getMessage());
                 postDAO.updatePostByPostID(postID,title,content,categoryID);
             }
-            String url = "EditPostServlet?id=" + postID;
+            String url = "ViewPostServlet?id=" + postID;
             response.sendRedirect(url);
 
 

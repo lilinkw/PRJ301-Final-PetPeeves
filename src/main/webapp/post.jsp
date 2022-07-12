@@ -67,8 +67,7 @@
                                                     <span>25</span>
                                                 </li>
                                                 <li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
-                                                    Comments
-                                                    15</a></li>
+                                                    Comments</a></li>
                                             </ul>
                                         </div>
                                         <div  class="comment-area">
@@ -141,7 +140,7 @@
                     <div class="post-project">
                         <h3>Edit post</h3>
                         <div class="post-project-fields">
-                            <form action="EditPostServlet" method="post" enctype="multipart/form-data">
+                            <form action="UpdatePostServlet" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="inp-field">
