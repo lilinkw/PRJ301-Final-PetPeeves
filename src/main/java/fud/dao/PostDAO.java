@@ -74,6 +74,7 @@ public class PostDAO {
                 while (rs.next()) {
                     imageLinksList.add(rs.getString("imgLink"));
                 }
+                return imageLinksList;
             }
         } finally {
             if (rs != null){
@@ -86,7 +87,7 @@ public class PostDAO {
                 con.close();
             }
         }
-        return  imageLinksList;
+        return  null;
     }
 
     public List<PostDTO> getPostByCategoryID(String currentUserID, String categoryID, int offset) throws Exception{

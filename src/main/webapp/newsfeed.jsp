@@ -123,7 +123,11 @@
                                                             <li><a href="SearchCategoryServlet?categoryID=${postDTO.getCategoryID()}" title="">${postDTO.getCategory()}</a></li>
                                                         </ul>
                                                         <p>${postDTO.getPostContent()}</p>
-                                                        <img style="display: block; width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                                        <c:if test="${not empty postDTO.getImageLinks()}">
+                                                            <img style=" width: 100%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                                        </c:if>
+
+
                                                     </div>
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">
@@ -211,7 +215,7 @@
                                                 <div class="post-project">
                                                     <h3>Edit post</h3>
                                                     <div class="post-project-fields">
-                                                        <form action="EditPostServlet" method="post">
+                                                        <form action="EditPostServlet" method="post" enctype="multipart/form-data">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="inp-field">
@@ -231,11 +235,12 @@
                                                                     <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
                                                                 </div>
                                                                 <div class="col-lg-12">
-                                                                    <img id="output" style="display: block; width: 30%" src="${postDTO.getImageLinks().get(0)}" alt="">
+                                                                        <img id="output-edit" style=" width: 30%" src="" alt="">
+
                                                                     <ul>
                                                                         <li><button class="active" type="submit" value="update">Update</button></li>
                                                                         <li style="margin-bottom: -15px">
-                                                                            <input type="file" onchange="loadFile(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
+                                                                            <input  type="file" onchange="loadFileEdit(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
                                                                             <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
                                                                                 Change images
                                                                             </label>
@@ -268,7 +273,7 @@
             <div class="post-project">
                 <h3>Create post</h3>
                 <div class="post-project-fields">
-                    <form action="ViewNewsFeedServlet" method="post">
+                    <form action="ViewNewsFeedServlet" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="inp-field">
@@ -285,11 +290,12 @@
                             <div class="col-lg-12">
                                 <textarea name="description" placeholder="What's on your mind?"></textarea>
                             </div>
+                            <img id="output-newpost" style=" width: 30%" src="" alt="">
                             <div class="col-lg-12">
                                 <ul>
-                                    <li><button class="active" type="submit" value="update">Update</button></li>
+                                    <li><button class="active" type="submit" value="update">Post</button></li>
                                     <li style="margin-bottom: -15px">
-                                        <input type="file" id="file" style="height: 0;overflow: hidden;width: 0;
+                                        <input type="file" name="Image" onchange="loadFileNewPost(event)" id="file" style="height: 0;overflow: hidden;width: 0;
                                         float: left; padding: 0px; margin-bottom: 0px">
 
                                         <label for="file" style="background: #fff; border: 2px solid #e44d3a;
@@ -323,8 +329,12 @@
 <script type="text/javascript" src="static/js/scrollbar.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
 <script>
-    var loadFile = function(event) {
-        var image = document.getElementById('output');
+    var loadFileEdit = function (event) {
+        var image = document.getElementById('output-edit');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFileNewPost = function (event) {
+        var image = document.getElementById('output-newpost');
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>

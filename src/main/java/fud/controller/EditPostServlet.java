@@ -28,7 +28,6 @@ public class EditPostServlet extends HttpServlet {
             PostDAO postDAO = new PostDAO();
             PostDTO postDTO = postDAO.getPostByPostID(postID);
 
-            //TODO: Check if User has posts
 //            for (CommentDTO a: postDTO.getCommentList()){
 //                System.out.println(a.getCommentContent());
 //            }
@@ -52,10 +51,6 @@ public class EditPostServlet extends HttpServlet {
             String content = request.getParameter("description");
 
 
-
-            //TODO: modify imglink
-            String imgLink = "https://www.charitycomms.org.uk/wp-content/uploads/2019/02/placeholder-image-square.jpg";
-
             PostDAO postDAO = new PostDAO();
             Part image = null;
             try {
@@ -75,6 +70,7 @@ public class EditPostServlet extends HttpServlet {
 
                 postDAO.updatePostByPostID(postID,title,content,categoryID,imageServletPath);
             } catch (Exception e){
+                System.out.println(e.getMessage());
                 postDAO.updatePostByPostID(postID,title,content,categoryID);
             }
             String url = "EditPostServlet?id=" + postID;
