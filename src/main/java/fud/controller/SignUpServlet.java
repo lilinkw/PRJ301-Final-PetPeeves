@@ -11,6 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "SignUpServlet", value = "/SignUpServlet")
 @MultipartConfig
@@ -56,40 +59,30 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("locationSU", location);
 
                 url = welcomePage;
-            } else if ( !password.equals(repeat_password) ) {
-                err = "password and re-password is not matched!";
-                request.setAttribute("SIGNUPERROR", err);
-                request.setAttribute("usernameSU", username);
-                request.setAttribute("passwordSU", password);
-                request.setAttribute("repeat_passwordSU", repeat_password);
-                request.setAttribute("fullnameSU", fullname);
-                request.setAttribute("genderSU", gender);
-                request.setAttribute("birthdaySU", birthday);
-                request.setAttribute("locationSU", location);
-
-                url = welcomePage;
             }
 
-            else {
-                userDAO.createNewAccount(username, password, fullname, gender, birthday, location, fileName);
+            // Get image
+            Part image = null;
+            try {
+                image = request.getPart("Image");
 
-                url = welcomePage;
-                request.setAttribute("username", username);
-                request.setAttribute("password", password);
+                String dateCreate = LocalDate.now().toString();
+                LocalTime time = LocalTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H-m-s-n");
+                String timeCreate = time.format(formatter);
+                // Get file extension
+                String fileExtension = image.getSubmittedFileName().split("\\.")[1];
+                String imageName = dateCreate + "_" + timeCreate + "." + fileExtension;
+                String imagePath = getServletContext().getInitParameter("img-upload") + "\\" + imageName;
+                String imageServletPath = getServletContext().getInitParameter("get-img") + "/" + imageName;
+                System.out.println(imageServletPath);
+                image.write(imagePath);
 
-                System.out.println("Success!");
+                userDAO.createNewAccount(username, password, fullname, gender, birthday, location, imageServletPath);
+            } catch (Exception e){
+                // TODO: ADD User without image
+//                userDAO.createNewAccount(username, password, fullname, gender, birthday, location);
             }
-
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(repeat_password);
-            System.out.println(fullname);
-            System.out.println(gender);
-            System.out.println(birthday);
-            System.out.println(location);
-            if (fileName == "") {
-                System.out.println("pikachu");
-            } else System.out.println(fileName);
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

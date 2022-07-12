@@ -44,8 +44,12 @@ public class LoginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
-            if (username.trim().isEmpty() || password.trim().isEmpty()) {
-                err = "Username or password is empty!";
+
+            UserDAO user = new UserDAO();
+            UserDTO account = user.login(username, password);
+
+            if (account == null) {
+                err = "Username/Password is not right!";
                 request.setAttribute("LOGINERROR", err);
                 request.setAttribute("username", username);
                 request.setAttribute("password", password);
@@ -54,11 +58,8 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             } else {
-                UserDAO user = new UserDAO();
-                UserDTO account = user.login(username, password);
-
-                if (account == null) {
-                    err = "Username/Password is not right!";
+                if (!account.isStatus()) {
+                    err = "User has been banned from this server!";
                     request.setAttribute("LOGINERROR", err);
                     request.setAttribute("username", username);
                     request.setAttribute("password", password);
@@ -67,22 +68,11 @@ public class LoginServlet extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                 } else {
-                    if (!account.isStatus()) {
-                        err = "User has been banned from this server!";
-                        request.setAttribute("LOGINERROR", err);
-                        request.setAttribute("username", username);
-                        request.setAttribute("password", password);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("CURRENTUSER", account);
 
-                        url = welcomePage;
-                        RequestDispatcher rd = request.getRequestDispatcher(url);
-                        rd.forward(request, response);
-                    } else {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("CURRENTUSER", account);
-
-                        url = homeServlet;
-                        response.sendRedirect(url);
-                    }
+                    url = homeServlet;
+                    response.sendRedirect(url);
                 }
             }
         } catch (Exception e) {

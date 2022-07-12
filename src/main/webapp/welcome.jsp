@@ -55,15 +55,17 @@
                                         
                                         <!--sign in section-->
                                         <h3>Sign in</h3>
-                                        <form action="LoginServlet" method="post">
+                                        <form id="sign-in-form" action="LoginServlet" method="post">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
+                                                    <p class="error" id="username-error">test</p>
                                                     <div class="sn-field">
                                                         <input type="text" name="username" placeholder="Username" value="${requestScope.username}">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
+                                                    <p class="error" id="password-error">test</p>
                                                     <div class="sn-field">
                                                         <input type="password" name="password" placeholder="Password" value="${requestScope.password}">
                                                         <i class="la la-lock"></i>
@@ -85,7 +87,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <button type="submit" value="Sign in" name="btAction">Sign in</button>
+                                                    <button id="sign-in-btn" type="submit" >Sign in</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -99,15 +101,16 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                     <!--sign up section-->
                                     <div class="sign_in_sec" id="tab-2">
                                         <div class="dff-tab current" id="tab-3">
 
                                             <c:set var="SIGNUPERROR" value="${requestScope.SIGNUPERROR}"></c:set>
-                                            <form action="SignUpServlet" method="post" enctype="multipart/form-data">
+                                            <form id="sign-up-form" action="SignUpServlet" method="post" enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="usernameSU-error">test</p>
                                                         <div class="sn-field">
                                                             <input type="text" name="usernameSU" placeholder="Username" value="${requestScope.usernameSU}">
                                                             <i class="la la-user"></i>
@@ -115,12 +118,14 @@
                                                     </div>
                                                     <h6 style="color: red">${SIGNUPERROR}</h6> <br><br>
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="passwordSU-error">test</p>
                                                         <div class="sn-field">
                                                             <input type="password" name="passwordSU" placeholder="Password" value="${requestScope.passwordSU}">
                                                             <i class="la la-lock"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="repeat-passwordSU-error">test</p>
                                                         <div class="sn-field">
                                                             <input type="password" name="repeat-passwordSU"
                                                                    placeholder="Repeat Password" value="${requestScope.repeat_passwordSU}">
@@ -129,14 +134,17 @@
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
                                                         <div class="sn-field">
+                                                            <p class="error" id="fullnameSU-error">test</p>
                                                             <input type="text" name="fullnameSU"
                                                                    placeholder="Fullname" value="${requestScope.fullnameSU}">
                                                             <i class="fa fa-user"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="genderSU-error">test</p>
                                                         <div class="sn-field">
                                                             <select name="genderSU">
+                                                                <option value="" disabled selected>Gender</option>
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                                 <option>Others</option>
@@ -145,12 +153,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="birthdaySU-error">test</p>
                                                         <div class="sn-field">
                                                             <input type="date" name="birthdaySU" value="${requestScope.birthdaySU}">
                                                             <i class="fa fa-calendar-days"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
+                                                        <p class="error" id="locationSU-error">test</p>
                                                         <div class="sn-field">
                                                             <input type="text" name="locationSU" placeholder="Location" value="${requestScope.locationSU}">
                                                             <i class="la la-globe"></i>
@@ -208,11 +218,13 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="static/js/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/popper.js"></script>
         <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="static/js/slick.min.js"></script>
         <script type="text/javascript" src="static/js/script.js"></script>
+        <script type="text/javascript" src="static/js/validate.js"></script>
 
     </body>
 

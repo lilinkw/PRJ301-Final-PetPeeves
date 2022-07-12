@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", value = "/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 
-    private final String welcomePage = "welcome.jsp";
+    private final String welcomePage = "LoginServlet";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class LogoutServlet extends HttpServlet {
         session.removeAttribute("CATEGORYLIST");
 
         // Forward to login page
-        request.getRequestDispatcher(welcomePage).forward(request, response);
+        response.sendRedirect(welcomePage);
     }
 
     @Override
