@@ -31,7 +31,7 @@ public class filter1 implements Filter {
 
 
         // If user logged in
-        boolean isLoggedIn = (session != null && session.getAttribute("CURRENTACCOUNT") != null);
+        boolean isLoggedIn = (session != null && session.getAttribute("CURRENTUSER") != null);
 
         if (session == null){
             System.out.println("session is null");
