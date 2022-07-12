@@ -76,7 +76,6 @@
 
                                     <c:if test="${not empty postList}">
                                         <c:forEach var="postDTO" items="${postList}">
-                                            <c:set var="a" value="${postDTO}"/>
 
                                             <!-- day la bai post template, duoc dung trong c:forEach -->
                                             <div class="posty">
