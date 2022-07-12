@@ -44,6 +44,7 @@ public class EditPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            //TODO: Check if User has posts
             String postID = request.getParameter("postID");
             String categoryID = request.getParameter("categoryID");
             String title = request.getParameter("title");

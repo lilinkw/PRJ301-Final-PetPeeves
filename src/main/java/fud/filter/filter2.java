@@ -8,8 +8,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "UpdateUserPasswordFilter", urlPatterns = {"/UpdateUserPasswordServlet"})
-public class UpdateUserPasswordFilter implements Filter {
+/**
+ * UserAction filer
+ * This is filter to for User Act on their personal info and post
+ */
+@WebFilter(filterName = "filter2",
+        urlPatterns = {"/UpdateUserPasswordServlet"})
+public class filter2 implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 
@@ -21,6 +26,8 @@ public class UpdateUserPasswordFilter implements Filter {
         System.out.println("UpdateUserPassword Filter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
+
+
         UserDTO currentUser = (UserDTO) session.getAttribute("CURRENTUSER");
         String currentPassword = currentUser.getPassword();
         String forwardPage = "account-setting.jsp";

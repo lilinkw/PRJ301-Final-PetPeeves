@@ -22,6 +22,7 @@ public class DeletePostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            //TODO: Check if User has posts or user is Admin
             String postID = request.getParameter("id");
             PostDAO postDAO = new PostDAO();
             postDAO.deactivatePostByPostID(postID);
