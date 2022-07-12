@@ -22,12 +22,24 @@ public class DeletePostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            //TODO: Check if User has posts or user is Admin
-            String postID = request.getParameter("id");
-            PostDAO postDAO = new PostDAO();
-            postDAO.deactivatePostByPostID(postID);
 
-            request.getRequestDispatcher(forwardPage).forward(request,response);
+            String postID = request.getParameter("id");
+
+//            Check if User has posts or user is Admin
+            HttpSession session = request.getSession();
+            UserDTO currentUser= (UserDTO) session.getAttribute("CURRENTUSER");
+            PostDAO postDAO = new PostDAO();
+            String authorID= postDAO.getAuthorByPostID(postID);
+            if(!(currentUser.isAdmin() && authorID.equals(currentUser.getUserID()))){
+                response.sendRedirect("accessDenied.jsp");
+            }else{
+                postDAO.deactivatePostByPostID(postID);
+
+                request.getRequestDispatcher(forwardPage).forward(request,response);
+            }
+
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

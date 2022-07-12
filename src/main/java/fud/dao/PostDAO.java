@@ -570,6 +570,39 @@ public class PostDAO {
         }
         return false;
     }
+
+    public String getAuthorByPostID(String postID) throws Exception{
+        String authorID = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "SELECT authorID FROM dbo.Post_Author_Category\n" +
+                        "WHERE postID =?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, postID);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    authorID = rs.getString("authorID");
+                }
+                return authorID;
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (ps != null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
         try {
             String userID = "USE00000001";
