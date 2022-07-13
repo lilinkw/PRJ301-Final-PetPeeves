@@ -25,8 +25,6 @@
 
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"
           type="text/css">
 
@@ -76,7 +74,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
+                        <a href="" title="">
                             <span><img src="static/images/icon2.png" alt=""></span>
                             Category
                         </a>
@@ -103,6 +101,7 @@
                     <h3>Setting</h3>
                     <ul class="us-links">
                         <li><a href="UpdateUserInfoServlet" title="">Account Setting</a></li>
+                        <li><a href="administration.jsp" title="">Administration</a></li>
                     </ul>
 <%--                    tra ve log out servlet--%>
                     <h3 class="tc"><a href="LogoutServlet"
