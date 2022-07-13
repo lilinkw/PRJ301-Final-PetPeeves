@@ -443,6 +443,44 @@ public class PostDAO {
         return false;
     }
 
+    public String addNewImage(String imageLink) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = new DBUtils().makeConnection();
+
+            // insert imageLink to Images first
+            // then create new account
+            if (con != null) {
+                String sql = "INSERT INTO dbo.Images(imgLink)\n" +
+                        "OUTPUT Inserted.imgID\n" +
+                        "VALUES(?)";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1, imageLink);
+
+                rs = stm.executeQuery();
+            }
+            String imgID = null;
+            if (rs.next()) {
+                // return only 1 result, whether are there multiple results or not
+                imgID = rs.getString("imgID");
+            }
+            return imgID;
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
     public boolean updatePostByPostID(String postID, String postTile, String postContent, String categoryID, String imgLink) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
@@ -455,16 +493,18 @@ public class PostDAO {
                 String sql = "UPDATE dbo.PostInfo SET postTitle = ? ,postContent =?, categoryID=?\n" +
                         "WHERE postID = ?\n" +
                         "\n" +
-                        "UPDATE dbo.Images SET imgLink = ?\n" +
-                        "WHERE imgID =(SELECT imgID FROM dbo.PostInfo WHERE postID =?)";
+                        "DELETE FROM dbo.PostImage WHERE postID = ?\n" +
+                        "INSERT INTO dbo.PostImage(postID,imgID)\n" +
+                        "VALUES(?,?)";
 
                 stm = con.prepareStatement(sql);
                 stm.setString(1, postTile);
                 stm.setString(2, postContent);
                 stm.setString(3,categoryID);
                 stm.setString(4,postID);
-                stm.setString(5,imgLink);
+                stm.setString(5,postID);
                 stm.setString(6,postID);
+                stm.setString(7,addNewImage(imgLink));
 
                 int row = stm.executeUpdate();
                 if (row > 0) {

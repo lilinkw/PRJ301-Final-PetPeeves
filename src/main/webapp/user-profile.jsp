@@ -264,13 +264,13 @@
                                                                         <textarea name="description" placeholder="What's on your mind?">${postDTO.getPostContent()}</textarea>
                                                                     </div>
                                                                     <div class="col-lg-12">
-                                                                        <img id="output-edit" style=" width: 30%" src="" alt="">
+                                                                        <img id="img-editfile-${postDTO.getPostID()}" style=" width: 30%" src="" alt="">
 
                                                                         <ul>
                                                                             <li><button class="active" type="submit" value="update">Update</button></li>
                                                                             <li style="margin-bottom: -15px">
-                                                                                <input name="Image" type="file" onchange="loadFileEdit(event)" id="editfile" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
-                                                                                <label for="editfile" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
+                                                                                <input name="Image" type="file" onchange="loadFileEdit(event,this.id)" id="editfile-${postDTO.getPostID()}" style="height: 0;overflow: hidden;width: 0;float: left; padding: 0px; margin-bottom: 0px"/>
+                                                                                <label for="editfile-${postDTO.getPostID()}" style="background: #fff; border: 2px solid #e44d3a;border-radius: 3px; color: #e44d3a; cursor: pointer; display: inline-block;font-size: 15px; font-weight: 600; outline: none; padding: 10px 20px;position: relative; transition: all 0.3s; vertical-align: middle; margin: 0;float: right; text-transform: uppercase;">
                                                                                     Change images
                                                                                 </label>
                                                                             </li>
@@ -336,8 +336,8 @@
 <script type="text/javascript" src="static/js/script.js"></script>
 
 <script>
-    var loadFileEdit = function (event) {
-        var image = document.getElementById('output-edit');
+    var loadFileEdit = function (event,id) {
+        var image = document.getElementById('img-'+id);
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
