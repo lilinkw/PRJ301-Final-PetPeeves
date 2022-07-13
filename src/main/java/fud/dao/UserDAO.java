@@ -528,6 +528,39 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean updateAvartarByUserID(String userID,String imgLink) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "UPDATE dbo.Users \n" +
+                        "SET avatarID =?\n" +
+                        "WHERE userID=?";
+
+                stm = con.prepareStatement(sql);
+                stm.setString(1,createImageAccount(imgLink));
+                stm.setString(2, userID);
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         try {
             UserDTO user = new UserDAO().login("Admin", "admin");

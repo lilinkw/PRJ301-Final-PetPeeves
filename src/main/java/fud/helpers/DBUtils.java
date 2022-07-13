@@ -17,7 +17,7 @@ public class DBUtils {
     // Change userID here
     public final String userID = "sa";
     // Change password here
-    public final String password = "123456789";
+    public final String password = "123";
     // Change database name here
     public final String dbName = "Final_PetPeeves";
 

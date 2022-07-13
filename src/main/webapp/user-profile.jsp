@@ -17,8 +17,8 @@
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-12 col-sm-12">
-                        <input type="file" id="file">
-                        <label for="file">Change Image</label>
+                        <input type="file" id="file1">
+                        <label for="file1">Change Image</label>
                     </div>
                 </div>
             </div>
@@ -33,10 +33,13 @@
                             <div class="main-left-sidebar">
                                 <div class="user_profile">
                                     <div class="user-pro-img">
-                                        <img src="${USERPROFILE.getAvatarLink()}" width="76.9%" alt="">
+                                        <img src="${USERPROFILE.getAvatarLink()}" width="190.33px" height="190.33px" alt="">
                                         <div class="add-dp" id="OpenImgUpload" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "":"hidden" }>
-                                            <input type="file" id="file">
-                                            <label for="file"><i class="fas fa-camera"></i></label>
+                                            <form action="UpdateAvatarServlet" method="post" enctype="multipart/form-data">
+                                                <input onchange="this.form.submit()" name="avatarImage" type="file" id="file2">
+                                                <label for="file2"><i class="fas fa-camera"></i></label>
+                                            </form>
+
                                         </div>
                                     </div>
                                     <div class="user_pro_status">
