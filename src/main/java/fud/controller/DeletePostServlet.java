@@ -30,12 +30,13 @@ public class DeletePostServlet extends HttpServlet {
             UserDTO currentUser= (UserDTO) session.getAttribute("CURRENTUSER");
             PostDAO postDAO = new PostDAO();
             String authorID= postDAO.getAuthorByPostID(postID);
-            if(!(currentUser.isAdmin() && authorID.equals(currentUser.getUserID()))){
-                response.sendRedirect("accessDenied.jsp");
-            }else{
+            if(currentUser.isAdmin() || authorID.equals(currentUser.getUserID())){
                 postDAO.deactivatePostByPostID(postID);
 
                 request.getRequestDispatcher(forwardPage).forward(request,response);
+
+            }else{
+                response.sendRedirect("accessDenied.jsp");
             }
 
 
