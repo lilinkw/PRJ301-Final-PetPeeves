@@ -26,7 +26,7 @@ public class UserDAO {
             if (con != null) {
                 String sql = "SELECT *\n"
                         + "FROM " + userDbName + " AS U LEFT JOIN " + imageDbName + " AS I on U.avatarID = I.imgID\n "
-                        + "WHERE [userName]=? AND [passwords]=?";
+                        + "WHERE [userName]=? AND [password]=?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, username);
                 ps.setString(2, password);
@@ -289,7 +289,7 @@ public class UserDAO {
             con = new DBUtils().makeConnection();
             if (con != null) {
                 String sql = "UPDATE " + userDbName + " \n" +
-                        "SET [passwords] = ?\n" +
+                        "SET [password] = ?\n" +
                         "WHERE [userID] = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, password);
