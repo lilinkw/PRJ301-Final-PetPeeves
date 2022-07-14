@@ -41,9 +41,10 @@
         <link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     </head>
 
-    <body>
+    <body onload="updateClock(), setInterval('updateClock()', 1000)">
         <div class="wrapper">
             <header>
                 <div class="container">
@@ -61,6 +62,9 @@
                         </div>
                         <nav>
                             <ul>
+                                <li>
+                                    <div id="clock" style="color: white;"></div>
+                                </li>
                                 <li>
                                     <a href="../ViewNewsFeedServlet" title="">
                                         <span><img src="../static/images/icon1.png" alt=""></span>

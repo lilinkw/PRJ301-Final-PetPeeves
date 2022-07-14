@@ -328,6 +328,7 @@
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/scrollbar.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
+
 <script>
     var loadFileEdit = function (event,id) {
         var image = document.getElementById('img-'+id);

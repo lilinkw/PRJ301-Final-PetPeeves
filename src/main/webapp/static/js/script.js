@@ -1,7 +1,19 @@
+// set datetime on realtime
+function updateClock(){
+    $('#clock').html(
+        moment().format('MMMM Do YYYY, h:mm:ss a')
+    );
+}
+
 $(window).on("load", function() {
     "use strict";
 
-    
+    // // set datetime on realtime
+    // setInterval(function(){
+    //     $('#clock').html(
+    //         moment().format('MMMM Do YYYY, h:mm:ss a')
+    //     );
+    // },1000);
 
     //  ============= POST PROJECT POPUP FUNCTION =========
 
@@ -317,9 +329,6 @@ $(".user-info").on("click", function(){$("#users").hide();
 
 
     });
-
-
-
 
 
 });

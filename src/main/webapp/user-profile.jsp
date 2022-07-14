@@ -10,6 +10,7 @@
     <jsp:include page="header.jsp"></jsp:include>
     <%-- copy lon Tung --%>
     <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
+    <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
 
     <section class="cover-sec">
         <img src="static/images/cover-img.jpg" alt="">

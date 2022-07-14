@@ -44,7 +44,7 @@
                                                 </div>
                                                 <div class="request-info">
                                                     <a href="../GetUserProfileServlet?userID=${User.getUserID()}" title="">
-                                                        <h3>${User.getFullname()}</h3>
+                                                        <h3>${User.getUsername()}</h3>
                                                     </a>
                                                     <span>${User.getUserID()} - ${User.getFullname()}</span>
                                                 </div>

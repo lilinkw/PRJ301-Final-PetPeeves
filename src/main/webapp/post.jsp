@@ -19,7 +19,7 @@
                                             <div class="usy-dt">
                                                 <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                 <div class="usy-name">
-                                                    <h3>${postDTO.getAuthorName()}</h3>
+                                                    <a href="GetUserProfileServlet?userID=${postDTO.getAuthorID()}"><h3>${postDTO.getAuthorName()}</h3></a>
                                                     <span><img src="static/images/clock.png" alt="">${postDTO.getPostTime()}</span>
                                                 </div>
                                             </div>
