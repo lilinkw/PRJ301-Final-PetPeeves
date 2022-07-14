@@ -44,8 +44,7 @@ public class CategoryDAO {
         }
         return null;
     }
-
-    public boolean addNewCategory(String category) throws Exception {
+    public CategoryDTO addNewCategory(String category) throws Exception {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -54,15 +53,17 @@ public class CategoryDAO {
             con = new DBUtils().makeConnection();
             if (con != null) {
                 String sql = "INSERT INTO Category\n" +
+                        "output Inserted.categoryID, Inserted.category\n" +
                         "VALUES (\n" +
                         "    ?\n" +
                         ")";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, category);
-                int row = stm.executeUpdate();
+                rs = stm.executeQuery();
 
-                if (row > 0) {
-                    return true;
+                while (rs.next()) {
+                    String categoryId = rs.getString( "categoryId");
+                    return new CategoryDTO(categoryId, category);
                 }
             }
         } finally {
@@ -77,6 +78,22 @@ public class CategoryDAO {
             }
         }
 
-        return false;
+        return null;
+    }
+
+    public static void main(String[] args) {
+        try {
+            String category = "a";
+
+            CategoryDAO abc = new CategoryDAO();
+            CategoryDTO categoryDTO = abc.addNewCategory(category);
+
+            System.out.println(categoryDTO == null);
+
+            System.out.println(categoryDTO.getCategoryID());
+            System.out.println(categoryDTO.getCategory());
+        } catch (Exception e){
+            System.out.println("PostDAO ERROR: " + e.getMessage());
+        }
     }
 }

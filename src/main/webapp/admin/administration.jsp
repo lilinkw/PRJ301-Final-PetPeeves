@@ -58,7 +58,7 @@
                                                         </c:url>
                                                         <li><a href="${User.isStatus() == baned ?unbanUser:banUser }" class="${User.isStatus() == baned ?"accept-req":"unaccept-req" }">${User.isStatus() == baned ?"Unban":"Ban" }</a>
                                                         </li>
-                                                        <li></li>
+<%--                                                        <li></li>--%>
                                                     </ul>
                                                 </div>
                                             </div>
