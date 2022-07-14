@@ -44,4 +44,39 @@ public class CategoryDAO {
         }
         return null;
     }
+
+    public boolean addNewCategory(String category) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "INSERT INTO Category\n" +
+                        "VALUES (\n" +
+                        "    ?\n" +
+                        ")";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, category);
+                int row = stm.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (stm != null){
+                stm.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+
+        return false;
+    }
 }

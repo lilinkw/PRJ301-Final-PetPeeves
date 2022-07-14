@@ -49,12 +49,12 @@
                 <div class="container">
                     <div class="header-data">
                         <div class="logo">
-                            <a href="/PetPeeves_war_exploded/ViewNewsFeedServlet" title=""><img src="../static/images/logo.png" alt=""></a>
+                            <a href="../ViewNewsFeedServlet" title=""><img src="../static/images/logo.png" alt=""></a>
                         </div>
                         <div class="search-bar">
 
                             <%--                search nguoi dung only--%>
-                            <form action="/PetPeeves_war_exploded/SearchUserServlet" method="post">
+                            <form action="../SearchUserServlet" method="post">
                                 <input type="text" name="search-user" placeholder="Search user...">
                                 <button type="submit"><i class="la la-search"></i></button>
                             </form>
@@ -62,13 +62,13 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="/PetPeeves_war_exploded/ViewNewsFeedServlet" title="">
+                                    <a href="../ViewNewsFeedServlet" title="">
                                         <span><img src="../static/images/icon1.png" alt=""></span>
                                         Home
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/PetPeeves_war_exploded/GetUserProfileServlet?userID=${sessionScope.CURRENTUSER.getUserID()}" title="">
+                                    <a href="../GetUserProfileServlet?userID=${sessionScope.CURRENTUSER.getUserID()}" title="">
                                         <span><img src="../static/images/icon4.png" alt=""></span>
                                         My Profile
                                     </a>
@@ -81,7 +81,7 @@
                                     <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
                                     <ul>
                                         <c:forEach var="categoryDTO" items="${categoryList}" varStatus="loop">
-                                            <li><a onclick="${loop.index}" href="/PetPeeves_war_exploded/SearchCategoryServlet?categoryID=${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</a></li>
+                                            <li><a onclick="${loop.index}" href="../SearchCategoryServlet?categoryID=${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</a></li>
                                         </c:forEach>
                                     </ul>
                                 </li>
@@ -100,11 +100,11 @@
                             <div class="user-account-settingss" id="users">
                                 <h3>Setting</h3>
                                 <ul class="us-links">
-                                    <li><a href="/PetPeeves_war_exploded/UpdateUserInfoServlet" title="">Account Setting</a></li>
+                                    <li><a href="../UpdateUserInfoServlet" title="">Account Setting</a></li>
                                     <li><a href="GetAccountManagementServlet" title="">Administration</a></li>
                                 </ul>
                                 <%--                    tra ve log out servlet--%>
-                                <h3 class="tc"><a href="/PetPeeves_war_exploded/LogoutServlet"
+                                <h3 class="tc"><a href="../LogoutServlet"
                                                   title="">Logout</a></h3>
                             </div>
                         </div>

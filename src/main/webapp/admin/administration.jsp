@@ -31,7 +31,7 @@
                             <div class="tab-pane fade active show" id="privcy" role="tabpanel"
                                  aria-labelledby="nav-privcy-tab">
                                 <div class="acc-setting">
-                                    <h3>User management</h3>
+                                    <h3>user management</h3>
                                     <c:set var="Users" value="${requestScope.ALLUSER}" />
                                     <c:if test="${not empty Users}" >
                                     <div class="requests-list">
@@ -43,7 +43,9 @@
                                                     <img src="${User.getAvatarLink()}" alt="">
                                                 </div>
                                                 <div class="request-info">
-                                                    <h3>${User.getUsername()}</h3>
+                                                    <a href="../GetUserProfileServlet?userID=${User.getUserID()}" title="">
+                                                        <h3>${User.getFullname()}</h3>
+                                                    </a>
                                                     <span>${User.getUserID()} - ${User.getFullname()}</span>
                                                 </div>
                                                 <div class="accept-feat">
@@ -70,7 +72,11 @@
                             <div class="tab-pane fade" id="nav-password" role="tabpanel"
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
-                                    <h3>Category management</h3>
+                                    <h3>
+                                        category management
+                                        <a href="#" style="float: right;" class="btn btn-primary" data-toggle="modal"
+                                           data-target="#mymodal" data-whatever="@mdo">add category</a>
+                                    </h3>
                                     <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"  />
                                     <c:if test="${not empty categoryList}" >
                                         <div class="requests-list">
@@ -99,6 +105,30 @@
             </div>
         </div>
     </section>
+
+
+    <div class="modal" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-light text-center">Add category</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="innerbody apply-jobbox">
+                        <h3>Enter category name here</h3>
+                        <form action="AddCategoryServlet" method="post">
+                                <textarea name="category" placeholder="Add category" style="width: 100%; padding:15px; height: 130px;     width: 100%;
+                                color: #b2b2b2;
+                                font-size: 14px;
+                                border: 1px solid #e5e5e5;
+                                font-weight: 500;"></textarea>
+                            <button type="submit" class="place-bid-btn">Add category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="../static/js/jquery.min.js"></script>
 <script type="text/javascript" src="../static/js/popper.js"></script>
