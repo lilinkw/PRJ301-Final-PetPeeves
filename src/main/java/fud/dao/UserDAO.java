@@ -561,17 +561,60 @@ public class UserDAO {
         }
         return false;
     }
-    public static void main(String[] args) {
+
+    public List<UserDTO> getAllUser() throws Exception {
+        List<UserDTO> result = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            UserDTO user = new UserDAO().login("Admin", "admin");
-            System.out.println("Username: " + user.getUsername() +
-                    "\nPassword: " + user.getPassword() +
-                    "\nstatus: " + user.isStatus() +
-                    "\navatarLink :" + user.getAvatarLink() +
-                    "\nFull Name: " + user.getFullname());
-        } catch (Exception e){
-            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+            con = new DBUtils().makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "select * \n" +
+                        "FROM " + userDbName + " LEFT JOIN " + imageDbName + " on Users.avatarID = Images.imgID\n";
+                ps = con.prepareStatement(sql);
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    boolean status = rs.getBoolean("userStatus");
+                    String userID = rs.getString("userID");
+                    String username = rs.getString("userName");
+                    String fullname = rs.getString("fullName");
+                    String avatarLink = rs.getString("imgLink");
+                    boolean isAdmin = rs.getBoolean("isAdmin");
+
+                    result.add( new UserDTO(userID, username, fullname, avatarLink, isAdmin, status));
+                }
+                return result;
+            }
+        } catch (Exception e) {
+            System.out.println("UserDAO getAllUser error: " + e.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
+        return null;
+    }
+    public static void main(String[] args) {
+//        try {
+//            UserDTO user = new UserDAO().login("Admin", "admin");
+//            System.out.println("Username: " + user.getUsername() +
+//                    "\nPassword: " + user.getPassword() +
+//                    "\nstatus: " + user.isStatus() +
+//                    "\navatarLink :" + user.getAvatarLink() +
+//                    "\nFull Name: " + user.getFullname());
+//        } catch (Exception e){
+//            System.out.println("UserDAO LOGIN ERROR: " + e.getMessage());
+//        }
 //        try {
 //        boolean test = new UserDAO().updateUserInfo("USE00000001", "Admin", "2002-08-30", "male", "Quang Nam");
 //
@@ -621,5 +664,13 @@ public class UserDAO {
 //        } catch (Exception e) {
 //
 //        }
+        try {
+            List<UserDTO> allUser = new UserDAO().getAllUser();
+            for(UserDTO u: allUser){
+                System.out.println(u.getUserID());
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
