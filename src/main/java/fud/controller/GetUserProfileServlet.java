@@ -31,6 +31,7 @@ public class GetUserProfileServlet extends HttpServlet {
             List<PostDTO> postDTOList = postDAO.getPostByAuthorID(requestedUserID);
             request.setAttribute("POSTLIST", postDTOList);
 
+            request.setAttribute("TITLE", "User Profile");
             request.getRequestDispatcher(profilePage).forward(request, response);
         } catch (Exception e){
             System.out.println("GetUserProfileServlet GET ERROR: " + e.getMessage());
