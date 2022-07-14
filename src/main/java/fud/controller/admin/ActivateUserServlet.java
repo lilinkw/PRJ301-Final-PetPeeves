@@ -7,14 +7,14 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "DeactivateUserServlet", value = "/admin/DeactivateUserServlet")
-public class DeactivateUserServlet extends HttpServlet {
+@WebServlet(name = "ActivateUserServlet", value = "/admin/ActivateUserServlet")
+public class ActivateUserServlet extends HttpServlet {
     private final String redirectPage = "GetAccountManagementServlet";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String userID = request.getParameter("userID");
-            new UserDAO().banUserByUserID(userID);
+            new UserDAO().unBanUserByUserID(userID);
 
             response.sendRedirect(redirectPage);
         } catch (Exception e){

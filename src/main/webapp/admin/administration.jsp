@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="fud.model.CategoryDTO" %>
 <jsp:include page="header.jsp"></jsp:include>
 
     <section class="profile-account-setting">
@@ -43,11 +44,17 @@
                                                 </div>
                                                 <div class="request-info">
                                                     <h3>${User.getUsername()}</h3>
-                                                    <span>${User.getFullname()}</span>
+                                                    <span>${User.getUserID()} - ${User.getFullname()}</span>
                                                 </div>
                                                 <div class="accept-feat">
                                                     <ul>
-                                                        <li><a href="" class="${User.isStatus() == baned ?"accept-req":"unaccept-req" }">${User.isStatus() == baned ?"Unban":"Ban" }</a>
+                                                        <c:url var="banUser" value="DeactivateUserServlet" >
+                                                            <c:param name="userID" value="${User.getUserID()}"/>
+                                                        </c:url>
+                                                        <c:url var="unbanUser" value="ActivateUserServlet" >
+                                                            <c:param name="userID" value="${User.getUserID()}"/>
+                                                        </c:url>
+                                                        <li><a href="${User.isStatus() == baned ?unbanUser:banUser }" class="${User.isStatus() == baned ?"accept-req":"unaccept-req" }">${User.isStatus() == baned ?"Unban":"Ban" }</a>
                                                         </li>
                                                         <li></li>
                                                     </ul>
@@ -64,110 +71,26 @@
                                  aria-labelledby="nav-password-tab">
                                 <div class="acc-setting">
                                     <h3>Category management</h3>
-                                    <div class="requests-list">
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img1.png" alt="">
+                                    <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"  />
+                                    <c:if test="${not empty categoryList}" >
+                                        <div class="requests-list">
+                                        <c:forEach var="categoryDTO" items="${categoryList}" >
+                                            <div class="request-details">
+                                                <div class="request-info">
+                                                    <h3>${categoryDTO.getCategory()}</h3>
+                                                    <span>${categoryDTO.getCategoryID()}</span>
+                                                </div>
+                                                <div class="accept-feat">
+                                                    <ul>
+                                                        <li><a href="" class="accept-req">Modify</a>
+                                                        </li>
+                                                        <li><a href="" class="unaccept-req">Delete</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="request-info">
-                                                <h3>Jessica William</h3>
-                                                <span>Graphic Designer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
+                                        </c:forEach>
                                         </div>
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img2.png" alt="">
-                                            </div>
-                                            <div class="request-info">
-                                                <h3>John Doe</h3>
-                                                <span>PHP Developer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img3.png" alt="">
-                                            </div>
-                                            <div class="request-info">
-                                                <h3>Poonam</h3>
-                                                <span>Wordpress Developer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img4.png" alt="">
-                                            </div>
-                                            <div class="request-info">
-                                                <h3>Bill Gates</h3>
-                                                <span>C &amp; C++ Developer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img5.png" alt="">
-                                            </div>
-                                            <div class="request-info">
-                                                <h3>Jessica William</h3>
-                                                <span>Graphic Designer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="request-details">
-                                            <div class="noty-user-img">
-                                                <img src="../static/images/r-img6.png" alt="">
-                                            </div>
-                                            <div class="request-info">
-                                                <h3>John Doe</h3>
-                                                <span>PHP Developer</span>
-                                            </div>
-                                            <div class="accept-feat">
-                                                <ul>
-                                                    <li><button type="submit" class="accept-req">Accept</button>
-                                                    </li>
-                                                    <li><button type="submit" class="close-req"><i
-                                                            class="la la-close"></i></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

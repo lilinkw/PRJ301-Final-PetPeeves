@@ -604,6 +604,73 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean banUserByUserID(String userID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean userStatus = false;
+        try {
+            con = new DBUtils().makeConnection();
+
+            if (con != null) {
+                String sql = "UPDATE " + userDbName + "\n" +
+                        "SET userStatus=?\n" +
+                        "WHERE userID=?";
+                ps = con.prepareStatement(sql);
+                ps.setBoolean(1, userStatus);
+                ps.setString(2, userID);
+
+                int row = ps.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("UserDAO banUserByUserID error: " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    public boolean unBanUserByUserID(String userID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean userStatus = true;
+        try {
+            con = new DBUtils().makeConnection();
+
+            if (con != null) {
+                String sql = "UPDATE " + userDbName + "\n" +
+                        "SET userStatus=?\n" +
+                        "WHERE userID=?";
+                ps = con.prepareStatement(sql);
+                ps.setBoolean(1, userStatus);
+                ps.setString(2, userID);
+
+                int row = ps.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("UserDAO banUserByUserID error: " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
 //        try {
 //            UserDTO user = new UserDAO().login("Admin", "admin");
@@ -664,11 +731,16 @@ public class UserDAO {
 //        } catch (Exception e) {
 //
 //        }
+//        try {
+//            List<UserDTO> allUser = new UserDAO().getAllUser();
+//            for(UserDTO u: allUser){
+//                System.out.println(u.getUserID());
+//            }
+//        } catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
         try {
-            List<UserDTO> allUser = new UserDAO().getAllUser();
-            for(UserDTO u: allUser){
-                System.out.println(u.getUserID());
-            }
+            boolean test = new UserDAO().unBanUserByUserID("USE00000007");
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
