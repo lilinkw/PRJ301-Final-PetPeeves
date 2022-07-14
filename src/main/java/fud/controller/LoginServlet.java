@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            System.out.println("LoginServlet GET");
             HttpSession session= request.getSession();
 
             //get and set category list
@@ -30,6 +31,7 @@ public class LoginServlet extends HttpServlet {
             // Forward to login page
             request.getRequestDispatcher(welcomePage).forward(request, response);
         } catch (Exception e) {
+            System.out.println("LoginServlet Get error: " + e.getMessage() );
         }
     }
 
@@ -55,6 +57,7 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("password", password);
 
                 url = welcomePage;
+                request.setAttribute("TITLE", "Login");
                 RequestDispatcher rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             } else {
@@ -65,6 +68,7 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("password", password);
 
                     url = welcomePage;
+                    request.setAttribute("TITLE", "Login");
                     RequestDispatcher rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
                 } else {

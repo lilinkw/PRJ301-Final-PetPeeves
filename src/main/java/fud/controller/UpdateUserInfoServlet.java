@@ -15,6 +15,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ACTION","Info" );
+        request.setAttribute("TITLE", "Update User Info");
         request.getRequestDispatcher(updatePage).forward(request, response);
     }
 

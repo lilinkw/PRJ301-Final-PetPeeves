@@ -32,6 +32,7 @@ public class SearchTitleServlet extends HttpServlet {
             request.setAttribute("search-title", search_title);
 
             // forward to search-title.jsp
+            request.setAttribute("TITLE", "Search");
             RequestDispatcher rd = request.getRequestDispatcher("search-title.jsp");
             rd.forward(request, response);
 

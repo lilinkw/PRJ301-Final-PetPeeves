@@ -35,6 +35,7 @@ public class ViewNewsFeedServlet extends HttpServlet {
 
 
             // forward to newsfeed
+            request.setAttribute("TITLE", "News Feed");
             request.getRequestDispatcher(forwardPage).forward(request, response);
 
         } catch (Exception e) {

@@ -15,6 +15,7 @@ public class UpdateUserPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ACTION","Password" );
+        request.setAttribute("TITLE", "Update Password");
         request.getRequestDispatcher(updatePage).forward(request, response);
     }
 

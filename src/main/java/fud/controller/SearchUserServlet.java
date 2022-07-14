@@ -58,6 +58,7 @@ public class SearchUserServlet extends HttpServlet {
             request.setAttribute("search-user", search_user);
 
             // forward to search-user.jsp
+            request.setAttribute("TITLE", "Search");
             RequestDispatcher rd = request.getRequestDispatcher("search-user.jsp");
             rd.forward(request, response);
         } catch (Exception e) {

@@ -33,6 +33,7 @@ public class SearchCategoryServlet extends HttpServlet {
             request.setAttribute("categoryID", categoryID);
 
             // forward to search-category.jsp
+            request.setAttribute("TITLE", "Search");
             RequestDispatcher rd = request.getRequestDispatcher("search-category.jsp");
             rd.forward(request, response);
         }

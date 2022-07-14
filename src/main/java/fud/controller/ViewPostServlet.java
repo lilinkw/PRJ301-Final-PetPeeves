@@ -35,6 +35,7 @@ public class ViewPostServlet extends HttpServlet {
 //            }
 
             request.setAttribute("POSTDTO",postDTO);
+            request.setAttribute("TITLE", "Post");
             request.getRequestDispatcher(forwardPage).forward(request,response);
         } catch (Exception e) {
             throw new RuntimeException(e);
