@@ -13,7 +13,7 @@ import java.io.IOException;
  * This is Filter for Login User required
  */
 @WebFilter(filterName = "filter1",
-            urlPatterns = {"/UpdateUserPasswordServlet","/AddCommentServlet", "/DeletePostServlet",
+            urlPatterns = {"/admin/*","/UpdateUserPasswordServlet","/AddCommentServlet", "/DeletePostServlet",
                     "/EditPostServlet", "/GetUserProfileServlet", "/SearchCategoryServlet",
                     "/SearchTitleServlet", "/SearchUserServlet", "/UpdateUserInfoServlet",
                     "/ViewNewsFeedServlet"})
@@ -42,7 +42,7 @@ public class filter1 implements Filter {
             chain.doFilter(request, response);
         } else {
             System.out.println("Not Logged in");
-            ((HttpServletResponse) response).sendRedirect("LoginServlet");
+            ((HttpServletResponse) response).sendRedirect("/PetPeeves_war_exploded/LoginServlet");
         }
     }
 }
