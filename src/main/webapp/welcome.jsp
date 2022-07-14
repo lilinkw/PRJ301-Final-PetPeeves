@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>WorkWise Html Template</title>
+        <title>PetPeeves</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -36,8 +36,8 @@
                                 <div class="cmp-info">
                                     <div class="cm-logo">
                                         <img src="static/images/cm-logo.png" alt="">
-                                        <p>Workwise, is a global freelancing platform and social networking where businesses
-                                            and independent professionals connect and collaborate remotely</p>
+                                        <p>PetPeeves, A social media for pet lovers. Where you can find things
+                                            you need for your pets</p>
                                     </div>
                                     <img src="static/images/cm-main-img.png" alt="">
                                 </div>

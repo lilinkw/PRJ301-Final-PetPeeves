@@ -14,7 +14,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>Title</title>
+    <title>${requestScope.TITLE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -101,7 +101,7 @@
                     <h3>Setting</h3>
                     <ul class="us-links">
                         <li><a href="UpdateUserInfoServlet" title="">Account Setting</a></li>
-                        <li><a href="administration.jsp" title="">Administration</a></li>
+                        <li><a href="admin/GetAccountManagementServlet" title="">Administration</a></li>
                     </ul>
 <%--                    tra ve log out servlet--%>
                     <h3 class="tc"><a href="LogoutServlet"
