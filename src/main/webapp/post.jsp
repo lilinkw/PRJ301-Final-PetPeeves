@@ -349,12 +349,7 @@
 <script type="text/javascript" src="static/js/jquery.range-min.js"></script>
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
-<script>
-    var loadFile = function(event) {
-        var image = document.getElementById('output');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
+<script type="text/javascript" src="static/js/javaScript.js"></script>
 </body>
 
 </html>

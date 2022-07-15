@@ -86,7 +86,7 @@ public class PostDAO {
                 con.close();
             }
         }
-        return  null;
+        return  imageLinksList;
     }
 
     public List<PostDTO> getPostByCategoryID(String currentUserID, String categoryID, int offset) throws Exception{

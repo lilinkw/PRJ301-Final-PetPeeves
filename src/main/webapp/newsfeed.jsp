@@ -67,7 +67,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="posts-section">
+                                <div id="content" class="posts-section">
                                     <c:set var="postList" value="${requestScope.POSTLIST}"/>
 
                                     <c:if test="${empty postList}">
@@ -255,10 +255,8 @@
                                             </div>
                                         </c:forEach>
                                     </c:if>
-
-
-
                                 </div>
+                                <button style="display: block;margin: auto" class="btn btn-primary" onclick="loadMorePost()">Load more</button>
                             </div>
                         </div>
                     </div>
@@ -328,17 +326,8 @@
 <script type="text/javascript" src="static/js/slick.min.js"></script>
 <script type="text/javascript" src="static/js/scrollbar.js"></script>
 <script type="text/javascript" src="static/js/script.js"></script>
+<script type="text/javascript" src="static/js/javaScript.js"></script>
 
-<script>
-    var loadFileEdit = function (event,id) {
-        var image = document.getElementById('img-'+id);
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-    var loadFileNewPost = function (event) {
-        var image = document.getElementById('output-newpost');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
 
 </body>
 

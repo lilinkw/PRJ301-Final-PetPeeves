@@ -20,7 +20,7 @@ import java.util.List;
 @WebServlet(name = "AddCommentServlet", value = "/AddCommentServlet")
 public class AddCommentServlet extends HttpServlet {
 
-    private final String forwardPage = "newsfeed.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,7 +42,7 @@ public class AddCommentServlet extends HttpServlet {
             postDAO.addComment(postID,currentUser.getUserID(),commentContent);
 
 
-            String url = "EditPostServlet?id=" + postID;
+            String url = "ViewPostServlet?id=" + postID;
             response.sendRedirect(url);
 
 //        System.out.println(authorID+"    "+ categoryID+"   "+content);
