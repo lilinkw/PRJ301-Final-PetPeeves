@@ -50,7 +50,7 @@ public class LoadMoreServlet extends HttpServlet {
                         "                                                            <div class=\"usy-name\">\n" +
                         "                                                                <a href=\"GetUserProfileServlet?userID="+postDTO.getAuthorID()+"\"><h3>"+postDTO.getAuthorName()+"</h3></a>\n" +
                         "                                                                <span><img src=\"static/images/clock.png\" alt=\"\">\n" +
-                        "                                                                    <a href=\"ViewPostServlet?id="+postDTO.getPostID()+"\" style=\"color: #b2b2b2\">"+postDTO.getPostTime()+"</a>\n" +
+                        "                                                                    <a class=\"postTime\" href=\"ViewPostServlet?id="+postDTO.getPostID()+"\" style=\"color: #b2b2b2\">"+postDTO.getPostTime()+"</a>\n" +
                         "                                                                </span>\n" +
                         "                                                            </div>\n" +
                         "                                                        </div>\n" +
