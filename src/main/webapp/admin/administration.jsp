@@ -91,7 +91,7 @@
                                                         <li><a href="" class="accept-req change-category" data-toggle="modal"
                                                                data-target="#change-category" data-whatever="@mdo" id="${categoryDTO.getCategoryID()}">Modify</a>
                                                         </li>
-                                                        <li><a href="" class="unaccept-req">Delete</a></li>
+                                                        <li><a href="DeleteCategoryServlet?categoryID=${categoryDTO.getCategoryID()}" class="unaccept-req">Delete</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -107,12 +107,11 @@
                                                             <div class="innerbody apply-jobbox">
                                                                 <h3>Change category name here</h3>
 
-                                                                <input name="categoryID" hidden="" value="${categoryDTO.getCategoryID()}">
-
-                                                                    <%--                                                                    current category--%>
+<%--                                                                current category--%>
                                                                 <p>${categoryDTO.getCategory()} - ${categoryDTO.getCategoryID()}</p>
-                                                                <form action="AddCategoryServlet" method="post">
-                                                                        <textarea name="category" placeholder="Modify category" style="width: 100%; padding:15px; height: 130px;     width: 100%;
+                                                                <form action="ChangeCategoryServlet" method="post">
+                                                                    <input name="categoryID" hidden="" value="${categoryDTO.getCategoryID()}">
+                                                                    <textarea name="category" placeholder="Modify category" style="width: 100%; padding:15px; height: 130px;     width: 100%;
                                         color: #b2b2b2;
                                         font-size: 14px;
                                         border: 1px solid #e5e5e5;
@@ -136,30 +135,6 @@
         </div>
     </div>
 </section>
-
-<%--    <div class="modal" id="change-category">--%>
-<%--        <div class="modal-dialog">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <h3 class="text-light text-center">Modify category</h3>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body">--%>
-<%--                    <div class="innerbody apply-jobbox">--%>
-<%--                        <h3>Change category name here</h3>--%>
-<%--                        <form action="AddCategoryServlet" method="post">--%>
-<%--                                    <textarea name="category" placeholder="Modify category" style="width: 100%; padding:15px; height: 130px;     width: 100%;--%>
-<%--                                    color: #b2b2b2;--%>
-<%--                                    font-size: 14px;--%>
-<%--                                    border: 1px solid #e5e5e5;--%>
-<%--                                    font-weight: 500;"></textarea>--%>
-<%--                            <button type="submit" class="place-bid-btn">Modify category</button>--%>
-<%--                        </form>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
 
 <div class="modal" id="mymodal">
     <div class="modal-dialog">

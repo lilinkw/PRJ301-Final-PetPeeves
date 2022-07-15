@@ -81,6 +81,43 @@ public class CategoryDAO {
         return null;
     }
 
+    public CategoryDTO changeCategory(String categoryID , String category) throws Exception {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "update Category\n" +
+                        "set category = ?\n" +
+                        "output inserted.categoryID, inserted.category\n" +
+                        "where categoryID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, category);
+                stm.setString(2, categoryID);
+
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    return new CategoryDTO(categoryID, category);
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (stm != null){
+                stm.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+
+        return null;
+    }
+
     public boolean deleteCategoryByID(String categoryID) throws Exception{
         Connection con = null;
         PreparedStatement ps = null;
@@ -109,23 +146,24 @@ public class CategoryDAO {
     }
 
     public static void main(String[] args) {
-//        try {
-//            String category = "a";
-//
-//            CategoryDAO abc = new CategoryDAO();
-//            CategoryDTO categoryDTO = abc.addNewCategory(category);
-//
-//            System.out.println(categoryDTO == null);
-//
-//            System.out.println(categoryDTO.getCategoryID());
-//            System.out.println(categoryDTO.getCategory());
-//        } catch (Exception e){
-//            System.out.println("PostDAO ERROR: " + e.getMessage());
-//        }
         try {
-            new CategoryDAO().deleteCategoryByID("CAT00000006");
+            String categoryID = "CAT00000006";
+            String category = "a";
+
+            CategoryDAO abc = new CategoryDAO();
+            CategoryDTO categoryDTO = abc.changeCategory(categoryID , category);
+
+            System.out.println(categoryDTO == null);
+
+            System.out.println(categoryDTO.getCategoryID());
+            System.out.println(categoryDTO.getCategory());
         } catch (Exception e){
-            System.out.println("CategoryDAO deleteCategoryByID ERROR: " + e.getMessage());
+            System.out.println("PostDAO ERROR: " + e.getMessage());
         }
+//        try {
+//            new CategoryDAO().deleteCategoryByID("CAT00000006");
+//        } catch (Exception e){
+//            System.out.println("CategoryDAO deleteCategoryByID ERROR: " + e.getMessage());
+//        }
     }
 }
