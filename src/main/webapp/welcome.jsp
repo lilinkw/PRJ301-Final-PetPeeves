@@ -35,7 +35,7 @@
                             <div class="col-lg-6">
                                 <div class="cmp-info">
                                     <div class="cm-logo">
-                                        <img src="static/images/cm-logo.png" alt="">
+                                        <img style="width: 12rem" src="static/images/cm-logo.png" alt="">
                                         <p>PetPeeves, A social media for pet lovers. Where you can find things
                                             you need for your pets</p>
                                     </div>

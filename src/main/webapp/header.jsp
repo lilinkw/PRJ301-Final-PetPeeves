@@ -49,7 +49,7 @@
     <div class="container">
         <div class="header-data">
             <div class="logo">
-                <a href="ViewNewsFeedServlet" title=""><img src="static/images/logo.png" alt=""></a>
+                <a href="ViewNewsFeedServlet" title=""><img style="width: 3rem" src="static/images/logo.png" alt=""></a>
             </div>
             <div class="search-bar">
 

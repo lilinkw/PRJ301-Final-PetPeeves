@@ -49,8 +49,8 @@
                                 </div>
                                 <div class="tags-sec full-width">
                                     <div class="cp-sec">
-                                        <img src="static/images/logo2.png" alt="">
-                                        <p><img src="static/images/cp.png" alt="">Copyright 2019</p>
+                                        <img style="width: 10rem" src="static/images/logo2.png" alt="">
+                                        <p ><img src="static/images/cp.png" alt="">Copyright 2019</p>
                                     </div>
                                 </div>
                             </div>
