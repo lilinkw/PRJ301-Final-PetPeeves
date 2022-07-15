@@ -277,7 +277,10 @@
                                 <div class="inp-field">
                                     <select name="categoryID">
                                         <c:forEach var="categoryDTO" items="${categoryList}">
-                                            <option value="${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</option>
+                                            <c:if test="${(!categoryDTO.getCategoryID().equals('CAT00000004'))||currentUser.isAdmin()}">
+                                                <option value="${categoryDTO.getCategoryID()}">${categoryDTO.getCategory()}</option>
+                                            </c:if>
+
                                         </c:forEach>
                                     </select>
                                 </div>
