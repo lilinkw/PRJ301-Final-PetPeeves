@@ -50,19 +50,13 @@ $(window).on("load", function() {
 
     //  ============= CHANGE CATEGORY POPUP FUNCTION =========
 
-    // $("#change-category").on("click", function(){
-    //     let a=  this.getAttribute("id");
-    //     console.log(a);
-    //     $('.edit-category.'+a).addClass("active");
-    //     $(".wrapper").addClass("overlay");
-    //     return false;
-    // });
-    //
-    // $("#change-category > a").on("click", function(){
-    //     $(".edit-category").removeClass("active");
-    //     $(".wrapper").removeClass("overlay");
-    //     return false;
-    // });
+    $(".accept-req").on("click", function(){
+        let a= this.getAttribute("id");
+        console.log(a);
+
+        $('.edit-category.'+a).modal("show");
+        return false;
+    });
 
     //  ============= POST JOB POPUP FUNCTION =========
 

@@ -89,7 +89,7 @@
                                                 <div class="accept-feat">
                                                     <ul>
                                                         <li><a href="" class="accept-req" data-toggle="modal"
-                                                               data-target="#change-category" data-whatever="@mdo">Modify</a>
+                                                               data-target="#change-category" data-whatever="@mdo" id="${categoryDTO.getCategoryID()}">Modify</a>
                                                         </li>
                                                         <li><a href="" class="unaccept-req">Delete</a></li>
                                                     </ul>
