@@ -40,6 +40,7 @@ public class LoadMoreServlet extends HttpServlet {
 
             PrintWriter out = response.getWriter();
 
+            if (postDTOList.isEmpty()) throw new ServletException("There is no more post");
 
             for (PostDTO postDTO: postDTOList) {
                 out.println("<div class=\"posty\">\n" +

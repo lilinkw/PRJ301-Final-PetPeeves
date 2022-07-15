@@ -34,7 +34,10 @@
                 postShowed: postnum
             },
             error: function(xhr) {
-                //Do Something to handle error
+                var a = document.getElementById("content");
+                a.innerHTML += "<p>There is no more post</p>";
+                $("#load-more-button").css("display", "none");
+
             },
             dataType: "html",
         });

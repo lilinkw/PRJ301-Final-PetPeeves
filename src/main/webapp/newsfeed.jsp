@@ -256,7 +256,7 @@
                                         </c:forEach>
                                     </c:if>
                                 </div>
-                                <button style="display: block;margin: auto" class="btn btn-primary" onclick="loadMorePost()">Load more</button>
+                                <button style="display: block;margin: auto" id="load-more-button" class="btn btn-primary" onclick="loadMorePost()">Load more</button>
                             </div>
                         </div>
                     </div>
