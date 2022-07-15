@@ -50,12 +50,12 @@ $(window).on("load", function() {
 
     //  ============= CHANGE CATEGORY POPUP FUNCTION =========
 
-    $(".accept-req").on("click", function(){
+    $(".change-category").on("click", function(){
         let a= this.getAttribute("id");
         console.log(a);
 
         $('.edit-category.'+a).modal("show");
-        // return false;
+        return false;
     });
 
     //  ============= POST JOB POPUP FUNCTION =========
