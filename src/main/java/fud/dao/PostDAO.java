@@ -441,6 +441,38 @@ public class PostDAO {
         }
         return false;
     }
+    public boolean updatePostStatusByUserID(String userID, boolean status) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            // create new student
+            if (con != null) {
+                String sql = "UPDATE dbo.PostInfo SET postStatus=?\n" +
+                        "WHERE authorID=?";
+
+                ps = con.prepareStatement(sql);
+                ps.setBoolean(1, status);
+                ps.setString(2, userID);
+
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        }finally {
+            if (con != null) {
+                con.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        }
+        return false;
+    }
 
     public String addNewImage(String imageLink) throws Exception {
         Connection con = null;
@@ -688,8 +720,14 @@ public class PostDAO {
 //            System.out.println("PostDAO ERROR: " + e.getMessage());
 //        }
 
+//        try {
+//            boolean test = new PostDAO().updatePostCategoryByCategoryID("CAT00000006", "CAT00000001");
+//            System.out.println(test);
+//        } catch (Exception e){
+//            System.out.println("PostDAO AddNewPost ERROR: " + e.getMessage());
+//        }
         try {
-            boolean test = new PostDAO().updatePostCategoryByCategoryID("CAT00000006", "CAT00000001");
+            boolean test = new PostDAO().updatePostStatusByUserID("USE00000003", true);
             System.out.println(test);
         } catch (Exception e){
             System.out.println("PostDAO AddNewPost ERROR: " + e.getMessage());

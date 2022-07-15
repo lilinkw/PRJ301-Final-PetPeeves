@@ -1,9 +1,11 @@
 package fud.controller.admin;
 
 import fud.dao.UserDAO;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -16,6 +18,7 @@ public class ActivateUserServlet extends HttpServlet {
             String userID = request.getParameter("userID");
             new UserDAO().unBanUserByUserID(userID);
 
+//            new PostDAO().updatePostStatusByUserID(userID,true);
             response.sendRedirect(redirectPage);
         } catch (Exception e){
             System.out.println("DeactivateUserServlet GET ERROR: " + e.getMessage());

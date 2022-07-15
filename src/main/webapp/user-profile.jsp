@@ -11,6 +11,7 @@
     <%-- copy lon Tung --%>
     <c:set var="currentUser" value="${sessionScope.CURRENTUSER}"/>
     <c:set var="categoryList" value="${sessionScope.CATEGORYLIST}"/>
+    <c:set var="USERPROFILE" value="${requestScope.USERPROFILE}" />
 
     <section class="cover-sec">
         <img src="static/images/cover-img.jpg" alt="">
