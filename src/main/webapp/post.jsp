@@ -20,7 +20,7 @@
                                                 <img style="width: 50px; height: 50px" src="${postDTO.getAuthorAvatarLink()}" alt="">
                                                 <div class="usy-name">
                                                     <a href="GetUserProfileServlet?userID=${postDTO.getAuthorID()}"><h3>${postDTO.getAuthorName()}</h3></a>
-                                                    <span><img src="static/images/clock.png" alt="">${postDTO.getPostTime()}</span>
+                                                    <span class="postTime"><img src="static/images/clock.png" alt="">${postDTO.getPostTime()}</span>
                                                 </div>
                                             </div>
                                             <div class="ed-opts">

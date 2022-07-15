@@ -7,6 +7,11 @@ function updateClock(){
 
 $(window).on("load", function() {
     "use strict";
+    // Update PostTime
+    $('.postTime').each(function (){
+        let diffTime = moment($(this).text(), "YYYY-MM-DD HH:m:s").fromNow();
+        $(this).text(diffTime);
+    });
 
     // // set datetime on realtime
     // setInterval(function(){

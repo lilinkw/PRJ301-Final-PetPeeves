@@ -3,7 +3,6 @@ package fud.dao;
 import fud.helpers.DBUtils;
 import fud.model.CommentDTO;
 import fud.model.PostDTO;
-import fud.model.UserDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -113,7 +112,7 @@ public class PostDAO {
                         String authorName = rs.getString("authorName");
                         String avatarLink = rs.getString("authorAvatar");
                         String postID = rs.getString("postID");
-                        String postTime = rs.getString("postTime");
+                        String postTime = rs.getString("FormatPostTime");
                         String postCategory = rs.getString("category");
                         String postTitle = rs.getString("postTitle");
                         String postContent = rs.getString("postContent");

@@ -86,7 +86,7 @@
                                                             <div class="usy-name">
                                                                 <a href="GetUserProfileServlet?userID=${postDTO.getAuthorID()}"><h3>${postDTO.getAuthorName()}</h3></a>
                                                                 <span><img src="static/images/clock.png" alt="">
-                                                                    <a href="ViewPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
+                                                                    <a class="postTime" href="ViewPostServlet?id=${postDTO.getPostID()}" style="color: #b2b2b2">${postDTO.getPostTime()}</a>
                                                                 </span>
                                                             </div>
                                                         </div>
