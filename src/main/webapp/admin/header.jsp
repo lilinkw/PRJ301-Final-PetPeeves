@@ -105,7 +105,9 @@
                                 <h3>Setting</h3>
                                 <ul class="us-links">
                                     <li><a href="../UpdateUserInfoServlet" title="">Account Setting</a></li>
-                                    <li><a href="GetAccountManagementServlet" title="">Administration</a></li>
+                                    <c:if test="${curentUser.isAdmin() eq 'true'}">
+                                        <li><a href="GetAccountManagementServlet" title="">Administration</a></li>
+                                    </c:if>
                                 </ul>
                                 <%--                    tra ve log out servlet--%>
                                 <h3 class="tc"><a href="../LogoutServlet"
