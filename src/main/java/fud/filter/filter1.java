@@ -16,7 +16,10 @@ import java.io.IOException;
             urlPatterns = {"/admin/*","/UpdateUserPasswordServlet","/AddCommentServlet", "/DeletePostServlet",
                     "/EditPostServlet", "/GetUserProfileServlet", "/SearchCategoryServlet",
                     "/SearchTitleServlet", "/SearchUserServlet", "/UpdateUserInfoServlet",
-                    "/ViewNewsFeedServlet"})
+                    "/ViewNewsFeedServlet", "/LoadMoreServlet", "/FollowUserServlet",
+                    "/UnFollowServlet", "/UpdateAvatarServlet", "/UpdatePostServlet",
+                    "/ViewPostServlet"
+            })
 public class filter1 implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
