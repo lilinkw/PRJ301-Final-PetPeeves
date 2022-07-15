@@ -48,6 +48,22 @@ $(window).on("load", function() {
         return false;
     });
 
+    //  ============= CHANGE CATEGORY POPUP FUNCTION =========
+
+    // $("#change-category").on("click", function(){
+    //     let a=  this.getAttribute("id");
+    //     console.log(a);
+    //     $('.edit-category.'+a).addClass("active");
+    //     $(".wrapper").addClass("overlay");
+    //     return false;
+    // });
+    //
+    // $("#change-category > a").on("click", function(){
+    //     $(".edit-category").removeClass("active");
+    //     $(".wrapper").removeClass("overlay");
+    //     return false;
+    // });
+
     //  ============= POST JOB POPUP FUNCTION =========
 
     $(".post-jb").on("click", function(){
