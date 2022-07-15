@@ -2,7 +2,6 @@ package fud.dao;
 
 import fud.helpers.DBUtils;
 import fud.model.CategoryDTO;
-import fud.model.PostDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
+    private final String categoryTbName = "[Category]";
     public List<CategoryDTO> getCategoryList() throws Exception{
         List<CategoryDTO> result = new ArrayList<>();
         Connection con = null;
@@ -81,19 +81,51 @@ public class CategoryDAO {
         return null;
     }
 
-    public static void main(String[] args) {
+    public boolean deleteCategoryByID(String categoryID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
         try {
-            String category = "a";
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "DELETE FROM " + categoryTbName + "\n" +
+                        "WHERE categoryID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, categoryID);
+                int row = ps.executeUpdate();
 
-            CategoryDAO abc = new CategoryDAO();
-            CategoryDTO categoryDTO = abc.addNewCategory(category);
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 
-            System.out.println(categoryDTO == null);
-
-            System.out.println(categoryDTO.getCategoryID());
-            System.out.println(categoryDTO.getCategory());
+    public static void main(String[] args) {
+//        try {
+//            String category = "a";
+//
+//            CategoryDAO abc = new CategoryDAO();
+//            CategoryDTO categoryDTO = abc.addNewCategory(category);
+//
+//            System.out.println(categoryDTO == null);
+//
+//            System.out.println(categoryDTO.getCategoryID());
+//            System.out.println(categoryDTO.getCategory());
+//        } catch (Exception e){
+//            System.out.println("PostDAO ERROR: " + e.getMessage());
+//        }
+        try {
+            new CategoryDAO().deleteCategoryByID("CAT00000006");
         } catch (Exception e){
-            System.out.println("PostDAO ERROR: " + e.getMessage());
+            System.out.println("CategoryDAO deleteCategoryByID ERROR: " + e.getMessage());
         }
     }
 }

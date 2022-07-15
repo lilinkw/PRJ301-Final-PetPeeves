@@ -90,7 +90,7 @@
                                                     <ul>
                                                         <li><a href="" class="accept-req">Modify</a>
                                                         </li>
-                                                        <li><a href="" class="unaccept-req">Delete</a></li>
+                                                        <li><a href="DeleteCategoryServlet?categoryID=${categoryDTO.getCategoryID()}" class="unaccept-req">Delete</a></li>
                                                     </ul>
                                                 </div>
                                             </div>

@@ -642,20 +642,57 @@ public class PostDAO {
         }
         return null;
     }
-    public static void main(String[] args) {
+
+    public boolean updatePostCategoryByCategoryID(String currentCategoryID,String newCategoryID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+
         try {
-            String userID = "USE00000001";
-            String category = "ALL";
-            int offset = 0;
-            List<PostDTO> postDTOList = new PostDAO().getPostByCategoryID(userID, category,offset);
-            for (PostDTO postDTO: postDTOList){
-                System.out.println("Post ID: " + postDTO.getPostID()
-                + "\nPost Status: " + postDTO.getPostStatus()
-                + "\nPost Time: "+ postDTO.getPostTime()
-                + "\nPost img: "+ postDTO.getImageLinks().get(0));
+            con = new DBUtils().makeConnection();
+            if (con != null) {
+                String sql = "UPDATE " + postInfoDbName + "\n" +
+                        "SET categoryID=?\n" +
+                        "WHERE categoryID=?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, newCategoryID);
+                ps.setString(2, currentCategoryID);
+                int row = ps.executeUpdate();
+
+                if(row > 0) {
+                    return true;
+                }
             }
+        } finally {
+            if (ps!= null){
+                ps.close();
+            }
+            if (con != null){
+                con.close();
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+//        try {
+//            String userID = "USE00000001";
+//            String category = "ALL";
+//            int offset = 0;
+//            List<PostDTO> postDTOList = new PostDAO().getPostByCategoryID(userID, category,offset);
+//            for (PostDTO postDTO: postDTOList){
+//                System.out.println("Post ID: " + postDTO.getPostID()
+//                + "\nPost Status: " + postDTO.getPostStatus()
+//                + "\nPost Time: "+ postDTO.getPostTime()
+//                + "\nPost img: "+ postDTO.getImageLinks().get(0));
+//            }
+//        } catch (Exception e){
+//            System.out.println("PostDAO ERROR: " + e.getMessage());
+//        }
+
+        try {
+            boolean test = new PostDAO().updatePostCategoryByCategoryID("CAT00000006", "CAT00000001");
+            System.out.println(test);
         } catch (Exception e){
-            System.out.println("PostDAO ERROR: " + e.getMessage());
+            System.out.println("PostDAO AddNewPost ERROR: " + e.getMessage());
         }
     }
 }
