@@ -477,6 +477,72 @@ public class UserDAO {
         }
         return false;
     }
+    public boolean followUserByUserID(String followerID, String followeeID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "INSERT INTO " + followingDbName + "\n" +
+                        "VALUES(?,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, followerID);
+                ps.setString(2, followeeID);
+
+                int row = ps.executeUpdate();
+                if (row >0) {
+                    return true;
+                }
+            }
+        } catch (Exception e){
+            return false;
+        }
+        finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    public boolean unFollowUserByUserID(String followerID, String followeeID) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = new DBUtils().makeConnection();
+
+            //check username existed
+            if (con != null) {
+                String sql = "DELETE FROM " + followingDbName + "\n" +
+                        "WHERE userID=? and followeeID=?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, followerID);
+                ps.setString(2, followeeID);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (Exception e){
+            return false;
+        }
+        finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 
     public List<UserDTO> getUsersByName(String name) throws SQLException {
         List<UserDTO> result = new ArrayList<>();
@@ -740,7 +806,8 @@ public class UserDAO {
 //            System.out.println(e.getMessage());
 //        }
         try {
-            boolean test = new UserDAO().unBanUserByUserID("USE00000007");
+            boolean test = new UserDAO().followUserByUserID("USE00000007", "USE00000005");
+            System.out.println(test);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

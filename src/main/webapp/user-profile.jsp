@@ -46,7 +46,13 @@
                                     </div>
                                     <div class="user_pro_status">
                                         <ul class="flw-hr" ${USERPROFILE.getUserID() == currentUser.getUserID() ? "hidden":"" }>
-                                            <li><a href="#" title="" class="flww${FOLLOWED == true ? "ed":""}"><i class="la ${FOLLOWED == true ? "la-check":"la-plus"}"></i>
+                                            <c:url var="FollowURL" value="FollowUserServlet" >
+                                                <c:param name="UserID" value="${USERPROFILE.getUserID()}" />
+                                            </c:url>
+                                            <c:url var="UnFollowURL" value="UnFollowServlet" >
+                                                <c:param name="UserID" value="${USERPROFILE.getUserID()}" />
+                                            </c:url>
+                                            <li><a href="${FOLLOWED == true ? UnFollowURL:FollowURL}" title="" class="flww${FOLLOWED == true ? "ed":""}"><i class="la ${FOLLOWED == true ? "la-check":"la-plus"}"></i>
                                                 Follow${FOLLOWED == true ? "ed":""}</a></li>
                                             <%-- <li><a href="#" title="" class="hre">Hire</a></li> --%>
                                         </ul>
