@@ -234,7 +234,7 @@ $(window).on("load", function() {
     //  ================== Edit Options Function =================
 
 
-    $(".ed-opts-open").on("click", function(){
+    $(".posts-section").on("click",".ed-opts-open", function(){
         $(this).next(".ed-options").toggleClass("active");
         return false;
     });
