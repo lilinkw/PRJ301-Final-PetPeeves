@@ -63,22 +63,10 @@
                                     </div>
                                     <!-- thong tin ca nhan -->
                                     <ul class="social_links">
-                                        <li><a title=""><i class="la la-globe"></i> www.example.com</a>
-                                        </li>
-                                        <li><a title=""><i class="fa fa-facebook-square"></i>
-                                            Http://www.facebook.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-twitter"></i>
-                                            Http://www.Twitter.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-google-plus-square"></i>
-                                            Http://www.googleplus.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-behance-square"></i>
-                                            Http://www.behance.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-pinterest"></i>
-                                            Http://www.pinterest.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-instagram"></i>
-                                            Http://www.instagram.com/john...</a></li>
-                                        <li><a title=""><i class="fa fa-youtube"></i>
-                                            Http://www.youtube.com/john...</a></li>
+                                        <li>Full name: ${USERPROFILE.getFullname()}</li>
+                                        <li>Date of birth: ${USERPROFILE.getDateOfBirth()}</li>
+                                        <li>Gender: ${USERPROFILE.getGender()}</li>
+                                        <li>Location: ${USERPROFILE.getLocation()}</li>
                                     </ul>
                                 </div>
                             </div>
