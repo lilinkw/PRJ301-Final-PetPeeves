@@ -55,7 +55,7 @@ $(window).on("load", function() {
         console.log(a);
 
         $('.edit-category.'+a).modal("show");
-        return false;
+        // return false;
     });
 
     //  ============= POST JOB POPUP FUNCTION =========
