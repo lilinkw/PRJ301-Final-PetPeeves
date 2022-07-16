@@ -294,8 +294,8 @@
           <li><a href="https://gambolthemes.net/workwise-new/projects.html?search-skills=aa#"
                  title="">Copyright Policy</a></li>
         </ul>
-        <p><img src="static/images/copy-icon2.png" alt="">Copyright 2019</p>
-        <img class="fl-rgt" src="static/images/logo2.png" alt="">
+        <p><img src="static/images/copy-icon2.png" alt="">Copyright 2022</p>
+        <img class="fl-rgt" src="static/images/logo2.png" width="10%" alt="">
       </div>
     </div>
   </footer>

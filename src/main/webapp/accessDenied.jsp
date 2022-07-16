@@ -12,5 +12,6 @@
 </head>
 <body>
 <h1 style=" color:  red">Access Denied</h1>
+<a href="ViewNewsFeedServlet">Turn back home</a>
 </body>
 </html>
