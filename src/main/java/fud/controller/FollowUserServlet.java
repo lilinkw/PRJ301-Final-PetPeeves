@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "FollowUserServlet", value = "/FollowUserServlet")
 public class FollowUserServlet extends HttpServlet {
-    private final String redirectPage = "ViewNewsFeedServlet";
+    private String redirectPage = "GetUserProfileServlet";
     private final String errorPage = "accessDenied.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,6 +20,7 @@ public class FollowUserServlet extends HttpServlet {
             String currentUserID = ((UserDTO) session.getAttribute("CURRENTUSER")).getUserID();
 
             if (new UserDAO().followUserByUserID(currentUserID, requestedUserID)){
+                redirectPage += "?userID="+requestedUserID;
                 response.sendRedirect(redirectPage);
             } else {
                 response.sendRedirect(errorPage);

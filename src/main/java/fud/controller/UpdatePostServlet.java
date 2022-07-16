@@ -43,6 +43,7 @@ public class UpdatePostServlet extends HttpServlet {
                 String title = request.getParameter("title");
                 String content = request.getParameter("description");
 
+                System.out.println(categoryID);
 
 
                 Part image = null;
@@ -70,7 +71,7 @@ public class UpdatePostServlet extends HttpServlet {
                 response.sendRedirect(url);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 }
